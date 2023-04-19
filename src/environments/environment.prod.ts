@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   hmr: false,
-  apiUrl: 'https://api-coopsanjose.crediventa.com',
+  apiUrl: 'https://api-coop.financieradevittoria.com',
   firebaseConfig: {
     apiKey: 'AIzaSyBu94RM9ISoQ3TiqJO6u-hATlChbGn5080',
     authDomain: 'grp-sanjose.firebaseapp.com',
