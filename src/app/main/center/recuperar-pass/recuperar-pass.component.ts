@@ -36,7 +36,7 @@ export class RecuperarPassComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _router: Router,
     private _recuperarPassService: RecuperarPassService) {
-    this.siteKey = '6LfO5vYjAAAAACAmaBylqU676NuFuyfER8sMrzid';
+    this.siteKey = '6LftXJ8lAAAAAKVSkVJj15gqC2HT-JGibJQaeaJx';
     this._unsubscribeAll = new Subject();
 
     // Configure the layout

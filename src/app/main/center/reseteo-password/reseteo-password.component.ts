@@ -44,7 +44,7 @@ export class ReseteoPasswordComponent implements OnInit {
     private _reseteoPasswordService: ReseteoPasswordService,
     private _activatedRoute: ActivatedRoute
   ) {
-    this.siteKey = '6LfO5vYjAAAAACAmaBylqU676NuFuyfER8sMrzid';
+    this.siteKey = '6LftXJ8lAAAAAKVSkVJj15gqC2HT-JGibJQaeaJx';
     this._unsubscribeAll = new Subject();
 
     // Configure the layout

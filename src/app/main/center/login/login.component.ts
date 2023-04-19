@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _authenticationService: AuthenticationService
   ) {
-    this.siteKey = '6LfO5vYjAAAAACAmaBylqU676NuFuyfER8sMrzid';
+    this.siteKey = '6LftXJ8lAAAAAKVSkVJj15gqC2HT-JGibJQaeaJx';
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
