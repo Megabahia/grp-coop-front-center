@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   hmr: false,
   apiUrl: 'https://api-coop.financieradevittoria.com',
+  setKey: '6Lf0IKglAAAAABFz3mTDdcDwDjhmDm2ZILZQnhB-',
   firebaseConfig: {
     apiKey: 'AIzaSyBu94RM9ISoQ3TiqJO6u-hATlChbGn5080',
     authDomain: 'grp-sanjose.firebaseapp.com',
