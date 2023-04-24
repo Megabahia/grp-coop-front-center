@@ -52,7 +52,7 @@ export class UploadLineasCreditos implements OnInit, OnDestroy {
         private modalService: NgbModal,
     ) {
         this._unsubscribeAll = new Subject();
-        this.usuario = this._coreMenuService.grpSanjoseCenterUser;
+        this.usuario = this._coreMenuService.grpCoopCenterUser;
     }
 
     get usuForm() {

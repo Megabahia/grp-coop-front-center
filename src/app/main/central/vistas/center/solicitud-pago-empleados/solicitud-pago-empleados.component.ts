@@ -43,7 +43,7 @@ export class SolicitudPagoEmpleadosComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this._unsubscribeAll = new Subject();
-        this.usuario = this._coreMenuService.grpSanjoseCenterUser;
+        this.usuario = this._coreMenuService.grpCoopCenterUser;
         this.obtenerSolicitudesCreditos();
     }
 

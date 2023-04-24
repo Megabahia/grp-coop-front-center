@@ -10,7 +10,7 @@ import { User } from 'app/auth/models';
   providedIn: 'root'
 })
 export class CoreMenuService {
-  grpSanjoseCenterUser: User;
+  grpCoopCenterUser: User;
   onItemCollapsed: Subject<any>;
   onItemCollapseToggled: Subject<any>;
 
@@ -28,7 +28,7 @@ export class CoreMenuService {
    * @param {AuthenticationService} _authenticationService
    */
   constructor(private _router: Router, private _authenticationService: AuthenticationService) {
-    this._authenticationService.grpSanjoseCenterUser.subscribe(x => (this.grpSanjoseCenterUser = x));
+    this._authenticationService.grpCoopCenterUser.subscribe(x => (this.grpCoopCenterUser = x));
 
     // Set defaults
     this.onItemCollapsed = new Subject();

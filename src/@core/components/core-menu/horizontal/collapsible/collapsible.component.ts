@@ -15,7 +15,7 @@ import { User } from 'app/auth/models';
 })
 export class CoreMenuHorizontalCollapsibleComponent implements OnInit, OnDestroy {
   coreConfig: any;
-  grpSanjoseCenterUser: User;
+  grpCoopCenterUser: User;
   isShow = false;
 
   // Conditionally add the active classes if UrlInChildren
@@ -61,7 +61,7 @@ export class CoreMenuHorizontalCollapsibleComponent implements OnInit, OnDestroy
 
     // Subscribe to the current menu changes
     this._coreMenuService.onMenuChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(() => {
-      this.grpSanjoseCenterUser = this._coreMenuService.grpSanjoseCenterUser;
+      this.grpCoopCenterUser = this._coreMenuService.grpCoopCenterUser;
     });
 
     // Listen for router events and expand

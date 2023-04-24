@@ -100,7 +100,7 @@ export class RegistroComponent implements OnInit {
     ).subscribe((info) => {
         this.error = null;
         this.loading = true;
-        localStorage.setItem('grpSanjoseCenterUser', JSON.stringify(info));
+        localStorage.setItem('grpCoopCenterUser', JSON.stringify(info));
         setTimeout(() => {
           window.location.href = '/';
         }, 1000);

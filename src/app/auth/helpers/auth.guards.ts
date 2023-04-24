@@ -15,12 +15,12 @@ export class AuthGuard implements CanActivate {
 
   // canActivate
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const grpSanjoseCenterUser = this._authenticationService.grpSanjoseCenterUserValue;
+    const grpCoopCenterUser = this._authenticationService.grpSanjoseCenterUserValue;
     let activacion = false;
-    if (grpSanjoseCenterUser) {
+    if (grpCoopCenterUser) {
       // check if route is restricted by role
       let rolEncontrado = false;
-      let expiracionToken = Number(grpSanjoseCenterUser.tokenExpiracion);
+      let expiracionToken = Number(grpCoopCenterUser.tokenExpiracion);
       let fechaActual = Date.now();
       if (expiracionToken - fechaActual <= 0) {
         this._authenticationService.logout();
@@ -29,13 +29,13 @@ export class AuthGuard implements CanActivate {
 
       // console.log(fechaActual.diff());
 
-      grpSanjoseCenterUser.roles.map(rol => {
+      grpCoopCenterUser.roles.map(rol => {
         if (route.data.roles && route.data.roles.indexOf(rol.nombre) != -1) {
           rolEncontrado = true;
         }
       });
 
-      if (!JSON.parse(grpSanjoseCenterUser.roles[0].config).includes(state.url.slice(1))) {
+      if (!JSON.parse(grpCoopCenterUser.roles[0].config).includes(state.url.slice(1))) {
         this._router.navigate(['/pages/miscellaneous/not-authorized']);
         return false;
       } else {
@@ -44,11 +44,11 @@ export class AuthGuard implements CanActivate {
 
 
       // if (route.data.activacion) {
-      //   if (route.data.activacion.indexOf(Number(grpSanjoseCenterUser.estado)) != -1) {
+      //   if (route.data.activacion.indexOf(Number(grpCoopCenterUser.estado)) != -1) {
       //     activacion = true;
       //   }
       // }
-      // switch (Number(grpSanjoseCenterUser.estado)) {
+      // switch (Number(grpCoopCenterUser.estado)) {
       //   case 1: {
       //     if (!activacion) {
       //       this._router.navigate(['/personas/bienvenido']);

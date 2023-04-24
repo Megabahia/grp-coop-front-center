@@ -36,7 +36,7 @@ export class SolicitudesPagoProveedoresComponent implements OnInit, AfterViewIni
     private _modalService: NgbModal,
   ) {
     this._unsubscribeAll = new Subject();
-    this.usuario = this._coreMenuService.grpSanjoseCenterUser;
+    this.usuario = this._coreMenuService.grpCoopCenterUser;
   }
 
   ngOnInit(): void {

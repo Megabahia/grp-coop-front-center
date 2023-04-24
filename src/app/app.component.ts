@@ -74,7 +74,7 @@ export class AppComponent implements OnInit, OnDestroy {
       private _coreTranslationService: CoreTranslationService,
       private _translateService: TranslateService
   ) {
-    this.usuario = this._coreMenuService.grpSanjoseCenterUser;
+    this.usuario = this._coreMenuService.grpCoopCenterUser;
     // Get the application main menu
     this.renderMenu(menu);
     this.menu = menu;

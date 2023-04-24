@@ -11,7 +11,7 @@ import moment from 'moment';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   //public
-  public grpSanjoseCenterUser: Observable<User>;
+  public grpCoopCenterUser: Observable<User>;
 
   //private
   private grpSanjoseCenterUserSubject: BehaviorSubject<User>;
@@ -22,8 +22,8 @@ export class AuthenticationService {
    * @param {ToastrService} _toastrService
    */
   constructor(private _http: HttpClient, private _toastrService: ToastrService) {
-    this.grpSanjoseCenterUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('grpSanjoseCenterUser')));
-    this.grpSanjoseCenterUser = this.grpSanjoseCenterUserSubject.asObservable();
+    this.grpSanjoseCenterUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('grpCoopCenterUser')));
+    this.grpCoopCenterUser = this.grpSanjoseCenterUserSubject.asObservable();
   }
 
   // getter: grpSanjoseCenterUserValue
@@ -35,14 +35,14 @@ export class AuthenticationService {
    *  Confirms if user is admin
    */
   // get isAdmin() {
-  //   return this.grpSanjoseCenterUser && this.grpSanjoseCenterUserSubject.value.role === Role.Admin;
+  //   return this.grpCoopCenterUser && this.grpSanjoseCenterUserSubject.value.role === Role.Admin;
   // }
 
   // /**
   //  *  Confirms if user is client
   //  */
   // get isClient() {
-  //   return this.grpSanjoseCenterUser && this.grpSanjoseCenterUserSubject.value.role === Role.Client;
+  //   return this.grpCoopCenterUser && this.grpSanjoseCenterUserSubject.value.role === Role.Client;
   // }
 
   /**
@@ -61,7 +61,7 @@ export class AuthenticationService {
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             user.tokenExpiracion = Date.now() + (Number(user.tokenExpiracion) * 1000);
-            localStorage.setItem('grpSanjoseCenterUser', JSON.stringify(user));
+            localStorage.setItem('grpCoopCenterUser', JSON.stringify(user));
             // Display welcome toast!
             setTimeout(() => {
               this._toastrService.success(
@@ -88,7 +88,7 @@ export class AuthenticationService {
    */
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('grpSanjoseCenterUser');
+    localStorage.removeItem('grpCoopCenterUser');
     // notify
     this.grpSanjoseCenterUserSubject.next(null);
   }

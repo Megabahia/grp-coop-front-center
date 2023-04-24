@@ -43,7 +43,7 @@ export class EmpleadosComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _coreMenuService: CoreMenuService,
   ) {
-    this.usuario = this._coreMenuService.grpSanjoseCenterUser;
+    this.usuario = this._coreMenuService.grpCoopCenterUser;
     this.route.params.subscribe((params) => {
         this.empresa = params.empresa;
         console.log(params);

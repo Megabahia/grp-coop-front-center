@@ -58,7 +58,7 @@ export class ListarComponent implements OnInit, AfterViewInit, OnDestroy {
     private _formBuilder: FormBuilder,
     private cdRef: ChangeDetectorRef
   ) {
-    this.usuario = this._coreMenuService.grpSanjoseCenterUser;
+    this.usuario = this._coreMenuService.grpCoopCenterUser;
 
     this.superMonedasElec = this.inicializarSuperMoneda();
 
@@ -97,7 +97,7 @@ export class ListarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.obtenerCategoriaEmpresaOpciones();
     this.fecha = this.transformarFecha(new Date());
 
-    this.usuario = this._coreMenuService.grpSanjoseCenterUser;
+    this.usuario = this._coreMenuService.grpCoopCenterUser;
 
 
     this.cdRef.detectChanges();

@@ -45,7 +45,7 @@ export class FelicidadesRegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuario = this._coreMenuService.grpSanjoseCenterUser;
+    this.usuario = this._coreMenuService.grpCoopCenterUser;
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
@@ -59,7 +59,7 @@ export class FelicidadesRegistroComponent implements OnInit {
       }
     ).subscribe(info => {
       this.usuario.estado = "5";
-      localStorage.setItem('grpSanjoseCenterUser', JSON.stringify(this.usuario));
+      localStorage.setItem('grpCoopCenterUser', JSON.stringify(this.usuario));
       setTimeout(() => {
         this._router.navigate(['/']);
       }, 100);
