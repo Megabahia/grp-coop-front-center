@@ -127,7 +127,7 @@
 <!-- INICIO MODAL USER -->
 <ng-template #modalSLC let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel1">Buró de crédito</h4>
+        <h4 class="modal-title" id="myModalLabel1">Solicitud de Crédito</h4>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -161,6 +161,60 @@
                         disabled
                 />
             </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Número de identificación</label>
+                <input
+                        type="text"
+                        value="{{userViewData.documento}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Correo electronico</label>
+                <input
+                        type="text"
+                        value="{{userViewData.email}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Estado civil</label>
+                <input
+                        type="text"
+                        value="{{userViewData.estadoCivil}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Número WhatsApp</label>
+                <input
+                        type="text"
+                        value="{{userViewData.whatsapp}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Número de celular</label>
+                <input
+                        type="text"
+                        value="{{userViewData.celular}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Tipo de persona</label>
+                <input
+                        type="text"
+                        value="{{userViewData.tipoPersona}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6">
@@ -190,6 +244,15 @@
                         type="text"
                         class="form-control"
                         value="{{userViewData.nombreDueno}}"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4" *ngIf="!casaPropia">
+                <label class="form-label">Whatsapp del dueño</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        value="{{userViewData.whatsappDueno}}"
                         disabled
                 />
             </div>
@@ -613,9 +676,6 @@
                     <label class="form-check-label mr-2" for="checkBuroRevisado">Valido</label>
                     <input class="form-check-input" type="checkbox" id="checkBuroRevisado"
                            formControlName="checkBuroRevisado"/>
-                    <a *ngIf="credito.buroCredito" href="{{credito.buroCredito}}" target="_blank">
-                        Ver
-                    </a>
                     <div *ngIf="submitted && controlsFrom.checkBuroRevisado.errors" class="invalid-feedback"
                          style="display: block;">
                         <div *ngIf="controlsFrom.checkBuroRevisado.errors.required">Buró revisado es

@@ -241,8 +241,8 @@ export class NegocioPropioComponent implements OnInit, AfterViewInit {
     this.actualizarCreditoFormData.delete('motivo');
     this.actualizarCreditoFormData.append('motivo', this.motivo);
     if (estado !== 'Por Completar') {
-      this.actualizarCreditoFormData.delete('checks');
-      this.actualizarCreditoFormData.append('checks', JSON.stringify(this.checks));
+      // this.actualizarCreditoFormData.delete('checks');
+      // this.actualizarCreditoFormData.append('checks', JSON.stringify(this.checks));
     }
     console.log('this.actualizarCreditoFormData', this.actualizarCreditoFormData);
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {

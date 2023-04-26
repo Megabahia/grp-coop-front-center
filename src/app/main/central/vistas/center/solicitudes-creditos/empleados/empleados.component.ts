@@ -148,7 +148,7 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
             checkCalificacionBuroIfis: ['', [Validators.requiredTrue]],
             checkBuroRevisado: ['', [Validators.requiredTrue]],
             checkIdenficicacion: ['', [Validators.requiredTrue]],
-            checkRuc: ['', [Validators.requiredTrue]],
+            checkRuc: ['', ],
             checkFotoCarnet: ['', [Validators.requiredTrue]],
             checkPapeletaVotacion: ['', [Validators.requiredTrue]],
             checkIdentificacionConyuge: ['', this.soltero ? [] : [Validators.requiredTrue]],

@@ -62,13 +62,15 @@
                                 <a href="{{credito.archivos.tablaAmortizacion}}" target="_blank">Tabla Amortizacion</a>
                             </td>
                             <td>
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
-                                   (click)="seguroNegarModal(credito._id)" alt="Negar">
-                                    Negar
-                                </a>
-                                <a href="javascript:void(0);" (click)="procesarPago(credito)" alt="Procesar">
-                                    Procesar
-                                </a>
+                                <div *ngIf="credito.estado === null">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
+                                       (click)="seguroNegarModal(credito._id)" alt="Negar">
+                                        Negar
+                                    </a>
+                                    <a href="javascript:void(0);" (click)="procesarPago(credito)" alt="Procesar">
+                                        Procesar
+                                    </a>
+                                </div>
                             </td>
                         </tr>
 
