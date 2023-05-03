@@ -181,6 +181,8 @@ export class IfisMicrocreditosPreAprovadosComponent implements OnInit, AfterView
             page: this.page - 1,
             tipoCredito: 'Pymes-PreAprobado',
             cargarOrigen: 'IFIS',
+            alcance: ['LOCAL', 'OMNIGLOBAL'],
+            enviado: 1,
         }).subscribe(info => {
             console.log('info', info);
             this.collectionSize = info.cont;

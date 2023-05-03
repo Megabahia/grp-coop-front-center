@@ -61,6 +61,31 @@ import {
   IfisMicrocreditosPreAprovadosComponent
 } from './vistas/center/solicitudes-creditos/ifis/microcreditos-pre-aprovados/ifis-microcreditos-pre-aprovados.component';
 import {MatTreeModule} from '@angular/material/tree';
+import {
+  SolicitudesEmpleadosCenterComponent
+} from './vistas/center/solicitudes-creditos-local/empleados/solicitudes-empleados-center.component';
+import {NegocioPropioCenterComponent} from './vistas/center/solicitudes-creditos-local/negocio-propio/negocio-propio-center.component';
+import {
+  NegocioPropioPreaprovadosCenterComponent
+} from './vistas/center/solicitudes-creditos-local/negocio-propio-preaprovados/negocio-propio-preaprovados-center.component';
+import {
+  EmpleadosPreaprovadosCenterComponent
+} from './vistas/center/solicitudes-creditos-local/empleados-preaprovados/empleados-preaprovados-center.component';
+import {
+  MicrocreditosPreAprovadosCenterComponent
+} from './vistas/center/solicitudes-creditos-local/microcreditos-pre-aprovados/microcreditos-pre-aprovados-center.component';
+import {
+  MicrocreditosNormalesCenterComponent
+} from './vistas/center/solicitudes-creditos-local/microcreditos-normales/microcreditos-normales-center.component';
+import {
+  IfisNegocioPropioPreaprovadosCenterComponent
+} from './vistas/center/solicitudes-creditos-local/ifis/negocio-propio-preaprovados/ifis-negocio-propio-preaprovados-center.component';
+import {
+  IfisEmpleadosPreaprovadosCenterComponent
+} from './vistas/center/solicitudes-creditos-local/ifis/empleados-preaprovados/ifis-empleados-preaprovados-center.component';
+import {
+  IfisMicrocreditosPreAprovadosCenterComponent
+} from './vistas/center/solicitudes-creditos-local/ifis/microcreditos-pre-aprovados/ifis-microcreditos-pre-aprovados-center.component';
 
 
 const routes = [
@@ -127,6 +152,62 @@ const routes = [
       },
       {
         path: 'reporte-correos-landing', component: CorreosLandingListar, canActivate: [AuthGuard]
+      },
+      {
+        path: 'solicitudes-creditos-local',
+        children: [
+          {path: '', redirectTo: 'empleados-center', pathMatch: 'full'},
+          {
+            path: 'empleados-center',
+            component: SolicitudesEmpleadosCenterComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'negocios-propio-center',
+            component: NegocioPropioCenterComponent,
+            canActivate: [AuthGuard]
+          },
+          // {
+          //   path: 'negocios-center',
+          //   component: SolicitudesCreditosCenterComponent,
+          //   canActivate: [AuthGuard]
+          // },
+          {
+            path: 'negocios-propios-pre-aprobados-center',
+            component: NegocioPropioPreaprovadosCenterComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'empelados-pre-aprobados-center',
+            component: EmpleadosPreaprovadosCenterComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'microcreditpreaprobado-center',
+            component: MicrocreditosPreAprovadosCenterComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'microcreditsolicitud-center',
+            component: MicrocreditosNormalesCenterComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'ifis/negocios-propios-pre-aprobados-center',
+            component: IfisNegocioPropioPreaprovadosCenterComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'ifis/empelados-pre-aprobados-center',
+            component: IfisEmpleadosPreaprovadosCenterComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'ifis/microcreditpreaprobado-center',
+            component: IfisMicrocreditosPreAprovadosCenterComponent,
+            canActivate: [AuthGuard]
+          },
+        ]
       },
       {
         path: 'solicitudes-creditos',
@@ -247,6 +328,16 @@ const routes = [
     IfisEmpleadosPreaprovaodsComponent,
     IfisNegocioPropioPreaprovaodsComponent,
     IfisMicrocreditosPreAprovadosComponent,
+    SolicitudesEmpleadosCenterComponent,
+    NegocioPropioCenterComponent,
+    // SolicitudesCreditosCenterComponent,
+    NegocioPropioPreaprovadosCenterComponent,
+    EmpleadosPreaprovadosCenterComponent,
+    MicrocreditosPreAprovadosCenterComponent,
+    MicrocreditosNormalesCenterComponent,
+    IfisNegocioPropioPreaprovadosCenterComponent,
+    IfisEmpleadosPreaprovadosCenterComponent,
+    IfisMicrocreditosPreAprovadosCenterComponent,
   ],
   imports: [
     CoreCommonModule,

@@ -100,6 +100,8 @@ export class IfisEmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit
       page: this.page - 1,
       tipoCredito: 'Empleado-PreAprobado',
       cargarOrigen: 'IFIS',
+      alcance: ['LOCAL', 'OMNIGLOBAL'],
+      enviado: 1,
     }).subscribe(info => {
       this.collectionSize = info.cont;
       this.listaCreditos = info.info;

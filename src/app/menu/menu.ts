@@ -156,6 +156,120 @@ export const menu: CoreMenu[] = [
         url: 'central/center/reporte-correos-landing',
       },
       {
+        id: 'solicitudesCreditosLocal',
+        title: 'Solicitudes de créditos Local',
+        // translate: 'MENU.HOME',
+        // role: [Role.BigPuntos],
+        type: 'collapsible',
+        icon: 'credit-card',
+        children: [
+          {
+            id: 'creditoComsumoLocal',
+            title: 'Créditos de consumo',
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'empleadosLocal',
+                title: 'Créditos empleados',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local/empleados-center'
+              },
+              {
+                id: 'negocios',
+                title: 'Créditos negocios',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local/negocios-propio-center'
+              },
+              {
+                id: 'propios-pre-aprovados',
+                title: 'Pre aprobados negocios propios',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local/negocios-propios-pre-aprobados-center'
+              },
+              {
+                id: 'empelados-pre-aprovados',
+                title: 'Pre aprobados empelados',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local/empelados-pre-aprobados-center'
+              },
+              {
+                id: 'ifisPreaprobados',
+                title: 'IFIS Preaprobados',
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'propios-pre-aprovados',
+                    title: 'Pre aprobados negocios propios',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-local/ifis/negocios-propios-pre-aprobados-center'
+                  },
+                  {
+                    id: 'empelados-pre-aprovados',
+                    title: 'Pre aprobados empelados',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-local/ifis/empelados-pre-aprobados-center'
+                  },
+                ],
+              },
+            ]
+          },
+          {
+            id: 'lineasCredito',
+            title: 'Líneas de crédito',
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'microcreditpreaprobado',
+                title: 'PYMES pre-aprobados ',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local/microcreditpreaprobado-center'
+              },
+              {
+                id: 'microcreditsolicitud',
+                title: 'PYMES Normales ',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local/microcreditsolicitud-center'
+              },
+              {
+                id: 'pymesIfis',
+                title: 'Pymes Ifis',
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'microcreditpreaprobado',
+                    title: 'PYMES pre-aprobados ',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-local/ifis/microcreditpreaprobado-center'
+                  },
+                ]
+              }
+            ]
+          },
+        ]
+      },
+      {
         id: 'solicitudesCreditos',
         title: 'Solicitudes de créditos',
         // translate: 'MENU.HOME',

@@ -182,7 +182,9 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
             page_size: this.page_size,
             page: this.page - 1,
             tipoCredito: 'Pymes-Normales',
-          cargarOrigen: 'BIGPUNTOS'
+          cargarOrigen: 'BIGPUNTOS',
+            alcance: ['LOCAL', 'OMNIGLOBAL'],
+            enviado: 1,
         }).subscribe(info => {
             console.log('info', info);
             this.collectionSize = info.cont;

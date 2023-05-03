@@ -101,6 +101,8 @@ public actualizarCreditoFormData;
       page: this.page - 1,
       tipoCredito: 'Negocio-PreAprobado',
       cargarOrigen: 'IFIS',
+      alcance: ['LOCAL', 'OMNIGLOBAL'],
+      enviado: 1,
     }).subscribe(info => {
       this.collectionSize = info.cont;
       this.listaCreditos = info.info;
