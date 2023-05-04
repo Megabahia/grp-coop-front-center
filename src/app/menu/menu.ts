@@ -157,7 +157,7 @@ export const menu: CoreMenu[] = [
       },
       {
         id: 'solicitudesCreditosLocal',
-        title: 'Solicitudes de créditos Local',
+        title: 'Visado de documentos preliminar',
         // translate: 'MENU.HOME',
         // role: [Role.BigPuntos],
         type: 'collapsible',
