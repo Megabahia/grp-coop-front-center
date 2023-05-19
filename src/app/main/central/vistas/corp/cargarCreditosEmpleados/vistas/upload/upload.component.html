@@ -29,12 +29,7 @@
                             <form class="add-new-user pt-0" [formGroup]="usuarioForm">
                                 <div class="form-group">
                                     <label>Cooperativa responsable</label>
-                                    <select class="form-control" name="empresaIfis_id" formControlName="empresaIfis_id"
-                                            (change)="obtenerEmpresaIfi()">
-                                        <option value="">- Seleccione -</option>
-                                        <option value="{{empresaIfi._id}}"
-                                                *ngFor="let empresaIfi of listaEmpresasIfis">{{empresaIfi.nombreEmpresa}}</option>
-                                    </select>
+                                    <input disabled type="text" value="{{nombreEmpresa}}" class="form-control form-control-sm">
                                     <div *ngIf="submitted && usuForm.empresaIfis_id.errors" class="invalid-feedback"
                                          style="display: block;">
                                         <div *ngIf="usuForm.empresaIfis_id.errors.required">Empresa Corp es requerida

@@ -44,6 +44,8 @@ export class UploadComponent implements OnInit {
   inicio;
   fin;
   public errores = false;
+  public nombreEmpresa = '';
+  public idEmpresa = '';
 
   constructor(
     private _cargarCreditosEmpleados: CargarCreditosEmpleadosService,
@@ -64,7 +66,7 @@ export class UploadComponent implements OnInit {
     this.obtenerListaEmpresasIfis();
     this.obtenerListaArchivosPreAprobados();
     this.usuarioForm = this._formBuilder.group({
-      empresaIfis_id: ['', [Validators.required]],
+      empresaIfis_id: [this.idEmpresa, [Validators.required]],
       empresaComercial_id: ['', []],
     }
     );
@@ -80,6 +82,8 @@ export class UploadComponent implements OnInit {
   obtenerListaEmpresasIfis() {
     this._cargarCreditosEmpleados.obtenerListaEmpresasIfis({}).subscribe((info) => {
       this.listaEmpresasIfis = info.info;
+      this.nombreEmpresa = info.info[0].nombreEmpresa;
+      this.idEmpresa = info.info[0]._id;
     },
     (error) => {
 
@@ -116,7 +120,7 @@ export class UploadComponent implements OnInit {
     this.nuevoArchivo.append('linkArchivo', archivo, archivo.name);
     this.nuevoArchivo.append('tamanioArchivo', String(archivo.size / (1000000 )));
     this.nombreArchivo = archivo.name;
-    this.nuevoArchivo.append('empresa_financiera', this.empresaIfi._id);
+    this.nuevoArchivo.append('empresa_financiera', this.idEmpresa);
     this.archivo = true;
 
     const target: DataTransfer = <DataTransfer>event.target;
@@ -150,13 +154,14 @@ export class UploadComponent implements OnInit {
     }
   }
   cargar() {
+    this.usuarioForm['controls']['empresaIfis_id'].setValue(this.idEmpresa);
     this.submitted = true;
     console.log('subir arvhivo');
     if (!this.nuevoArchivo.get('linkArchivo')) {
       this.archivo = false;
       return;
     }
-    this.mensaje = `Empresa IFIS: ${this.empresaIfi.nombreComercial}<br>
+    this.mensaje = `Empresa IFIS: ${this.nombreEmpresa}<br>
                             <br>Registros: ${this.numeroRegistros} en el Excel ${this.nombreArchivo}`;
     this.abrirModal(this.confirmarModal);
   }
@@ -172,7 +177,7 @@ export class UploadComponent implements OnInit {
     this.nuevoArchivo.delete('user_id');
     this.nuevoArchivo.append('user_id', this.usuario.id);
     this.nuevoArchivo.append('tipoCredito', 'Empleado');
-    this.nuevoArchivo.append('empresa_financiera', this.empresaIfi._id);
+    this.nuevoArchivo.append('empresa_financiera', this.idEmpresa);
     // this.nuevoArchivo.delete('empresa_comercial');
     // this.nuevoArchivo.append('empresa_comercial', this.empresaCorp._id);
     this._cargarCreditosEmpleados.crearArchivoPreAprobados(
