@@ -85,8 +85,10 @@ export class SolicitudPagoEmpleadosComponent implements OnInit, AfterViewInit {
         })
             .subscribe((info) => {
                 this.obtenerSolicitudesCreditos();
+                this._modalService.dismissAll();
             });
     }
+
 
     enviarProcesar() {
         this._solicitudesPagoEmpleadosService.actualizarSolicitudesPagoProveedores({
