@@ -47,7 +47,7 @@ export class ValoresProcesoComponent implements OnInit {
       montoAprobado: [this.credito.montoAprobado, [Validators.required]],
       gastosAdministrativos: [this.credito.gastosAdministrativos, [Validators.required]],
       montoLiquidar: [this.credito.montoLiquidar, [Validators.required]],
-      montoDisponible: [this.credito.montoLiquidar, [Validators.required]],
+      montoDisponible: [this.credito.montoAprobado, [Validators.required]],
       cuota: [0, []],
       solicitudCredito: [this.credito.solicitudCredito],
       pagare: ['', [Validators.required, ValidacionesPropias.pdfValido]],
