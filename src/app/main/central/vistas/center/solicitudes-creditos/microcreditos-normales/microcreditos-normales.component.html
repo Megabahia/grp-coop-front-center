@@ -74,7 +74,7 @@
                         <td>{{credito.empresaInfo.comercial}}</td>
                         <td>{{credito.empresaInfo.rucEmpresa}}</td>
                         <td>
-                            <button
+                            <button *ngIf="credito.estado !== 'Aprobado' && credito.estado !== 'Negado' && credito.estado !== 'Por Completar'"
                                     type="button" class="btn btn-outline-primary"
                                     rippleEffect
                                     (click)="verDocumentos(credito)">Ver
@@ -613,7 +613,7 @@
         <div class="modal-body flex-grow-1">
 
             <div class="form-group">
-                <label>Copia de cédula y Ruc</label>
+                <label>Copia de cédula</label>
 
                 <div class="custom-file">
                     <label class="form-check-label mr-2" for="checkIdentificacion">Valido</label>
@@ -626,6 +626,24 @@
                          style="display: block;">
                         <div *ngIf="controlsFrom.checkIdentificacion.errors.required">Copia de cédula y Ruc es
                             requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Copia de ruc</label>
+
+                <div class="custom-file">
+                    <label class="form-check-label mr-2" for="checkRuc">Valido</label>
+                    <input class="form-check-input" type="checkbox" id="checkRuc"
+                           formControlName="checkRuc"/>
+                    <a *ngIf="credito.ruc" href="{{credito.ruc}}" target="_blank">
+                        Ver
+                    </a>
+                    <div *ngIf="submitted && controlsFrom.checkRuc.errors" class="invalid-feedback"
+                         style="display: block;">
+                        <div *ngIf="controlsFrom.checkRuc.errors.required">
+                            Copia de Ruc es requerido
                         </div>
                     </div>
                 </div>
@@ -1039,7 +1057,7 @@
             <div class="form-group">
                 <label for="calificacionBuroIfis">Calificación de Buró de Crédito</label>
                 <div class="custom-file">
-                    <input type="number" class="form-control" id="calificacionBuroIfis"
+                    <input type="text" class="form-control" id="calificacionBuroIfis"
                            formControlName="calificacionBuroIfis"
                            value="{{actualizarCreditoForm.get('calificacionBuroIfis').value}}"
                     />
@@ -1048,6 +1066,15 @@
                         <div *ngIf="controlsFrom.calificacionBuroIfis.errors.required">Calificación de Buró de Crédito
                             es
                             requerido
+                        </div>
+                        <div *ngIf="controlsFrom.calificacionBuroIfis.errors.pattern">
+                            Ingrese solo numeros
+                        </div>
+                        <div *ngIf="controlsFrom.calificacionBuroIfis.errors.minlength">
+                            Minimo 3
+                        </div>
+                        <div *ngIf="controlsFrom.calificacionBuroIfis.errors.maxlength">
+                            Maximo 4
                         </div>
                     </div>
                 </div>

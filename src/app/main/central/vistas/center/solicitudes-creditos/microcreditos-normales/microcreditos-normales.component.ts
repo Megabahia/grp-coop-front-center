@@ -253,7 +253,9 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
                 codigoClienteCreado: [this.credito.codigoClienteCreado ? this.credito.codigoClienteCreado : '', [Validators.required]], //
                 codigoCuentaCreada: [this.credito.codigoCuentaCreada ? this.credito.codigoCuentaCreada : '', [Validators.required]], //
                 buroCreditoIfis: ['', [Validators.required]], //
-                calificacionBuroIfis: [this.credito.calificacionBuroIfis ? this.credito.calificacionBuroIfis : '', [Validators.required]],
+                calificacionBuroIfis: [this.credito.calificacionBuroIfis ? this.credito.calificacionBuroIfis : '',
+                    [Validators.required, Validators.minLength(3), Validators.maxLength(4), Validators.pattern('^[0-9]*$')]
+                ],
                 calificacionBuro: [this.credito.calificacionBuro ? this.credito.calificacionBuro : '', [Validators.required]], //
                 // fotoCarnet: ['', [Validators.required]], //
                 // papeletaVotacion: ['', [Validators.required]], //
@@ -270,6 +272,7 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
                 // observacion: [this.credito.observacion ? this.credito.observacion : '', [Validators.required]], //
                 // checks
                 checkIdentificacion: ['', [Validators.requiredTrue]], //
+                checkRuc: ['', [Validators.requiredTrue]], //
                 checkFotoCarnet: ['', [Validators.requiredTrue]], //
                 checkPapeletaVotacion: ['', [Validators.requiredTrue]], //
                 checkIdentificacionConyuge: ['', this.soltero ? [] : [Validators.requiredTrue]], //
@@ -359,7 +362,7 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
         this.checks = [
             {'label': 'identificacion', 'valor': resto.checkIdentificacion},
             {'label': 'Foto Carnet', 'valor': resto.checkFotoCarnet},
-            {'label': 'Ruc', 'valor': resto.checkIdentificacion},
+            {'label': 'Ruc', 'valor': resto.checkRuc},
             {'label': 'Papeleta votación Representante Legal ', 'valor': resto.checkPapeletaVotacion},
             {'label': 'Identificacion conyuge', 'valor': resto.checkIdentificacionConyuge},
             {'label': 'Papeleta votacion conyuge', 'valor': resto.checkPapeletaVotacionConyuge},
