@@ -327,4 +327,11 @@ public actualizarCreditoFormData;
   cerrarModal() {
     this.modalService.dismissAll();
   }
+
+  consumirAWS() {
+    this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
+      console.log(info);
+      this.obtenerSolicitudesCreditos();
+    });
+  }
 }

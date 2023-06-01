@@ -110,7 +110,7 @@ export class ValoresProcesoComponent implements OnInit {
     const gastosAdministrativos = this.actualizarCreditoForm.get('gastosAdministrativos').value || 0;
     const montoLiquidar = new Decimal(montoAprobado).add(gastosAdministrativos).toNumber();
     this.actualizarCreditoForm.get('montoLiquidar').setValue(montoLiquidar);
-    this.actualizarCreditoForm.get('montoDisponible').setValue(montoLiquidar);
+    this.actualizarCreditoForm.get('montoDisponible').setValue(new Decimal(montoAprobado).toNumber());
   }
 
   viewDataUser(modal) {

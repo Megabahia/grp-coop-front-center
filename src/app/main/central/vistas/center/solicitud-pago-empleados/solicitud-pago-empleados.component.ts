@@ -58,7 +58,8 @@ export class SolicitudPagoEmpleadosComponent implements OnInit, AfterViewInit {
     }
 
     obtenerSolicitudesCreditos() {
-        this._solicitudesPagoEmpleadosService.obtenerSolicitudesPagoEmpleados({page_size: this.page_size, page: this.page - 1})
+        this._solicitudesPagoEmpleadosService.obtenerSolicitudesPagoEmpleados({page_size: this.page_size, page: this.page - 1,
+            estado: ['Pendiente', 'Aprobado', 'Negado']})
             .subscribe((info) => {
                 this.collectionSize = info.cont;
                 const newInfo = info.info.map((value) => {

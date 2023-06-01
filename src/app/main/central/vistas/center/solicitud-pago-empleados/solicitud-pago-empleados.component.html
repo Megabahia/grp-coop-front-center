@@ -62,7 +62,7 @@
                                 <a href="{{credito.archivos.tablaAmortizacion}}" target="_blank">Tabla Amortizacion</a>
                             </td>
                             <td>
-                                <div *ngIf="credito.estado === null">
+                                <div *ngIf="credito.estado === 'Pendiente'">
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
                                        (click)="seguroNegarModal(credito._id)" alt="Negar">
                                         Negar
