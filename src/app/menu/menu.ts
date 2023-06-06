@@ -389,6 +389,24 @@ export const menu: CoreMenu[] = [
               }
             ]
           },
+          {
+            id: 'creditoAlfa',
+            title: 'Créditos Alfa',
+            // translate: 'MENU.HOME',
+            // role: [Role.BigPuntos],
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'alfa',
+                title: 'Credito Alfa',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos/alfa'
+              },
+            ]
+          }
         ]
       },
       {

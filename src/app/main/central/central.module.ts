@@ -86,6 +86,7 @@ import {
 import {
   IfisMicrocreditosPreAprovadosCenterComponent
 } from './vistas/center/solicitudes-creditos-local/ifis/microcreditos-pre-aprovados/ifis-microcreditos-pre-aprovados-center.component';
+import { AlfaComponent } from './vistas/center/solicitudes-creditos/alfa/alfa.component';
 
 
 const routes = [
@@ -267,6 +268,12 @@ const routes = [
             // data: {roles: [Role.BigPuntos]},
             canActivate: [AuthGuard]
           },
+          {
+            path: 'alfa',
+            component: AlfaComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
         ]
       },
       {
@@ -338,6 +345,7 @@ const routes = [
     IfisNegocioPropioPreaprovadosCenterComponent,
     IfisEmpleadosPreaprovadosCenterComponent,
     IfisMicrocreditosPreAprovadosCenterComponent,
+    AlfaComponent,
   ],
   imports: [
     CoreCommonModule,
