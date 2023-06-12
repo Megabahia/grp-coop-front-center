@@ -3,7 +3,7 @@
         <div class="col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="content-header-title float-left mb-0">Cargar créditos Empleados</h2>
+                    <h2 class="content-header-title float-left mb-0">Cargar Líneas de Crédito</h2>
                     <div class="breadcrumb-wrapper">
                         <!-- <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
@@ -28,13 +28,8 @@
                         <div class="col-md-6">
                             <form class="add-new-user pt-0" [formGroup]="usuarioForm">
                                 <div class="form-group">
-                                    <label>Entidad Financiera responsable</label>
-                                    <select class="form-control" name="empresaIfis_id" formControlName="empresaIfis_id"
-                                            (change)="obtenerEmpresaIfi()">
-                                        <option value="">- Seleccione -</option>
-                                        <option value="{{empresaIfi._id}}"
-                                                *ngFor="let empresaIfi of listaEmpresasIfis">{{empresaIfi.nombreEmpresa}}</option>
-                                    </select>
+                                    <label>Cooperativa responsable</label>
+                                    <input disabled type="text" value="{{nombreEmpresa}}" class="form-control form-control-sm">
                                     <div *ngIf="submitted && usuForm.empresaIfis_id.errors" class="invalid-feedback"
                                          style="display: block;">
                                         <div *ngIf="usuForm.empresaIfis_id.errors.required">Empresa Corp es requerida
