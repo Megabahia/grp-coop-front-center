@@ -44,6 +44,8 @@ export class UploadLineasCreditos implements OnInit, OnDestroy {
     public listaArchivosPreAprobados = [];
     public inicio;
     public fin;
+    public nombreEmpresa = '';
+    public idEmpresa = '';
 
     constructor(
         private _cargarCreditosNegocios: CargarCreditosNegociosService,
@@ -73,6 +75,9 @@ export class UploadLineasCreditos implements OnInit, OnDestroy {
     obtenerListaEmpresasCorp() {
         this._cargarCreditosNegocios.obtenerListaEmpresasCorps({}).subscribe((info) => {
                 this.listaEmpresasCorps = info.info;
+                this.nombreEmpresa = info.info[0].nombreEmpresa;
+                this.idEmpresa = info.info[0]._id;
+
             },
             (error) => {
 
@@ -123,7 +128,7 @@ export class UploadLineasCreditos implements OnInit, OnDestroy {
         this.nuevoArchivo.append('linkArchivo', archivo, archivo.name);
         this.nuevoArchivo.append('tamanioArchivo', String(archivo.size / (1000000)));
         this.nombreArchivo = archivo.name;
-        this.nuevoArchivo.append('empresa_financiera', this.empresaIfi._id);
+        this.nuevoArchivo.append('empresa_financiera', this.idEmpresa);
         this.archivo = true;
 
         const target: DataTransfer = <DataTransfer>event.target;
@@ -158,13 +163,15 @@ export class UploadLineasCreditos implements OnInit, OnDestroy {
     }
 
     cargar() {
+        this.usuarioForm['controls']['empresaIfis_id'].setValue(this.idEmpresa);
         this.submitted = true;
+        console.log('subir arvhivo');
         if (!this.nuevoArchivo.get('linkArchivo')) {
             this.archivo = false;
             return;
         }
-        this.mensaje = `Empresa Corp: ${this.empresaIfi.nombreComercial}<br>Ruc: ${this.empresaIfi.ruc}
-                            <br>Registros: ${this.numeroRegistros}`;
+        this.mensaje = `Empresa IFIS: ${this.nombreEmpresa}<br>
+                            <br>Registros: ${this.numeroRegistros} en el Excel ${this.nombreArchivo}`;
         this.abrirModal(this.confirmarModal);
     }
 
@@ -178,9 +185,9 @@ export class UploadLineasCreditos implements OnInit, OnDestroy {
         this.nuevoArchivo.delete('user_id');
         this.nuevoArchivo.append('user_id', this.usuario.id);
         this.nuevoArchivo.append('tipoCredito', 'Negocio');
-        this.nuevoArchivo.append('empresa_financiera', this.empresaIfi._id);
-        this.nuevoArchivo.delete('empresa_comercial');
-        this.nuevoArchivo.append('empresa_comercial', this.empresaIfi._id);
+        this.nuevoArchivo.append('empresa_financiera', this.idEmpresa);
+        /*this.nuevoArchivo.delete('empresa_comercial');
+        this.nuevoArchivo.append('empresa_comercial', this.empresaIfi._id);*/
         this._cargarCreditosNegocios.crearArchivoPreAprobados(
             this.nuevoArchivo
         ).subscribe(info => {
