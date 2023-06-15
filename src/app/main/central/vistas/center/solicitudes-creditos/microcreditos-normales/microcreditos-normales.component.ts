@@ -229,6 +229,9 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
             nombreFamiliar: [''], //
             apellidoFamiliar: [''], //
             telefonoFamiliar: [''], //
+            pais: [''],
+            provincia: [''],
+            ciudad: [''],
             direccionFamiliar: [''],
             tipoPariente: [''],
         });
