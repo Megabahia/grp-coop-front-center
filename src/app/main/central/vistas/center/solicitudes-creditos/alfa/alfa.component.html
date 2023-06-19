@@ -81,7 +81,7 @@
                             <div class="badge badge-light-success">{{credito.estado}}</div>
                         </td>
                         <td>
-                            <button *ngIf="credito.estado !== 'Aprobado' && credito.estado !== 'Negado' && credito.estado !== 'Por Completar'"
+                            <button
                                     type="button" class="btn btn-outline-primary"
                                     rippleEffect
                                     (click)="verDocumentos(credito)">Ver
@@ -739,6 +739,7 @@
                 </div>
             </div>
 
+            <h3>DOCUMENTOS DEL SOLICITANTE</h3>
             <div class="form-group">
                 <label for="checkIdenficicacion">Copia de cédula</label>
 
@@ -872,23 +873,6 @@
             </div>
 
             <div class="form-group">
-                <label for="checkMecanizadoIess">Mecanizado del IESS</label>
-
-                <div class="custom-file">
-                    <label class="form-check-label mr-2" for="checkMecanizadoIess">Valido</label>
-                    <input class="form-check-input" type="checkbox" id="checkMecanizadoIess"
-                           formControlName="checkMecanizadoIess"/>
-                    <a *ngIf="credito.mecanizadoIess" href="{{credito.mecanizadoIess}}" target="_blank">
-                        Ver
-                    </a>
-                    <div *ngIf="submitted && controlsFrom.checkMecanizadoIess.errors" class="invalid-feedback"
-                         style="display: block;">
-                        <div *ngIf="controlsFrom.checkMecanizadoIess.errors.required">Mecanizado es requerido</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label for="checkMatriculaVehiculo">Copia de matrícula del vehículo (opcional)
                 </label>
 
@@ -927,6 +911,122 @@
                     </div>
                 </div>
             </div>
+            <h3>DOCUMENTOS DE LA MADRINA O PADRINO</h3>
+            <div class="form-group">
+                <label for="checkCedulaGarante">Cédula de identidad de la madrina o padrino
+                </label>
+
+                <div class="custom-file">
+                    <label class="form-check-label mr-2" for="checkCedulaGarante">Valido</label>
+                    <input class="form-check-input" type="checkbox" id="checkCedulaGarante"
+                           formControlName="checkCedulaGarante"/>
+                    <a *ngIf="credito.cedulaGarante" href="{{credito.cedulaGarante}}" target="_blank">
+                        Ver
+                    </a>
+                    <div *ngIf="submitted && controlsFrom.checkCedulaGarante.errors" class="invalid-feedback"
+                         style="display: block;">
+                        <div *ngIf="controlsFrom.checkCedulaGarante.errors.required">Copia de pago de impuesto predial
+                            es requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="checkPapeletaVotacionGarante">Papeleta de votación de la madrina o padrino
+                </label>
+
+                <div class="custom-file">
+                    <label class="form-check-label mr-2" for="checkPapeletaVotacionGarante">Valido</label>
+                    <input class="form-check-input" type="checkbox" id="checkPapeletaVotacionGarante"
+                           formControlName="checkPapeletaVotacionGarante"/>
+                    <a *ngIf="credito.papeletaVotacionGarante" href="{{credito.papeletaVotacionGarante}}" target="_blank">
+                        Ver
+                    </a>
+                    <div *ngIf="submitted && controlsFrom.checkPapeletaVotacionGarante.errors" class="invalid-feedback"
+                         style="display: block;">
+                        <div *ngIf="controlsFrom.checkPapeletaVotacionGarante.errors.required">Copia de pago de impuesto predial
+                            es requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="checkFotoGarante">Selfie (foto) con cédula de la madrina o padrino
+                </label>
+
+                <div class="custom-file">
+                    <label class="form-check-label mr-2" for="checkFotoGarante">Valido</label>
+                    <input class="form-check-input" type="checkbox" id="checkFotoGarante"
+                           formControlName="checkFotoGarante"/>
+                    <a *ngIf="credito.fotoGarante" href="{{credito.fotoGarante}}" target="_blank">
+                        Ver
+                    </a>
+                    <div *ngIf="submitted && controlsFrom.checkFotoGarante.errors" class="invalid-feedback"
+                         style="display: block;">
+                        <div *ngIf="controlsFrom.checkFotoGarante.errors.required">Copia de pago de impuesto predial
+                            es requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="checkImpuestoPredialGarante">Impuesto predial en caso de aplicar de la madrina o padrino
+                </label>
+
+                <div class="custom-file">
+                    <label class="form-check-label mr-2" for="checkImpuestoPredialGarante">Valido</label>
+                    <input class="form-check-input" type="checkbox" id="checkImpuestoPredialGarante"
+                           formControlName="checkImpuestoPredialGarante"/>
+                    <a *ngIf="credito.impuestoPredialGarante" href="{{credito.impuestoPredialGarante}}" target="_blank">
+                        Ver
+                    </a>
+                    <div *ngIf="submitted && controlsFrom.checkImpuestoPredialGarante.errors" class="invalid-feedback"
+                         style="display: block;">
+                        <div *ngIf="controlsFrom.checkImpuestoPredialGarante.errors.required">Copia de pago de impuesto predial
+                            es requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="checkMatriculaVehiculoGarante">Matrícula del vehículo de la madrina o padrino (en caso de aplicar)
+                </label>
+
+                <div class="custom-file">
+                    <label class="form-check-label mr-2" for="checkMatriculaVehiculoGarante">Valido</label>
+                    <input class="form-check-input" type="checkbox" id="checkMatriculaVehiculoGarante"
+                           formControlName="checkMatriculaVehiculoGarante"/>
+                    <a *ngIf="credito.matriculaVehiculoGarante" href="{{credito.matriculaVehiculoGarante}}" target="_blank">
+                        Ver
+                    </a>
+                    <div *ngIf="submitted && controlsFrom.checkMatriculaVehiculoGarante.errors" class="invalid-feedback"
+                         style="display: block;">
+                        <div *ngIf="controlsFrom.checkMatriculaVehiculoGarante.errors.required">Copia de pago de impuesto predial
+                            es requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="checkPlanillaDomicilioGarante">Copia de planilla de luz del domicilio de la madrina o padrino
+                </label>
+
+                <div class="custom-file">
+                    <label class="form-check-label mr-2" for="checkPlanillaDomicilioGarante">Valido</label>
+                    <input class="form-check-input" type="checkbox" id="checkPlanillaDomicilioGarante"
+                           formControlName="checkPlanillaDomicilioGarante"/>
+                    <a *ngIf="credito.planillaDomicilioGarante" href="{{credito.planillaDomicilioGarante}}" target="_blank">
+                        Ver
+                    </a>
+                    <div *ngIf="submitted && controlsFrom.checkPlanillaDomicilioGarante.errors" class="invalid-feedback"
+                         style="display: block;">
+                        <div *ngIf="controlsFrom.checkPlanillaDomicilioGarante.errors.required">Copia de pago de impuesto predial
+                            es requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="checkBuroCredito">Buró de Crédito (GRP) </label>
                 <div class="custom-file">
