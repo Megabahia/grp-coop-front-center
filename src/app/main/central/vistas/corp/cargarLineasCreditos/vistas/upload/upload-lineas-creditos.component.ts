@@ -75,8 +75,7 @@ export class UploadLineasCreditos implements OnInit, OnDestroy {
     obtenerListaEmpresasCorp() {
         this._cargarCreditosNegocios.obtenerListaEmpresasCorps({}).subscribe((info) => {
                 this.listaEmpresasCorps = info.info;
-                this.nombreEmpresa = info.info[0].nombreEmpresa;
-                this.idEmpresa = info.info[0]._id;
+
 
             },
             (error) => {
@@ -87,6 +86,9 @@ export class UploadLineasCreditos implements OnInit, OnDestroy {
     obtenerListaEmpresasIfis() {
         this._cargarCreditosNegocios.obtenerListaEmpresasIfis({}).subscribe((info) => {
                 this.listaEmpresasIfis = info.info;
+                this.nombreEmpresa = info.info[0].nombreEmpresa;
+                this.idEmpresa = info.info[0]._id;
+
             },
             (error) => {
 
