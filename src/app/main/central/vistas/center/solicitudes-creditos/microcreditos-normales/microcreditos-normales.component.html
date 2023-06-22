@@ -394,7 +394,7 @@
             <div class="row">
                 <div class="col-4">
                     <h3>
-                        REFERENCIAS FAMILAIRES:
+                        REFERENCIAS FAMILIARES:
                     </h3>
                 </div>
                 <div class="col-4"></div>
@@ -405,7 +405,7 @@
                 <ng-container
                         *ngFor="let familiar of formSolicitud.get('familiares')['controls']; let i = index">
                     <h5>
-                        Familair {{i + 1}} {{familiar['controls']?.tipoPariente.value}}:
+                        Familiar {{i + 1}} {{familiar['controls']?.tipoPariente.value}}:
                     </h5>
                     <div [formGroup]="familiar">
                         <div class="row">
@@ -483,7 +483,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>
-                                        País:
+                                        Provincia:
                                     </label>
                                     <input type="text" formControlName="provincia"
                                            class="form-control"
@@ -493,7 +493,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>
-                                        País:
+                                        Cantón:
                                     </label>
                                     <input type="text" formControlName="ciudad"
                                            class="form-control"
@@ -520,6 +520,59 @@
                             <!--                                                                requerido-->
                             <!--                                                            </div>-->
                             <!--                                                        </div>-->
+                        </div>
+
+                    </div>
+                </ng-container>
+            </ng-container>
+            <h3>REFERENCIAS COMERCIALES</h3>
+            <ng-container formArrayName="comerciales">
+                <ng-container
+                        *ngFor="let comercial of formSolicitud.get('comerciales')['controls']; let i = index">
+                    <h5>
+                        REFERENCIAS COMERCIALES {{i + 1}}:
+                    </h5>
+                    <div [formGroup]="comercial">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Nombres y apellidos
+                                    </label>
+                                    <input type="text" formControlName="nombresDuenoComercial"
+                                           class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Nombre del negocio
+                                    </label>
+                                    <input type="text" formControlName="negocioDuenoComercial"
+                                           class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Teléfono:
+                                    </label>
+                                    <input type="text" formControlName="telefonoDuenoComercial"
+                                           class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Dirección:
+                                    </label>
+                                    <input type="text" formControlName="direccionDuenoComercial"
+                                           class="form-control" disabled>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -1168,6 +1221,12 @@
                             requerido
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="autorizacion">Autorización y validación de información</label>
+                <div class="custom-file">
+                    <a href="{{credito.autorizacion}}" target="_blank">Ver</a>
                 </div>
             </div>
         </div>
