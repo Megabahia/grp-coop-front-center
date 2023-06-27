@@ -95,6 +95,8 @@ export class ValoresProcesoComponent implements OnInit {
         this.actualizarCreditoFormData.append(llaves, creditoValores[index]);
       }
     });
+    this.actualizarCreditoFormData.delete('estado');
+    this.actualizarCreditoFormData.append('estado', 'Aprobado');
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
         console.log('se guardo los valores proceso');
         this.cargando = false;

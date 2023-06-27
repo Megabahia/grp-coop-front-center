@@ -409,8 +409,8 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
             this.checks.splice(3, 2);
         }
         this.cargando = true;
-        this.actualizarCreditoFormData.delete('estado');
-        this.actualizarCreditoFormData.append('estado', estado);
+        // this.actualizarCreditoFormData.delete('estado');
+        // this.actualizarCreditoFormData.append('estado', estado);
         this.actualizarCreditoFormData.delete('motivo');
         this.actualizarCreditoFormData.append('motivo', this.motivo);
         if (estado !== 'Por Completar') {
