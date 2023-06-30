@@ -225,8 +225,8 @@
                                 <option *ngFor="let generoOp of tipoGeneroOpciones" value="{{generoOp.valor}}">{{generoOp.nombre}}</option>
                         
                             </select>
-                            <div *ngIf="usuarioSubmitted && usuForm.cargo.errors" class="invalid-feedback" style="display: block;">
-                                <div *ngIf="usuForm.cargo.errors.required">Cargo es requerido
+                            <div *ngIf="usuarioSubmitted && usuForm.genero.errors" class="invalid-feedback" style="display: block;">
+                                <div *ngIf="usuForm.genero.errors.required">Género es requerido
                                 </div>
                             </div>
                         </div>
