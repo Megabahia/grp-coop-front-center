@@ -462,4 +462,11 @@ export class IfisMicrocreditosPreAprovadosComponent implements OnInit, AfterView
       }
     );
   }
+
+    consumirAWS() {
+        this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
+            console.log(info);
+            this.obtenerSolicitudesCreditos();
+        });
+    }
 }

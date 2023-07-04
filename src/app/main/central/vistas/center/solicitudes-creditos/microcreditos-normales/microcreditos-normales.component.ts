@@ -334,6 +334,7 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
 
     cambiarEstado($event) {
         this.pantalla = $event;
+        this.obtenerSolicitudesCreditos();
     }
 
     cancelar() {
@@ -409,8 +410,10 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
             this.checks.splice(3, 2);
         }
         this.cargando = true;
-        // this.actualizarCreditoFormData.delete('estado');
-        // this.actualizarCreditoFormData.append('estado', estado);
+        if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+            this.actualizarCreditoFormData.delete('estado');
+            this.actualizarCreditoFormData.append('estado', this.estadoCredito);
+        }
         this.actualizarCreditoFormData.delete('motivo');
         this.actualizarCreditoFormData.append('motivo', this.motivo);
         if (estado !== 'Por Completar') {

@@ -180,6 +180,9 @@ export class ValoresProcesoComponent implements OnInit {
       nombreFamiliar: [''], //
       apellidoFamiliar: [''], //
       telefonoFamiliar: [''], //
+      pais: [''],
+      provincia: [''],
+      ciudad: [''],
       direccionFamiliar: [''],
       tipoPariente: [''],
     });
