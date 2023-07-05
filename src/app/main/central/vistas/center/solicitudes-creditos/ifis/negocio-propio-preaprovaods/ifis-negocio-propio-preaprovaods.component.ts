@@ -323,7 +323,12 @@ public actualizarCreditoFormData;
       }
     );
   }
-
+  consumirAWS() {
+    this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
+      console.log(info);
+      this.obtenerSolicitudesCreditos();
+    });
+  }
   cerrarModal() {
     this.modalService.dismissAll();
   }
