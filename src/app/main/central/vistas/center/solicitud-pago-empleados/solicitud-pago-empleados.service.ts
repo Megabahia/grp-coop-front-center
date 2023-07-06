@@ -17,4 +17,8 @@ export class SolicitudPagoEmpleadosService {
   public obtenerSolicitudesPagoEmpleados(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/notasPedidos/list/factura/`, datos);
   }
+
+  obtenerInformacionCredito(id) {
+    return this._httpClient.get<any>(`${environment.apiUrl}/corp/creditoPersonas/listOne/${id}`);
+  }
 }

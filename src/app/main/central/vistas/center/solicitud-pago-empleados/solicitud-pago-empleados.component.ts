@@ -113,7 +113,13 @@ export class SolicitudPagoEmpleadosComponent implements OnInit, AfterViewInit {
     procesarPago(pago) {
         this.idPagoProveedor = pago._id;
         this.solicitudPago = pago;
-        this.abrirModal(this.procesarMdl);
+        this._solicitudesPagoEmpleadosService.obtenerInformacionCredito(pago.credito_id).subscribe((data) => {
+           this.solicitudPago.numeroCuenta = JSON.parse(data?.empresaEmpleado).numeroCuenta;
+           this.solicitudPago.titularCuenta = JSON.parse(data?.empresaEmpleado).titularCuenta;
+           this.solicitudPago.correoTitular = JSON.parse(data?.empresaEmpleado).correoTitular;
+           this.solicitudPago.bancoDestino = JSON.parse(data?.empresaEmpleado).bancoDestino;
+            this.abrirModal(this.procesarMdl);
+        });
     }
 
     transformarFecha(fecha) {
