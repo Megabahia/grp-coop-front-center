@@ -162,6 +162,7 @@ export class ValoresProcesoComponent implements OnInit {
           correoConyuge: [''],
         }),
         familiares: this._formBuilder.array([]),
+        comerciales: this._formBuilder.array([]),
         inresosMensualesVentas: ['', [Validators.required]], //
         sueldoConyuge: [''], //
         otrosIngresos: [''], //

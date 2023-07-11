@@ -60,7 +60,14 @@
                             <td>{{credito.nombreProveedor}}</td>
                             <td>{{credito.valorPagar}}</td>
                             <td><a [href]="credito.factura" target="_blank">Enlace</a></td>
-                            <td><a [href]="credito.archivoFirmado" target="_blank">Enlace</a></td>
+                            <td>
+                                <a *ngIf="credito.archivoFirmado" [href]="credito.archivoFirmado" target="_blank">Enlace</a>
+                                <img *ngIf="credito.documentoVerificado; else content" src="/assets/fonts/feather/check-green.png"/>
+                                <ng-template #content>
+                                    <img src="/assets/fonts/feather/mark-red.png"/>
+                                </ng-template>
+                                Firma verificada
+                            </td>
                             <td>{{credito.estado}}</td>
                             <td>
                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
