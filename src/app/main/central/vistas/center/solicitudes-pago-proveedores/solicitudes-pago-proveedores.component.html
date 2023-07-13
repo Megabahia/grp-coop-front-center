@@ -44,6 +44,7 @@
                             <th>APELLIDOS DEL USUARIO</th>
                             <th>NOMBRE DEL PROVEEDOR</th>
                             <th>MONTO A PAGAR</th>
+                            <th>DOCUMENTOS HABILITANTES</th>
                             <th>FACTURA</th>
                             <th>COMPROBANTE FIRMADO DE LA SOLICITUD DE PAGO A PROVEEDOR</th>
                             <th>ESTADO DE LA FIRMA</th>
@@ -59,6 +60,12 @@
                             <td>{{transformarObjecto(credito.usuario, 'apellidos')}}</td>
                             <td>{{credito.nombreProveedor}}</td>
                             <td>{{credito.valorPagar}}</td>
+                            <td>
+                                <a *ngIf="credito.archivosFirmados" href="{{credito.archivosFirmados.solicitudCredito}}" target="_blank">Solicitud Credito</a><br>
+                                <a *ngIf="credito.archivosFirmados" href="{{credito.archivosFirmados.pagare}}" target="_blank">Solicitud Credito</a><br>
+                                <a *ngIf="credito.archivosFirmados" href="{{credito.archivosFirmados.contratosCuenta}}" target="_blank">Solicitud Credito</a><br>
+                                <a *ngIf="credito.archivosFirmados" href="{{credito.archivosFirmados.tablaAmortizacion}}" target="_blank">Tabla Amortizacion</a>
+                            </td>
                             <td><a [href]="credito.factura" target="_blank">Enlace</a></td>
                             <td>
                                 <a *ngIf="credito.archivoFirmado" [href]="credito.archivoFirmado" target="_blank">Enlace</a>
