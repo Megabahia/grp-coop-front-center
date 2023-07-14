@@ -49,7 +49,7 @@ import { MicrocreditosNormalesComponent } from './vistas/center/solicitudes-cred
 import { SolicitudesPagoProveedoresComponent } from './vistas/center/solicitudes-pago-proveedores/solicitudes-pago-proveedores.component';
 import { SolicitudesPagoCasasComercialComponent } from './vistas/center/solicitudes-pago-casas-comercial/solicitudes-pago-casas-comercial.component';
 import { EmpleadosComponent as EmpleadosCorp } from './vistas/corp/empleados/empleados/empleados.component';
-import { SolicitudPagoCasasComercialesComponent } from './vistas/center/solicitud-pago-empleados/solicitud-pago-casas-comerciales.component';
+import { SolicitudPagoCasasComercialesComponent } from './vistas/center/solicitud-pago-casas-comerciales/solicitud-pago-casas-comerciales.component';
 import {UploadLineasCreditos} from './vistas/corp/cargarLineasCreditos/vistas/upload/upload-lineas-creditos.component';
 import {ViewFileComponent} from './vistas/corp/cargarLineasCreditos/vistas/view-file/view-file.component';
 import {
@@ -88,6 +88,7 @@ import {
   IfisMicrocreditosPreAprovadosCenterComponent
 } from './vistas/center/solicitudes-creditos-local/ifis/microcreditos-pre-aprovados/ifis-microcreditos-pre-aprovados-center.component';
 import { AlfaComponent } from './vistas/center/solicitudes-creditos/alfa/alfa.component';
+import { SolicitudesPagoEmpleadosComponent } from './vistas/center/solicitudes-pago-empleados/solicitudes-pago-empleados.component';
 
 
 const routes = [
@@ -354,6 +355,7 @@ const routes = [
     IfisEmpleadosPreaprovadosCenterComponent,
     IfisMicrocreditosPreAprovadosCenterComponent,
     AlfaComponent,
+    SolicitudesPagoEmpleadosComponent,
   ],
   imports: [
     CoreCommonModule,
