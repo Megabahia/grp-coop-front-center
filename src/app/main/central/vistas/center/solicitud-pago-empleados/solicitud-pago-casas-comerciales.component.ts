@@ -9,11 +9,11 @@ import {SolicitudPagoEmpleadosService} from './solicitud-pago-empleados.service'
 
 @Component({
     selector: 'app-solicitud-pago-empleados',
-    templateUrl: './solicitud-pago-empleados.component.html',
-    styleUrls: ['./solicitud-pago-empleados.component.scss'],
+    templateUrl: './solicitud-pago-casas-comerciales.component.html',
+    styleUrls: ['./solicitud-pago-casas-comerciales.component.scss'],
     providers: [DatePipe]
 })
-export class SolicitudPagoEmpleadosComponent implements OnInit, AfterViewInit {
+export class SolicitudPagoCasasComercialesComponent implements OnInit, AfterViewInit {
 
     @ViewChild(NgbPagination) paginator: NgbPagination;
     @ViewChild('negarMdl') negarMdl;
