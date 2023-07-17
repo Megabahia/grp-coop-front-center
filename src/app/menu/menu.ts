@@ -437,6 +437,15 @@ export const menu: CoreMenu[] = [
         url: 'central/center/solicitud-pago-proveedores',
       },
       {
+        id: 'pagoEmpleados',
+        title: 'Solicitudes de Pago a empleados',
+        // translate: 'MENU.HOME',
+        // role: [Role.SuperMonedas],
+        type: 'item',
+        icon: 'package',
+        url: 'central/center/solicitud-pago-empleados',
+      },
+      {
         id: 'pagoCasasComerciales',
         title: 'Solicitudes de Pago Casas Comerciales',
         // translate: 'MENU.HOME',

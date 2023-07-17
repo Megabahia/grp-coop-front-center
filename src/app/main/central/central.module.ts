@@ -288,6 +288,9 @@ const routes = [
         path: 'solicitud-pago-proveedores', component: SolicitudesPagoProveedoresComponent, canActivate: [AuthGuard]
       },
       {
+        path: 'solicitud-pago-empleados', component: SolicitudesPagoEmpleadosComponent, canActivate: [AuthGuard]
+      },
+      {
         path: 'solicitud-pago-casas-comerciales-XYZ', component: SolicitudesPagoCasasComercialComponent, canActivate: [AuthGuard]
       },
       {
