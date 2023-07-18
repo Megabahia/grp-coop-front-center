@@ -162,7 +162,26 @@ export class ValoresProcesoComponent implements OnInit {
           correoConyuge: [''],
         }),
         familiares: this._formBuilder.array([]),
-        comerciales: this._formBuilder.array([]),
+        comerciales: this._formBuilder.array([
+          this._formBuilder.group({
+            nombresDuenoComercial: [''],
+            negocioDuenoComercial: [''],
+            telefonoDuenoComercial: [''],
+            direccionDuenoComercial: [''],
+          }),
+          this._formBuilder.group({
+            nombresDuenoComercial: [''],
+            negocioDuenoComercial: [''],
+            telefonoDuenoComercial: [''],
+            direccionDuenoComercial: [''],
+          }),
+          this._formBuilder.group({
+            nombresDuenoComercial: [''],
+            negocioDuenoComercial: [''],
+            telefonoDuenoComercial: [''],
+            direccionDuenoComercial: [''],
+          }),
+        ]),
         inresosMensualesVentas: ['', [Validators.required]], //
         sueldoConyuge: [''], //
         otrosIngresos: [''], //
