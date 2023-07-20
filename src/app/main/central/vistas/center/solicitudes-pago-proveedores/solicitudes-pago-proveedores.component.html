@@ -79,22 +79,24 @@
                             </td>
                             <td>{{credito.estado}}</td>
                             <td>
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
-                                   (click)="seguroNegarModal(credito._id)" alt="Negar">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="feather feather-minus-circle">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                                    </svg>
-                                </a>
-                                <a href="javascript:void(0);" (click)="procesarPago(credito)" alt="Procesar">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="feather feather-check">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                </a>
+                                <ng-container *ngIf="credito?.estado !== 'Procesar'">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
+                                       (click)="seguroNegarModal(credito._id)" alt="Negar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round" class="feather feather-minus-circle">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" (click)="procesarPago(credito)" alt="Procesar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round" class="feather feather-check">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </a>
+                                </ng-container>
                             </td>
                         </tr>
 
