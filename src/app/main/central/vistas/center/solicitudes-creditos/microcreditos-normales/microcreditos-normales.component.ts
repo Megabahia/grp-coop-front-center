@@ -231,7 +231,9 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
         this.declareFormularios();
         this.declareFormConyuge();
         this.modalOpenSLC(modal);
-        this.casado = (infoEmpresa.estadoCivil === 'Casad@' || infoEmpresa.estadoCivil === 'Casado' || infoEmpresa.estadoCivil === 'Unión libre');
+        this.soltero = (infoEmpresa.esatdo_civil === 'Solter@' || infoEmpresa.esatdo_civil === 'Soltero' ||
+            infoEmpresa.estadoCivil === 'Solter@' || infoEmpresa.estadoCivil === 'Divorciado' ||
+            infoEmpresa.esatdo_civil === 'Divorciad@' || infoEmpresa.esatdo_civil === 'Divorciado');
         infoEmpresa?.familiares.forEach(item => this.agregarFamiliar());
         this.formSolicitud.patchValue({...infoEmpresa});
         // this.formConyuge.patchValue({...infoEmpresa.conyuge});
@@ -264,9 +266,9 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
         this.submitted = false;
         this.actualizarCreditoFormData = new FormData();
         this.pantalla = 1;
-      this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
+      this.soltero = (credito.empresaInfo.esatdo_civil === 'Solter@' || credito.empresaInfo.esatdo_civil === 'Soltero' ||
         credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
-        credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
+          credito.empresaInfo.esatdo_civil === 'Divorciad@' || credito.empresaInfo.esatdo_civil === 'Divorciado');
       this.ingresoNegocioSuperior = (credito.monto >= this.montoLimite);
         this.actualizarCreditoForm = this._formBuilder.group(
             {

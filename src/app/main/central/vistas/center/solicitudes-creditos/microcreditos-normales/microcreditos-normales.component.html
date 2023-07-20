@@ -154,7 +154,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Nombre del representante legal: value={{ this.empresa.reprsentante }}
+                        <label>Nombre del representante legal:
                         </label>
                         <input type="text"
                                class="form-control"
@@ -348,7 +348,7 @@
             <!--Conyuge-->
             <div class="row">
 
-                <div *ngIf="casado">
+                <div *ngIf="!soltero">
                     <h3>
                         Datos cónyuge:
                     </h3>
@@ -598,7 +598,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div *ngIf="!soltero"  class="col-md-4">
                     <div class="form-group">
                         <label>Sueldo cónyuge (de ser casado) (VALOR):
                         </label>
