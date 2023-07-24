@@ -28,6 +28,8 @@ export class SolicitudesPagoProveedoresComponent implements OnInit, AfterViewIni
   public observacion = '';
   public idPagoProveedor = '';
   private solicitudPago;
+  public numeroComprobante = '';
+  public date = new Date();
 
   constructor(
     private _pagoProveedoresService: PagoProveedoresService,
@@ -71,7 +73,8 @@ export class SolicitudesPagoProveedoresComponent implements OnInit, AfterViewIni
     this._pagoProveedoresService.actualizarSolicitudesPagoProveedores({
       _id: this.idPagoProveedor,
       estado: 'Negado',
-      observacion: this.observacion
+      observacion: this.observacion,
+      fechaProceso: this.date,
     })
       .subscribe((info) => {
         this.obtenerSolicitudesCreditos();
@@ -82,7 +85,9 @@ export class SolicitudesPagoProveedoresComponent implements OnInit, AfterViewIni
     this._pagoProveedoresService.actualizarSolicitudesPagoProveedores({
       _id: this.idPagoProveedor,
       estado: 'Procesar',
-      fechaFirma: this.fechaActual()
+      fechaFirma: this.fechaActual(),
+      numeroComprobante: this.numeroComprobante,
+      fechaProceso: this.date
     })
       .subscribe((info) => {
         this._modalService.dismissAll();
@@ -99,6 +104,7 @@ export class SolicitudesPagoProveedoresComponent implements OnInit, AfterViewIni
   }
 
   procesarPago(pago) {
+    this.numeroComprobante = '';
     this.idPagoProveedor = pago._id;
     this.solicitudPago = pago;
     this.abrirModal(this.procesarMdl);

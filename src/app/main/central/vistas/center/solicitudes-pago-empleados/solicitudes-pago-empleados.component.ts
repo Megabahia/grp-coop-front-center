@@ -29,6 +29,8 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
   public observacion = '';
   public idPagoEmpleado = '';
   private solicitudPago;
+  public numeroComprobante = '';
+  public date = new Date();
 
   constructor(
       private _pagoEmpleadosService: SolicitudPagoEmpleadosService,
@@ -55,7 +57,7 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
   }
 
   obtenerSolicitudesPagoEmpleados() {
-    this._pagoEmpleadosService.obtenerSolicitudesPagoProveedores({page_size: this.page_size, page: this.page - 1})
+    this._pagoEmpleadosService.obtenerSolicitudesPagoProveedores({page_size: this.page_size, page: this.page - 1, estado: ['Activo', 'Inactivo']})
         .subscribe((info) => {
           this.collectionSize = info.cont;
           this.listaPagoEmpleados = info.info;
@@ -72,7 +74,8 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
     this._pagoEmpleadosService.actualizarSolicitudesPagoProveedores({
       _id: this.idPagoEmpleado,
       estado: 'Negado',
-      observacion: this.observacion
+      observacion: this.observacion,
+      fechaProceso: this.date,
     })
         .subscribe((info) => {
           this.obtenerSolicitudesPagoEmpleados();
@@ -83,7 +86,9 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
     this._pagoEmpleadosService.actualizarSolicitudesPagoProveedores({
       _id: this.idPagoEmpleado,
       estado: 'Aprobado',
-      fechaFirma: this.fechaActual()
+      fechaFirma: this.fechaActual(),
+      numeroComprobante: this.numeroComprobante,
+      fechaProceso: this.date
     })
         .subscribe((info) => {
           this._modalService.dismissAll();
@@ -100,6 +105,7 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
   }
 
   procesarPago(pago) {
+    this.numeroComprobante = '';
     this.idPagoEmpleado = pago._id;
     this.solicitudPago = pago;
     this.abrirModal(this.procesarMdl);

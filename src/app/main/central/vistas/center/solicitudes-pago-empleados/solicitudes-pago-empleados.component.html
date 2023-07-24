@@ -46,6 +46,8 @@
                             <th>Celular</th>
                             <th>Correo</th>
                             <th>Código del empleado</th>
+                            <th>Número de cuenta bancaria</th>
+                            <th>Número de cuenta bancaria</th>
                             <th>Monto a pagar</th>
                             <th>Comprobante firmado de la solicitud de pago a empleados</th>
                             <th>ACCIONES</th>
@@ -62,6 +64,8 @@
                             <td>{{pagoEmpleado.celular}}</td>
                             <td>{{pagoEmpleado.correo}}</td>
                             <td>{{pagoEmpleado.codigoEmpleado}}</td>
+                            <td>{{pagoEmpleado.numeroCuentaEmpleado}}</td>
+                            <td>{{pagoEmpleado.bancoDestino}}</td>
                             <td>{{pagoEmpleado.montoPagar}}</td>
                             <td>
                                 <a *ngIf="pagoEmpleado.archivoFirmado" [href]="pagoEmpleado.archivoFirmado" target="_blank">Enlace</a>
@@ -72,22 +76,24 @@
                                 Firma verificada
                             </td>
                             <td>
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
-                                   (click)="seguroNegarModal(pagoEmpleado._id)" alt="Negar">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="feather feather-minus-circle">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                                    </svg>
-                                </a>
-                                <a href="javascript:void(0);" (click)="procesarPago(pagoEmpleado)" alt="Procesar">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="feather feather-check">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                </a>
+                                <ng-container >
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
+                                       (click)="seguroNegarModal(pagoEmpleado._id)" alt="Negar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round" class="feather feather-minus-circle">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" (click)="procesarPago(pagoEmpleado)" alt="Procesar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round" class="feather feather-check">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </a>
+                                </ng-container>
                             </td>
                         </tr>
 
@@ -111,7 +117,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <p>Motivo de Negación de Solicitud:</p>
+        <p>MOTIVO POR EL QUE SE NIEGA EL PAGO A EMPLEADO:</p>
         <textarea type="text" [(ngModel)]="observacion" class="form-control"></textarea>
     </div>
     <div class="modal-footer">
@@ -133,6 +139,28 @@
                 <div class="col-sm-12 col-form-label">
                     <label for="montoDisponible">MONTO DISPONIBLE DE LÍNEA DE CRÉDITO DEL USUARIO:</label>
                     <input id="montoDisponible" type="text" class="form-control" value="{{solicitudPago?.montoDisponible}}" disabled/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 col-form-label">
+                    <label for="fecha">Fecha de transferencia:</label>
+                    <input id="fecha" type="text" class="form-control" value="{{solicitudPago?.created_at}}" disabled/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2 col-form-label">
+                    <label>Número de comprobante de transferencia:</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" [(ngModel)]="numeroComprobante" [ngModelOptions]="{ standalone: true }"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2 col-form-label">
+                    <label>Fecha de registro de transferencia:</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{date | date: 'yyyy-mm-dd' }}" disabled/>
                 </div>
             </div>
         </form>
