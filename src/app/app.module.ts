@@ -25,6 +25,7 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
 import {MatTreeModule} from "@angular/material/tree";
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 
 const appRoutes: Routes = [
     {
@@ -82,7 +83,7 @@ const appRoutes: Routes = [
         AngularFirestoreModule, // for firestore
 
         MatTreeModule,
-
+        SweetAlert2Module.forRoot()
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

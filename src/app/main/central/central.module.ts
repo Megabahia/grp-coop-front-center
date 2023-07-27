@@ -89,6 +89,11 @@ import {
 } from './vistas/center/solicitudes-creditos-local/ifis/microcreditos-pre-aprovados/ifis-microcreditos-pre-aprovados-center.component';
 import { AlfaComponent } from './vistas/center/solicitudes-creditos/alfa/alfa.component';
 import { SolicitudesPagoEmpleadosComponent } from './vistas/center/solicitudes-pago-empleados/solicitudes-pago-empleados.component';
+import {RecargarLineasCreditos} from './vistas/corp/recargarLineasCreditos/vistas/upload/recargar-lineas-creditos.component';
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
+import {
+  ConfirmacionRecargarLineasCreditos
+} from './vistas/corp/recargarLineasCreditos/vistas/confirmacion/confirmar-recarga-lineas-creditos.component';
 
 
 const routes = [
@@ -127,6 +132,12 @@ const routes = [
       },
       {
         path: 'cargarCreditosNegocios', component: UploadLineasCreditos, canActivate: [AuthGuard]
+      },
+      {
+        path: 'recargarLineasCreditos', component: RecargarLineasCreditos, canActivate: [AuthGuard]
+      },
+      {
+        path: 'confirmacionRecargarLineasCreditos', component: ConfirmacionRecargarLineasCreditos, canActivate: [AuthGuard]
       },
       {
         path: 'archivo/:archivoId', component: ViewFileComponent, canActivate: [AuthGuard]
@@ -359,6 +370,8 @@ const routes = [
     IfisMicrocreditosPreAprovadosCenterComponent,
     AlfaComponent,
     SolicitudesPagoEmpleadosComponent,
+    RecargarLineasCreditos,
+    ConfirmacionRecargarLineasCreditos,
   ],
   imports: [
     CoreCommonModule,
@@ -377,6 +390,7 @@ const routes = [
     QRCodeModule,
     FlatpickrModule.forRoot(),
     MatTreeModule,
+    SweetAlert2Module,
   ],
   exports: [
 

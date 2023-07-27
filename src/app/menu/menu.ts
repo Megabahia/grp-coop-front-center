@@ -91,6 +91,24 @@ export const menu: CoreMenu[] = [
         icon: 'dollar-sign',
         url: 'central/corp/cargarCreditosNegocios',
       },
+      {
+        id: 'recargarLineasCredito',
+        title: 'Recargar Cupo de Líneas de Crédito',
+        // translate: 'MENU.HOME',
+        // role: [Role.SuperMonedas],
+        type: 'item',
+        icon: 'dollar-sign',
+        url: 'central/corp/recargarLineasCreditos',
+      },
+      {
+        id: 'confirmacionRecargarLineasCredito',
+        title: 'Confirmación de recargas de Líneas de crédito',
+        // translate: 'MENU.HOME',
+        // role: [Role.SuperMonedas],
+        type: 'item',
+        icon: 'dollar-sign',
+        url: 'central/corp/confirmacionRecargarLineasCreditos',
+      },
     ]
   },
   {
