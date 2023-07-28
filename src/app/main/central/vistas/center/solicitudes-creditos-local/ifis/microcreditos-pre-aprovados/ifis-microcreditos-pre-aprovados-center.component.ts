@@ -209,7 +209,8 @@ export class IfisMicrocreditosPreAprovadosCenterComponent implements OnInit, Aft
         this.declareFormularios();
         this.declareFormConyuge();
         this.modalOpenSLC(modal);
-        this.casado = infoEmpresa.esatdo_civil ? true : false;
+        this.casado = (infoEmpresa.esatdo_civil === 'Casad@' || infoEmpresa.esatdo_civil === 'Casado'
+            || infoEmpresa.esatdo_civil === 'Union Libre' || infoEmpresa.esatdo_civil === 'Unión libre');
         infoEmpresa?.familiares.forEach(item => this.agregarFamiliar());
         this.formSolicitud.patchValue({...infoEmpresa});
     }

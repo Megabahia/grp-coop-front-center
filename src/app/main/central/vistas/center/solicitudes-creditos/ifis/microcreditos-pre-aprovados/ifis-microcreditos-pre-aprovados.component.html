@@ -68,6 +68,8 @@
                         <th>Documentos</th>
                         <th>Estado</th>
                         <th>Solicitud de crédito</th>
+                        <th>Documentos habilitantes firmandos</th>
+                        <th>Activación de Línea de Crédito</th>
                         <th>Observaciones</th>
                         <th>Acciones</th>
                     </tr>
@@ -94,6 +96,19 @@
                                     rippleEffect>
                                 Enlace
                             </button>
+                        </td>
+                        <td>
+                            <a *ngIf="credito?.solicitudCreditoFirmado" target="_blank" [href]="credito?.solicitudCreditoFirmado">Solicitud CreditoFirmado</a>
+                            <a *ngIf="credito?.pagareFirmado" target="_blank" [href]="credito?.pagareFirmado">Pagare Firmado</a>
+                            <a *ngIf="credito?.contratosCuentaFirmado" target="_blank" [href]="credito?.contratosCuentaFirmado">Contratos CuentaFirmado</a>
+                            <a *ngIf="credito?.tablaAmortizacionFirmado" target="_blank" [href]="credito?.tablaAmortizacionFirmado">TablaAmortizacion Firmado</a>
+                        </td>
+                        <td>
+                            <ng-container
+                                    >
+                                <button type="button" class="btn btn-outline-primary" (click)="activacion(activarLineaCredito, credito)">Activar</button>
+                                <button type="button" class="btn btn-outline-primary" (click)="negar(negarLineaCredito, credito)">Negar</button>
+                            </ng-container>
                         </td>
                         <td>{{credito.observacion}}</td>
 
@@ -1386,3 +1401,71 @@
     </div>
 </ng-template>
 <!-- FIN MODAL USER-->
+
+
+<ng-template #activarLineaCredito let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="activacion">ACTIVACIÓN DE LÍNEA DE CRÉDITO</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div style="padding: 20px 20px 20px 20px;">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <a *ngIf="credito?.solicitudCreditoFirmado" target="_blank" [href]="credito?.solicitudCreditoFirmado">
+                    Solicitud CreditoFirmado
+                    <input type="checkbox" [checked]="credito?.solicitudCreditoFirmado" disabled>
+                </a>
+                <a *ngIf="credito?.pagareFirmado" target="_blank" [href]="credito?.pagareFirmado">
+                    Pagare Firmado
+                    <input type="checkbox" [checked]="credito?.pagareFirmado" disabled>
+                </a>
+                <a *ngIf="credito?.contratosCuentaFirmado" target="_blank" [href]="credito?.contratosCuentaFirmado">
+                    Contratos CuentaFirmado
+                    <input type="checkbox" [checked]="credito?.contratosCuentaFirmado" disabled>
+                </a>
+                <a *ngIf="credito?.tablaAmortizacionFirmado" target="_blank" [href]="credito?.tablaAmortizacionFirmado">
+                    TablaAmortizacion Firmado
+                    <input type="checkbox" [checked]="credito?.tablaAmortizacionFirmado" disabled>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="actualizarLineaCredito(1)" rippleEffect>
+            Aceptar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')" rippleEffect>
+            Cerrar
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #negarLineaCredito let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">NEGAR DE LÍNEA DE CRÉDITO</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div style="padding: 20px 20px 20px 20px;">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="form-label" for="motivo">Motivo:</label>
+                <input id="motivo" type="text" class="form-control"
+                       placeholder="Ingrese un motivo por el cual se va negar" [(ngModel)]="motivoNegarLinea">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="actualizarLineaCredito()" rippleEffect>
+            Aceptar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')" rippleEffect>
+            Cerrar
+        </button>
+    </div>
+</ng-template>

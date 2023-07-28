@@ -136,7 +136,8 @@ export class ValoresProcesoComponent implements OnInit {
     this.declareFormularios();
     this.declareFormConyuge();
     this.modalOpenSLC(modal);
-    this.casado = (infoEmpresa.estadoCivil === 'Casad@' || infoEmpresa.estadoCivil === 'Casado' || infoEmpresa.estadoCivil === 'Unión libre');
+    this.casado = (infoEmpresa.esatdo_civil === 'Casad@' || infoEmpresa.esatdo_civil === 'Casado'
+        || infoEmpresa.esatdo_civil === 'Union Libre' || infoEmpresa.esatdo_civil === 'Unión libre');
     infoEmpresa?.familiares.forEach(item => this.agregarFamiliar());
     this.formSolicitud.patchValue({...infoEmpresa});
   }

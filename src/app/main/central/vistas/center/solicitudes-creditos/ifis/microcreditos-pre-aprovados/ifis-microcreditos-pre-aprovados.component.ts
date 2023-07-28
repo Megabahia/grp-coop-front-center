@@ -53,6 +53,7 @@ export class IfisMicrocreditosPreAprovadosComponent implements OnInit, AfterView
   public ingresoNegocioSuperior = false;
   private motivo: string;
   private estadoCredito: any;
+    public motivoNegarLinea = '';
 
     constructor(
         private _solicitudCreditosService: SolicitudesCreditosService,
@@ -467,6 +468,26 @@ export class IfisMicrocreditosPreAprovadosComponent implements OnInit, AfterView
         this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
             console.log(info);
             this.obtenerSolicitudesCreditos();
+        });
+    }
+
+    activacion(modal, credito) {
+        this.credito = credito;
+        this.modalOpenSLC(modal);
+    }
+
+    negar(modal, credito) {
+        this.credito = credito;
+        this.modalOpenSLC(modal);
+    }
+
+    actualizarLineaCredito(activarMenu?: number) {
+        this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+            _id: this.credito._id,
+            motivoNegarLinea: this.motivoNegarLinea,
+            activarMenu
+        }).subscribe( (n) => {
+            this.cerrarModal();
         });
     }
 }

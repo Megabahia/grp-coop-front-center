@@ -8,8 +8,10 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">Solicitud de
-                                créditos empleados</a>
+                            <li class="breadcrumb-item">
+                                <a class="text-primary" href="mis-premios.html">
+                                    Solicitudes de negocios
+                                </a>
                             </li>
                         </ol>
                     </div>
@@ -83,15 +85,14 @@
                             <div class="badge badge-light-success">{{credito.estado}}</div>
                         </td>
                         <td>
-                            <button *ngIf="isObjectEmpty(credito.empresaInfo)" type="button" (click)="viewDataUser(modalSLC,credito.empresaInfo)"
+                            <button *ngIf="isObjectEmpty(credito.empresaInfo)" type="button"
+                                    (click)="viewDataUser(modalSLC,credito.empresaInfo)"
                                     class="btn btn-outline-primary"
                                     rippleEffect>
                                 Enlace
                             </button>
                         </td>
                         <td>{{credito.observacion}}</td>
-
-
                         <td class="d-flex">
                             <!--                            <a *ngIf="credito.estado == 'Nuevo'" href="javascript:void(0)" class="avatar bg-info mr-1" data-target="#gestionar"-->
                             <!--                               data-toggle="modal" (click)="toggleSidebar('actualizar-credito',credito._id)">-->
@@ -230,14 +231,7 @@
                         <label>
                             Estado civil:
                         </label>
-                        <select #teams
-                                class="form-control select2" formControlName="esatdo_civil" disabled
-                        >
-                            <option value="">- Seleccione -</option>
-                            <option value="Soltero">- Soltero -</option>
-                            <option value="Casado">- Casado -</option>
-                            <option value="Divorciado">- Divorciado -</option>
-                        </select>
+                        <input type="text" class="form-control select2" formControlName="esatdo_civil" disabled>
                     </div>
                 </div>
 
@@ -408,7 +402,7 @@
                                value="" disabled>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div *ngIf="casado" class="col-md-4">
                     <div class="form-group">
                         <label>Sueldo cónyuge (de ser casado) (VALOR):
                         </label>
@@ -423,6 +417,38 @@
                         <label>Otros ingresos (valor) :
                         </label>
                         <input type="text" formControlName="otrosIngresos"
+                               class="form-control"
+                               value="" disabled>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Gastos mensuales en compras para el negocio (valor) :
+                        </label>
+                        <input type="text" formControlName="gastosMensuales"
+                               class="form-control"
+                               value="" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Gastos familiares (valor)
+                        </label>
+                        <input type="text" formControlName="gastosFamilaires"
+                               class="form-control"
+                               value="" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            Especifique otros ingresos (ejemplo: vendo artículos de revista
+                            en mi tiempo libre, etc.)
+                        </label>
+                        <input type="text" formControlName="especificaIngresos"
                                class="form-control"
                                value="" disabled>
                     </div>
@@ -482,39 +508,6 @@
                     </div>
                 </ng-container>
             </ng-container>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Gastos mensuales en compras para el negocio (valor) :
-                        </label>
-                        <input type="text" formControlName="gastosMensuales"
-                               class="form-control"
-                               value="" disabled>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Gastos familiares (valor)
-                        </label>
-                        <input type="text" formControlName="gastosFamilaires"
-                               class="form-control"
-                               value="" disabled>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>
-                            Especifique otros ingresos (ejemplo: vendo artículos de revista
-                            en mi tiempo libre, etc.)
-                        </label>
-                        <input type="text" formControlName="especificaIngresos"
-                               class="form-control"
-                               value="" disabled>
-                    </div>
-
-                </div>
-            </div>
-
         </form>
 
     </div>
@@ -880,7 +873,8 @@
                     </a>
                     <div *ngIf="submitted && controlsFrom.checkFacturasVentas2meses2.errors" class="invalid-feedback"
                          style="display: block;">
-                        <div *ngIf="controlsFrom.checkFacturasVentas2meses2.errors.required">Facturas de Ventas últimos 2
+                        <div *ngIf="controlsFrom.checkFacturasVentas2meses2.errors.required">Facturas de Ventas últimos
+                            2
                             meses es
                             requerido
                         </div>
@@ -1067,10 +1061,12 @@
                     <label class="form-check-label mr-2" for="checkNombramientoRepresentante">Valido</label>
                     <input class="form-check-input" type="checkbox" id="checkNombramientoRepresentante"
                            formControlName="checkNombramientoRepresentante"/>
-                    <a *ngIf="credito.nombramientoRepresentante" href="{{credito.nombramientoRepresentante}}" target="_blank">
+                    <a *ngIf="credito.nombramientoRepresentante" href="{{credito.nombramientoRepresentante}}"
+                       target="_blank">
                         Ver
                     </a>
-                    <div *ngIf="submitted && controlsFrom.checkNombramientoRepresentante.errors" class="invalid-feedback"
+                    <div *ngIf="submitted && controlsFrom.checkNombramientoRepresentante.errors"
+                         class="invalid-feedback"
                          style="display: block;">
                         <div *ngIf="controlsFrom.checkNombramientoRepresentante.errors.required">
                             Copia de pago de impuesto predial es requerido
@@ -1094,10 +1090,12 @@
                     <label class="form-check-label mr-2" for="checkCertificadoSuperintendencia">Valido</label>
                     <input class="form-check-input" type="checkbox" id="checkCertificadoSuperintendencia"
                            formControlName="checkCertificadoSuperintendencia"/>
-                    <a *ngIf="credito.certificadoSuperintendencia" href="{{credito.certificadoSuperintendencia}}" target="_blank">
+                    <a *ngIf="credito.certificadoSuperintendencia" href="{{credito.certificadoSuperintendencia}}"
+                       target="_blank">
                         Ver
                     </a>
-                    <div *ngIf="submitted && controlsFrom.checkCertificadoSuperintendencia.errors" class="invalid-feedback"
+                    <div *ngIf="submitted && controlsFrom.checkCertificadoSuperintendencia.errors"
+                         class="invalid-feedback"
                          style="display: block;">
                         <div *ngIf="controlsFrom.checkCertificadoSuperintendencia.errors.required">
                             Copia de pago de impuesto predial es requerido
@@ -1257,7 +1255,8 @@
                     <label class="form-check-label mr-2" for="checkBalancePerdidasGanancias">Valido</label>
                     <input class="form-check-input" type="checkbox" id="checkBalancePerdidasGanancias"
                            formControlName="checkBalancePerdidasGanancias"/>
-                    <a *ngIf="credito.balancePerdidasGanancias" href="{{credito.balancePerdidasGanancias}}" target="_blank">
+                    <a *ngIf="credito.balancePerdidasGanancias" href="{{credito.balancePerdidasGanancias}}"
+                       target="_blank">
                         Ver
                     </a>
                     <div *ngIf="submitted && controlsFrom.checkBalancePerdidasGanancias.errors" class="invalid-feedback"
