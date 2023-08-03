@@ -479,7 +479,7 @@ export const menu: CoreMenu[] = [
         // role: [Role.SuperMonedas],
         type: 'item',
         icon: 'package',
-        url: 'central/center/solicitud-pago-casas-comerciales',
+        url: 'central/center/solicitud-pago-locales-comerciales',
       },
       {
         id: 'consumoCreditos',

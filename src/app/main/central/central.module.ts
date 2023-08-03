@@ -305,7 +305,7 @@ const routes = [
         path: 'solicitud-pago-casas-comerciales-XYZ', component: SolicitudesPagoCasasComercialComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'solicitud-pago-casas-comerciales', component: SolicitudPagoCasasComercialesComponent, canActivate: [AuthGuard]
+        path: 'solicitud-pago-locales-comerciales', component: SolicitudPagoCasasComercialesComponent, canActivate: [AuthGuard]
       },
       {
         path: 'consumosCreditos', component: ConsumoCreditosComponent, canActivate: [AuthGuard]
