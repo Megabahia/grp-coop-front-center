@@ -5,6 +5,7 @@ import {PagoProveedoresService} from '../solicitudes-pago-proveedores/pago-prove
 import {DatePipe} from '@angular/common';
 import {CoreMenuService} from '../../../../../../@core/components/core-menu/core-menu.service';
 import {SolicitudPagoEmpleadosService} from './solicitud-pago-empleados.service';
+import {SolicitudesCreditosService} from '../solicitudes-creditos/solicitudes-creditos.service';
 
 @Component({
   selector: 'app-solicitudes-pago-empleados',
@@ -33,10 +34,11 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
   public date = new Date();
 
   constructor(
-      private _pagoEmpleadosService: SolicitudPagoEmpleadosService,
-      private datePipe: DatePipe,
-      private _coreMenuService: CoreMenuService,
-      private _modalService: NgbModal,
+    private _solicitudCreditosService: SolicitudesCreditosService,
+    private _pagoEmpleadosService: SolicitudPagoEmpleadosService,
+    private datePipe: DatePipe,
+    private _coreMenuService: CoreMenuService,
+    private _modalService: NgbModal,
   ) {
     this._unsubscribeAll = new Subject();
     this.usuario = this._coreMenuService.grpCoopCenterUser;
@@ -57,11 +59,15 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
   }
 
   obtenerSolicitudesPagoEmpleados() {
-    this._pagoEmpleadosService.obtenerSolicitudesPagoProveedores({page_size: this.page_size, page: this.page - 1, estado: ['Activo', 'Inactivo']})
-        .subscribe((info) => {
-          this.collectionSize = info.cont;
-          this.listaPagoEmpleados = info.info;
-        });
+    this._pagoEmpleadosService.obtenerSolicitudesPagoProveedores({
+      page_size: this.page_size,
+      page: this.page - 1,
+      estado: ['Activo', 'Inactivo']
+    })
+      .subscribe((info) => {
+        this.collectionSize = info.cont;
+        this.listaPagoEmpleados = info.info;
+      });
   }
 
   seguroNegarModal(id) {
@@ -77,9 +83,9 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
       observacion: this.observacion,
       fechaProceso: this.date,
     })
-        .subscribe((info) => {
-          this.obtenerSolicitudesPagoEmpleados();
-        });
+      .subscribe((info) => {
+        this.obtenerSolicitudesPagoEmpleados();
+      });
   }
 
   enviarProcesar() {
@@ -90,10 +96,10 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
       numeroComprobante: this.numeroComprobante,
       fechaProceso: this.date
     })
-        .subscribe((info) => {
-          this._modalService.dismissAll();
-          this.obtenerSolicitudesPagoEmpleados();
-        });
+      .subscribe((info) => {
+        this._modalService.dismissAll();
+        this.obtenerSolicitudesPagoEmpleados();
+      });
   }
 
   getUsuario(usuario, atributo) {
@@ -121,5 +127,12 @@ export class SolicitudesPagoEmpleadosComponent implements OnInit, AfterViewInit 
 
   abrirModal(modal) {
     this._modalService.open(modal);
+  }
+
+  consumirAWS() {
+    this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
+      console.log(info);
+      this.obtenerSolicitudesPagoEmpleados();
+    });
   }
 }

@@ -23,18 +23,30 @@
         <!-- users list start -->
         <section class="app-user-list">
             <div class="card card-company-table">
-                <div class="row m-75">
-                    <div class="col-lg-12 col-xl-6">
-                        <label>Mostrar</label>
-                        <select class="form-control-sm" [(ngModel)]="page_size" (click)="obtenerSolicitudesPagoEmpleados()">
-                            <option value="4">4</option>
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
+                <div class="profile-header-nav">
+                    <!-- navbar -->
+                    <nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100">
+                        <div class="col-2">
+                            <button class="form-control " (click)="consumirAWS()">
+                                Actualizar
+                            </button>
+                        </div>
 
-                    </div>
+                        <!--/ collapse  -->
+                        <div class="col-10" style="text-align: right">
+                            <label>Mostrar</label>
+                            <select class="form-control-sm" [(ngModel)]="page_size"
+                                    (change)="obtenerSolicitudesPagoEmpleados()">
+                                <option value="4">4</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </nav>
+                    <!--/ navbar -->
+
                 </div>
                 <div class="card-datatable table-responsive pt-0">
                     <table class="table table-striped">
@@ -70,18 +82,21 @@
                             <td>{{pagoEmpleado.bancoDestino}}</td>
                             <td>{{pagoEmpleado.montoPagar}}</td>
                             <td>
-                                <a *ngIf="pagoEmpleado.archivoFirmado" [href]="pagoEmpleado.archivoFirmado" target="_blank">Enlace</a>
-                                <img *ngIf="pagoEmpleado.documentoVerificado; else content" src="/assets/fonts/feather/check-green.png"/>
+                                <a *ngIf="pagoEmpleado.archivoFirmado" [href]="pagoEmpleado.archivoFirmado"
+                                   target="_blank">Enlace</a>
+                                <img *ngIf="pagoEmpleado.documentoVerificado; else content"
+                                     src="/assets/fonts/feather/check-green.png"/>
                                 <ng-template #content>
                                     <img src="/assets/fonts/feather/mark-red.png"/>
                                 </ng-template>
                                 Firma verificada
                             </td>
                             <td>
-                                <ng-container >
+                                <ng-container>
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
                                        (click)="seguroNegarModal(pagoEmpleado._id)" alt="Negar">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
                                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                              stroke-linejoin="round" class="feather feather-minus-circle">
                                             <circle cx="12" cy="12" r="10"></circle>
@@ -89,7 +104,8 @@
                                         </svg>
                                     </a>
                                     <a href="javascript:void(0);" (click)="procesarPago(pagoEmpleado)" alt="Procesar">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
                                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                              stroke-linejoin="round" class="feather feather-check">
                                             <polyline points="20 6 9 17 4 12"></polyline>
@@ -140,7 +156,8 @@
             <div class="form-group row">
                 <div class="col-sm-12 col-form-label">
                     <label for="montoDisponible">MONTO DISPONIBLE DE LÍNEA DE CRÉDITO DEL USUARIO:</label>
-                    <input id="montoDisponible" type="text" class="form-control" value="{{solicitudPago?.montoDisponible}}" disabled/>
+                    <input id="montoDisponible" type="text" class="form-control"
+                           value="{{solicitudPago?.montoDisponible}}" disabled/>
                 </div>
             </div>
             <div class="form-group row">
@@ -154,7 +171,8 @@
                     <label>Número de comprobante de transferencia:</label>
                 </div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" [(ngModel)]="numeroComprobante" [ngModelOptions]="{ standalone: true }"/>
+                    <input type="text" class="form-control" [(ngModel)]="numeroComprobante"
+                           [ngModelOptions]="{ standalone: true }"/>
                 </div>
             </div>
             <div class="form-group row">

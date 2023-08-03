@@ -220,9 +220,8 @@ export class IfisMicrocreditosPreAprovadosCenterComponent implements OnInit, Aft
         this.submitted = false;
         this.actualizarCreditoFormData = new FormData();
         this.pantalla = 1;
-        this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
-            credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
-            credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
+        this.soltero = (credito.empresaInfo.esatdo_civil === 'Solter@' || credito.empresaInfo.esatdo_civil === 'Soltero' ||
+          credito.empresaInfo.esatdo_civil === 'Divorciado' || credito.empresaInfo.esatdo_civil === 'Divorciad@');
         this.ingresoNegocioSuperior = (credito.monto >= this.montoLimite);
         this.actualizarCreditoForm = this._formBuilder.group({
             id: [credito._id, [Validators.required]],

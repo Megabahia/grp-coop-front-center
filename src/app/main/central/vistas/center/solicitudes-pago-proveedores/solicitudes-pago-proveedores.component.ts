@@ -4,6 +4,7 @@ import {DatePipe} from '@angular/common';
 import {CoreMenuService} from '../../../../../../@core/components/core-menu/core-menu.service';
 import {Subject} from 'rxjs';
 import {PagoProveedoresService} from './pago-proveedores.service';
+import {SolicitudesCreditosService} from '../solicitudes-creditos/solicitudes-creditos.service';
 
 @Component({
   selector: 'app-solicitudes-pago-proveedores',
@@ -32,6 +33,7 @@ export class SolicitudesPagoProveedoresComponent implements OnInit, AfterViewIni
   public date = new Date();
 
   constructor(
+      private _solicitudCreditosService: SolicitudesCreditosService,
     private _pagoProveedoresService: PagoProveedoresService,
     private datePipe: DatePipe,
     private _coreMenuService: CoreMenuService,
@@ -120,5 +122,11 @@ export class SolicitudesPagoProveedoresComponent implements OnInit, AfterViewIni
 
   abrirModal(modal) {
     this._modalService.open(modal);
+  }
+  consumirAWS() {
+    this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
+      console.log(info);
+      this.obtenerSolicitudesCreditos();
+    });
   }
 }
