@@ -115,7 +115,6 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         this.casaPropia = (user.tipoVivienda === 'Propia');
         this.modalOpenSLC(modal);
         this.userViewData = user;
-        console.log('user', user);
         this.ocupacionSolicitante = user.ocupacionSolicitante;
         this.referenciasSolicitante = user.referenciasSolicitante;
         this.ingresosSolicitante = user.ingresosSolicitante;
@@ -130,7 +129,6 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
             credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
             credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
-        console.log(this.soltero, 'this.soltero');
         this.actualizarCreditoForm = this._formBuilder.group({
             id: [credito._id, [Validators.required]],
             identificacion: ['', credito.identificacion ? [] : [Validators.required]],
@@ -187,7 +185,6 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
     actualizarSolicitudCredito() {
         this.submitted = true;
         if (this.actualizarCreditoForm.invalid) {
-            console.log('form', this.actualizarCreditoForm);
             return;
         }
         const {
@@ -255,7 +252,6 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
 
     consumirAWS() {
         this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
-            console.log(info);
             this.obtenerSolicitudesCreditos();
         });
     }

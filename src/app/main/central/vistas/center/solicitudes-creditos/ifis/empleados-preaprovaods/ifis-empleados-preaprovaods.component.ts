@@ -182,11 +182,9 @@ export class IfisEmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit
   }
 
   actualizarSolicitudCredito(estado?: string) {
-    console.log('llega---', this.actualizarCreditoForm);
     this.submitted = true;
     if (this.estadoCredito !== 'Por Completar' && this.estadoCredito !== 'Negado') {
       if (this.actualizarCreditoForm.invalid) {
-        console.log(' no valido form');
         return;
       }
     }
@@ -235,15 +233,12 @@ export class IfisEmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit
       this.checks.splice(3, 2);
     }
     this.cargando = true;
-    this.actualizarCreditoFormData.delete('estado');
-    this.actualizarCreditoFormData.append('estado', estado);
+    if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+      this.actualizarCreditoFormData.delete('estado');
+      this.actualizarCreditoFormData.append('estado', this.estadoCredito);
+    }
     this.actualizarCreditoFormData.delete('motivo');
     this.actualizarCreditoFormData.append('motivo', this.motivo);
-    if (estado !== 'Por Completar') {
-      this.actualizarCreditoFormData.delete('checks');
-      this.actualizarCreditoFormData.append('checks', JSON.stringify(this.checks));
-    }
-    console.log('this.actualizarCreditoFormData', this.actualizarCreditoFormData);
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
         this.cerrarModal();
           this.cargando = false;
@@ -273,8 +268,12 @@ export class IfisEmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit
       }
     });
     this.cargando = true;
-    this.actualizarCreditoFormData.delete('estado');
-    this.actualizarCreditoFormData.append('estado', estado);
+    if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+      this.actualizarCreditoFormData.delete('estado');
+      this.actualizarCreditoFormData.append('estado', this.estadoCredito);
+    }
+    this.actualizarCreditoFormData.delete('motivo');
+    this.actualizarCreditoFormData.append('motivo', this.motivo);
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
           this.cargando = false;
           this.obtenerSolicitudesCreditos();

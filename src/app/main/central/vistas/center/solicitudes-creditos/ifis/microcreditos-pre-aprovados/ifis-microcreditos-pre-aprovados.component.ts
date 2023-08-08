@@ -312,7 +312,6 @@ export class IfisMicrocreditosPreAprovadosComponent implements OnInit, AfterView
                 checkBuroCreditoIfis: ['', [Validators.requiredTrue]], //
                 checkCalificacionBuroIfis: ['', [Validators.requiredTrue]], //
             });
-      console.log('tipo de checks', typeof credito.checks);
       this.checks = (typeof credito.checks === 'object') ? credito.checks : JSON.parse(credito.checks);
     }
 
@@ -386,15 +385,12 @@ export class IfisMicrocreditosPreAprovadosComponent implements OnInit, AfterView
             this.checks.splice(3, 2);
         }
         this.cargando = true;
-        this.actualizarCreditoFormData.delete('estado');
-        this.actualizarCreditoFormData.append('estado', estado);
+        if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+            this.actualizarCreditoFormData.delete('estado');
+            this.actualizarCreditoFormData.append('estado', this.estadoCredito);
+        }
         this.actualizarCreditoFormData.delete('motivo');
         this.actualizarCreditoFormData.append('motivo', this.motivo);
-        if (estado !== 'Por Completar') {
-          // this.actualizarCreditoFormData.delete('checks');
-          // this.actualizarCreditoFormData.append('checks', JSON.stringify(this.checks));
-        }
-        console.log('this.actualizarCreditoFormData', this.actualizarCreditoFormData);
         this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
                 this.cerrarModal();
                 this.cargando = false;
