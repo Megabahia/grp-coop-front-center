@@ -131,7 +131,6 @@ public actualizarCreditoFormData;
     this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
       credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
       credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
-    console.log(this.soltero, 'this.soltero');
     this.actualizarCreditoForm = this._formBuilder.group({
       id: [credito._id, [Validators.required]],
       solicitudCredito: ['', [Validators.required]],
@@ -186,15 +185,12 @@ public actualizarCreditoFormData;
   }
 
   actualizarSolicitudCredito(estado?: string) {
-    console.log('llega---', this.actualizarCreditoForm);
     this.submitted = true;
     if (this.estadoCredito !== 'Por Completar' && this.estadoCredito !== 'Negado') {
       if (this.actualizarCreditoForm.invalid) {
-        console.log(' no valido form');
         return;
       }
     }
-    console.log('paso');
     const {
       id,
       identificacion,
@@ -248,15 +244,12 @@ public actualizarCreditoFormData;
       this.checks.splice(3, 2);
     }
     this.cargando = true;
-    this.actualizarCreditoFormData.delete('estado');
-    this.actualizarCreditoFormData.append('estado', estado);
+    if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+      this.actualizarCreditoFormData.delete('estado');
+      this.actualizarCreditoFormData.append('estado', this.estadoCredito);
+    }
     this.actualizarCreditoFormData.delete('motivo');
     this.actualizarCreditoFormData.append('motivo', this.motivo);
-    if (estado !== 'Por Completar') {
-      this.actualizarCreditoFormData.delete('checks');
-      this.actualizarCreditoFormData.append('checks', JSON.stringify(this.checks));
-    }
-    console.log('this.actualizarCreditoFormData', this.actualizarCreditoFormData);
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
         this.cerrarModal();
         this.cargando = false;
@@ -308,10 +301,8 @@ public actualizarCreditoFormData;
 
   abrirModalMotivo(modalMotivo, estadoCredito) {
     if (estadoCredito === 'Aprobado') {
-      console.log('form', this.actualizarCreditoForm);
       this.submitted = true;
       if (this.actualizarCreditoForm.invalid) {
-        console.log('invalid Form');
         return;
       }
     }
@@ -325,7 +316,6 @@ public actualizarCreditoFormData;
   }
   consumirAWS() {
     this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
-      console.log(info);
       this.obtenerSolicitudesCreditos();
     });
   }

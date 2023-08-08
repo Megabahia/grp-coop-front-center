@@ -177,10 +177,8 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
 
     abrirModalMotivo(modalMotivo, estadoCredito) {
       if (estadoCredito === 'Aprobado') {
-        console.log('form', this.actualizarCreditoForm);
         this.submitted = true;
         if (this.actualizarCreditoForm.invalid) {
-          console.log('invalid Form');
           return;
         }
       }
@@ -206,7 +204,6 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
             alcance: ['LOCAL', 'OMNIGLOBAL'],
             enviado: 1,
         }).subscribe(info => {
-            console.log('info', info);
             this.collectionSize = info.cont;
             this.listaCreditos = info.info;
         });
@@ -227,7 +224,6 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
     viewDataUser(modal, empresa) {
         const infoEmpresa = empresa;
         this.empresa = infoEmpresa;
-        console.log('infoEmpresa', infoEmpresa);
         this.declareFormularios();
         this.declareFormConyuge();
         this.modalOpenSLC(modal);
@@ -262,7 +258,6 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
 
     verDocumentos(credito) {
         this.credito = credito;
-        console.log('credito', this.credito);
         this.submitted = false;
         this.actualizarCreditoFormData = new FormData();
         this.pantalla = 1;
@@ -322,7 +317,6 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
                 checkBuroCreditoGRP: ['', [Validators.requiredTrue]], //
                 checkCalificacionBuro: ['', [Validators.requiredTrue]], //
             });
-      console.log('tipo de checks', typeof credito.checks);
       if (typeof credito.checks === 'object') {
         if (this.soltero) {
           this.checks = this.ingresoNegocioSuperior ? this.checksSolteroSuperior : this.checksSolteroInferior;
@@ -352,15 +346,12 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
     }
 
     actualizarSolicitudCredito(estado?: string) {
-        console.log('llega---', this.actualizarCreditoForm);
         this.submitted = true;
         if (this.estadoCredito !== 'Por Completar' && this.estadoCredito !== 'Negado') {
           if (this.actualizarCreditoForm.invalid) {
-              console.log(' no valido form');
               return;
           }
         }
-        console.log('');
         const {
             id,
             identificacion,
@@ -418,11 +409,6 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
         }
         this.actualizarCreditoFormData.delete('motivo');
         this.actualizarCreditoFormData.append('motivo', this.motivo);
-        if (estado !== 'Por Completar') {
-          // this.actualizarCreditoFormData.delete('checks');
-          // this.actualizarCreditoFormData.append('checks', JSON.stringify(this.checks));
-        }
-        console.log('this.actualizarCreditoFormData', this.actualizarCreditoFormData);
         this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
                 this.cerrarModal();
                 this.cargando = false;
@@ -472,7 +458,6 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
 
   consumirAWS() {
     this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
-      console.log(info);
       this.obtenerSolicitudesCreditos();
     });
   }

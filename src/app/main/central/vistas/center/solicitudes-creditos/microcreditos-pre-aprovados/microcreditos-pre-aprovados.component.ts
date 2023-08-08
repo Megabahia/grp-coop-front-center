@@ -184,7 +184,6 @@ export class MicrocreditosPreAprovadosComponent implements OnInit, AfterViewInit
             alcance: ['LOCAL', 'OMNIGLOBAL'],
             enviado: 1,
         }).subscribe(info => {
-            console.log('info', info);
             this.collectionSize = info.cont;
             this.listaCreditos = info.info;
         });
@@ -209,7 +208,6 @@ export class MicrocreditosPreAprovadosComponent implements OnInit, AfterViewInit
     viewDataUser(modal, empresa) {
         const infoEmpresa = empresa;
         this.empresa = infoEmpresa;
-        console.log('infoEmpresa', infoEmpresa);
         this.declareFormularios();
         this.declareFormConyuge();
         this.modalOpenSLC(modal);
@@ -240,7 +238,6 @@ export class MicrocreditosPreAprovadosComponent implements OnInit, AfterViewInit
     }
     verDocumentos(credito) {
         this.credito = credito;
-        console.log('credito', this.credito);
         this.submitted = false;
         this.actualizarCreditoFormData = new FormData();
         this.pantalla = 1;
@@ -311,7 +308,6 @@ export class MicrocreditosPreAprovadosComponent implements OnInit, AfterViewInit
                 checkBuroCreditoIfis: ['', [Validators.requiredTrue]], //
                 checkCalificacionBuroIfis: ['', [Validators.requiredTrue]], //
             });
-      console.log('tipo de checks', typeof credito.checks);
       this.checks = (typeof credito.checks === 'object') ? credito.checks : JSON.parse(credito.checks);
     }
 
@@ -333,7 +329,6 @@ export class MicrocreditosPreAprovadosComponent implements OnInit, AfterViewInit
         this.submitted = true;
       if (this.estadoCredito !== 'Por Completar' && this.estadoCredito !== 'Negado') {
         if (this.actualizarCreditoForm.invalid) {
-          console.log(' no valido form', this.actualizarCreditoForm);
           return;
         }
       }
@@ -385,15 +380,12 @@ export class MicrocreditosPreAprovadosComponent implements OnInit, AfterViewInit
             this.checks.splice(3, 2);
         }
         this.cargando = true;
-        this.actualizarCreditoFormData.delete('estado');
-        this.actualizarCreditoFormData.append('estado', estado);
+        if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+            this.actualizarCreditoFormData.delete('estado');
+            this.actualizarCreditoFormData.append('estado', this.estadoCredito);
+        }
         this.actualizarCreditoFormData.delete('motivo');
         this.actualizarCreditoFormData.append('motivo', this.motivo);
-        if (estado !== 'Por Completar') {
-          // this.actualizarCreditoFormData.delete('checks');
-          // this.actualizarCreditoFormData.append('checks', JSON.stringify(this.checks));
-        }
-        console.log('this.actualizarCreditoFormData', this.actualizarCreditoFormData);
         this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
                 this.cerrarModal();
                 this.cargando = false;
@@ -447,10 +439,8 @@ export class MicrocreditosPreAprovadosComponent implements OnInit, AfterViewInit
 
   abrirModalMotivo(modalMotivo, estadoCredito) {
     if (estadoCredito === 'Aprobado') {
-      console.log('form', this.actualizarCreditoForm);
       this.submitted = true;
       if (this.actualizarCreditoForm.invalid) {
-        console.log('invalid Form');
         return;
       }
     }
@@ -465,7 +455,6 @@ export class MicrocreditosPreAprovadosComponent implements OnInit, AfterViewInit
 
   consumirAWS() {
     this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
-        console.log(info);
         this.obtenerSolicitudesCreditos();
     });
   }
