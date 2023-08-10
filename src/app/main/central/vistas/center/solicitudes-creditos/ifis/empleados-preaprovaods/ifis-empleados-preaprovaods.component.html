@@ -172,6 +172,60 @@
                         disabled
                 />
             </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Número de identificación</label>
+                <input
+                        type="text"
+                        value="{{userViewData.documento}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Correo electronico</label>
+                <input
+                        type="text"
+                        value="{{userViewData.email}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Estado civil</label>
+                <input
+                        type="text"
+                        value="{{userViewData.estadoCivil}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Número WhatsApp</label>
+                <input
+                        type="text"
+                        value="{{userViewData.whatsapp}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Número de celular</label>
+                <input
+                        type="text"
+                        value="{{userViewData.celular}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Tipo de persona</label>
+                <input
+                        type="text"
+                        value="{{userViewData.tipoPersona}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6">
@@ -291,6 +345,28 @@
                     <label for="apellido[{{i}}]">Apellido</label>
                     <input disabled="true" type="text" class="form-control"
                            value="{{referencia.apellido}}">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="pais[{{i}}]">País</label>
+                    <input disabled="true" type="text" class="form-control"
+                           value="{{referencia.pais}}">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="provincia[{{i}}]">Provincia</label>
+                    <input disabled="true" type="text" class="form-control"
+                           value="{{referencia.provincia}}">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="ciudad[{{i}}]">Ciudad</label>
+                    <input disabled="true" type="text" class="form-control"
+                           value="{{referencia.ciudad}}">
                 </div>
             </div>
 
@@ -560,7 +636,7 @@
             </div>
 
             <div class="form-group">
-                <label for="buroCreditoIfis">Cargar Buró</label>
+                <label for="buroCreditoIfis">Cargar Buró Institución Financiera</label>
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="buroCreditoIfis"
                            formControlName="buroCreditoIfis"
@@ -573,7 +649,7 @@
                            for="buroCreditoIfis">{{actualizarCreditoForm.get('buroCreditoIfis').value}}</label>
                     <div *ngIf="submitted && controlsFrom.buroCreditoIfis.errors" class="invalid-feedback"
                          style="display: block;">
-                        <div *ngIf="controlsFrom.buroCreditoIfis.errors.required">Cargar Buró es requerido
+                        <div *ngIf="controlsFrom.buroCreditoIfis.errors.required">Cargar Buró Institución Financiera es requerido
                         </div>
                     </div>
                 </div>
@@ -640,7 +716,7 @@
             </div>
 
             <div class="form-group">
-                <label for="checkIdenficicacion">Copia de cédula y Ruc</label>
+                <label for="checkIdenficicacion">Copia de cédula</label>
 
                 <div class="custom-file">
                     <label class="form-check-label mr-2" for="checkIdenficicacion">Valido</label>
@@ -651,8 +727,8 @@
                     </a>
                     <div *ngIf="submitted && controlsFrom.checkIdenficicacion.errors" class="invalid-feedback"
                          style="display: block;">
-                        <div *ngIf="controlsFrom.checkIdenficicacion.errors.required">Copia de cédula y Ruc es
-                            requerido
+                        <div *ngIf="controlsFrom.checkIdenficicacion.errors.required">
+                            Copia de cédula es requerido
                         </div>
                     </div>
                 </div>
