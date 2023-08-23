@@ -75,12 +75,12 @@ export const menu: CoreMenu[] = [
       },
       {
         id: 'creditosEmpleados',
-        title: 'Cargar Creditos Empleados',
+        title: 'Cargar Créditos de Consumo',
         // translate: 'MENU.HOME',
         // role: [Role.SuperMonedas],
         type: 'item',
         icon: 'dollar-sign',
-        url: 'central/corp/cargarCreditosEmpleados',
+        url: 'central/corp/cargarCreditosdeConsumo',
       },
       {
         id: 'creditosEmpleados',

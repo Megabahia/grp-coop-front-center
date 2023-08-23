@@ -183,6 +183,7 @@ export class UploadComponent implements OnInit {
     this._cargarCreditosEmpleados.crearArchivoPreAprobados(
       this.nuevoArchivo
     ).subscribe(info => {
+      this.nombreArchivo = '';
       this.mensaje = `Se subio el excel correctamente.`;
       this.abrirModal(this.mensajeModal);
       this.obtenerListaArchivosPreAprobados();
