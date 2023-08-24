@@ -29,28 +29,29 @@
                             <form class="add-new-user pt-0" [formGroup]="usuarioForm">
                                 <div class="form-group">
                                     <label>Cooperativa responsable</label>
-                                    <input disabled type="text" value="{{nombreEmpresa}}" class="form-control form-control-sm">
+                                    <input disabled type="text" value="{{nombreEmpresa}}"
+                                           class="form-control form-control-sm">
                                     <div *ngIf="submitted && usuForm.empresaIfis_id.errors" class="invalid-feedback"
                                          style="display: block;">
                                         <div *ngIf="usuForm.empresaIfis_id.errors.required">Empresa Corp es requerida
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div class="form-group">-->
-<!--                                    <label>Empresa Corps</label>-->
-<!--                                    <select class="form-control" name="empresaComercial_id"-->
-<!--                                            formControlName="empresaComercial_id" (change)="obtenerEmpresaCorp()">-->
-<!--                                        <option value="">- Seleccione -</option>-->
-<!--                                        <option value="{{empresaCorp._id}}"-->
-<!--                                                *ngFor="let empresaCorp of listaEmpresasCorps">{{empresaCorp.nombreEmpresa}}</option>-->
-<!--                                    </select>-->
-<!--                                    <div *ngIf="submitted && usuForm.empresaComercial_id.errors"-->
-<!--                                         class="invalid-feedback" style="display: block;">-->
-<!--                                        <div *ngIf="usuForm.empresaComercial_id.errors.required">Empresa Ifis es-->
-<!--                                            requerida-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                <!--                                <div class="form-group">-->
+                                <!--                                    <label>Empresa Corps</label>-->
+                                <!--                                    <select class="form-control" name="empresaComercial_id"-->
+                                <!--                                            formControlName="empresaComercial_id" (change)="obtenerEmpresaCorp()">-->
+                                <!--                                        <option value="">- Seleccione -</option>-->
+                                <!--                                        <option value="{{empresaCorp._id}}"-->
+                                <!--                                                *ngFor="let empresaCorp of listaEmpresasCorps">{{empresaCorp.nombreEmpresa}}</option>-->
+                                <!--                                    </select>-->
+                                <!--                                    <div *ngIf="submitted && usuForm.empresaComercial_id.errors"-->
+                                <!--                                         class="invalid-feedback" style="display: block;">-->
+                                <!--                                        <div *ngIf="usuForm.empresaComercial_id.errors.required">Empresa Ifis es-->
+                                <!--                                            requerida-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
                                 <div class="form-group">
                                     <label>Archivo</label>
                                     <a href="/assets/anexos/creditos_preaprobados_empleados_v_ifis.xlsx">Anexo</a>
@@ -66,7 +67,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary mr-1" [disabled]="cargandoUsuario"
+                                <button class="btn btn-primary mr-1 {{blockButton?'buttonBlock':''}} "
+                                        [disabled]="cargandoUsuario"
                                         (click)="cargar()"> <span
                                         *ngIf="cargandoUsuario" class="spinner-border spinner-border-sm mr-1"></span>Guardar
                                 </button>
@@ -158,8 +160,9 @@
                             <td>{{archivo.usuarioCargo}}</td>
                             <td>{{archivo.estado}}</td>
                             <td class="d-flex">
-                                <a href="javascript:void(0);" class="avatar bg-danger mr-1" data-target="#eliminar" data-toggle="modal"
-                                (click)="eliminarArchivoPreAprobado(archivo.id)"
+                                <a href="javascript:void(0);" class="avatar bg-danger mr-1" data-target="#eliminar"
+                                   data-toggle="modal"
+                                   (click)="eliminarArchivoPreAprobado(archivo.id)"
                                    *ngIf="archivo.estado != 'Cargado'"
                                 >
                                     <div class="avatar-content">
@@ -172,12 +175,20 @@
                                         </svg>
                                     </div>
                                 </a>
-                                <a href="javascript:void(0);" class="avatar bg-info mr-1" data-target="#gestionar" data-toggle="modal"
+                                <a href="javascript:void(0);" class="avatar bg-info mr-1" data-target="#gestionar"
+                                   data-toggle="modal"
                                    (click)="subirArchivoPreAprobado(archivo.id)"
                                    *ngIf="archivo.estado != 'Cargado'"
                                 >
-                                    <div class="avatar-content" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Aprobar/Rechazar">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                    <div class="avatar-content" data-toggle="tooltip" data-placement="bottom" title=""
+                                         data-original-title="Aprobar/Rechazar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round"
+                                             class="feather feather-check-circle">
+                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                        </svg>
                                     </div>
                                 </a>
                             </td>
@@ -326,9 +337,12 @@
         <div [innerHTML]="mensaje"></div>
     </div>
     <div class="modal-footer">
-        <button *ngIf="!errores; else loggedOut" type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar</button>
+        <button *ngIf="!errores; else loggedOut" type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar
+        </button>
         <ng-template #loggedOut>
-            <button type="button" class="btn btn-light" (click)="cerrarModal()" [routerLink]="['/central/corp/cargar_empleados']">Cerrar</button>
+            <button type="button" class="btn btn-light" (click)="cerrarModal()"
+                    [routerLink]="['/central/corp/cargar_empleados']">Cerrar
+            </button>
         </ng-template>
     </div>
 </ng-template>
@@ -348,3 +362,4 @@
         <button type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar</button>
     </div>
 </ng-template>
+

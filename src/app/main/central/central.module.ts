@@ -128,7 +128,7 @@ const routes = [
         path: 'cargarBig-Puntos', component: CargarSuperMonedasCorpComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'cargarCreditosEmpleados', component: UploadComponent, canActivate: [AuthGuard]
+        path: 'cargarCreditosdeConsumo', component: UploadComponent, canActivate: [AuthGuard]
       },
       {
         path: 'cargarCreditosNegocios', component: UploadLineasCreditos, canActivate: [AuthGuard]
