@@ -109,6 +109,15 @@ export const menu: CoreMenu[] = [
         icon: 'dollar-sign',
         url: 'central/corp/confirmacionRecargarLineasCreditos',
       },
+      {
+        id: 'creditosAutomotriz',
+        title: 'Cargar Créditos Automotriz',
+        // translate: 'MENU.HOME',
+        // role: [Role.SuperMonedas],
+        type: 'item',
+        icon: 'dollar-sign',
+        url: 'central/corp/cargarCreditosAutomotriz',
+      },
     ]
   },
   {

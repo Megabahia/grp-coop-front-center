@@ -132,6 +132,7 @@ import {
   EmpleadosAutomotrizComponent
 } from './vistas/center/automotriz-solicitudes-creditos/empleados-automotriz/empleados-automotriz.component';
 import {AlfaAutomotrizComponent} from './vistas/center/automotriz-solicitudes-creditos/alfa-automotriz/alfa-automotriz.component';
+import {UploadAutomotrizComponent} from './vistas/corp/cargarCreditosAutomotriz/vistas/upload/upload-automotriz.component';
 
 
 const routes = [
@@ -167,6 +168,9 @@ const routes = [
       },
       {
         path: 'cargarCreditosdeConsumo', component: UploadComponent, canActivate: [AuthGuard]
+      },
+      {
+        path: 'cargarCreditosAutomotriz', component: UploadAutomotrizComponent, canActivate: [AuthGuard]
       },
       {
         path: 'cargarCreditosNegocios', component: UploadLineasCreditos, canActivate: [AuthGuard]
@@ -490,7 +494,9 @@ const routes = [
     EmpleadosPreaprovaodsAutomotrizComponent,
     EmpleadosAutomotrizComponent,
     AlfaAutomotrizComponent,
-    SolicitudesCreditosAutomotrizComponent
+    SolicitudesCreditosAutomotrizComponent,
+      //
+    UploadAutomotrizComponent
   ],
   imports: [
     CoreCommonModule,
