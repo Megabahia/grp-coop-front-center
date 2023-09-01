@@ -142,9 +142,11 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
                 inresosMensualesVentas: ['', [Validators.required]], //
                 sueldoConyuge: [''], //
                 otrosIngresos: [''], //
+                totalIngresos: [''],
                 gastosMensuales: ['', [Validators.required]], //
                 gastosFamilaires: ['', [Validators.required]], //
                 especificaIngresos: [''], //
+                totalEgresos: [''],
             });
     }
 

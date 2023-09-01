@@ -94,6 +94,45 @@ import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {
   ConfirmacionRecargarLineasCreditos
 } from './vistas/corp/recargarLineasCreditos/vistas/confirmacion/confirmar-recarga-lineas-creditos.component';
+import {
+  SolicitudesCreditosAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/solicitudes-creditos-automotriz.component';
+import {
+  ValoresProcesoAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/valores-proceso-automotriz/valores-proceso-automotriz.component';
+import {
+  RevisionDocumentosAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/revision-documentos-automotriz/revision-documentos-automotriz.component';
+import {ResumenAutomotrizComponent} from './vistas/center/automotriz-solicitudes-creditos/resumen-automotriz/resumen-automotriz.component';
+import {
+  NegocioPropioPreaprovaodsAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/negocio-propio-preaprovaods-automotriz/negocio-propio-preaprovaods-automotriz.component';
+import {
+  NegocioPropioAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/negocio-propio-automotriz/negocio-propio-automotriz.component';
+import {
+  MicrocreditosPreAprovadosAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/microcreditos-pre-aprovados-automotriz/microcreditos-pre-aprovados-automotriz.component';
+import {
+  MicrocreditosNormalesAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/microcreditos-normales-automotriz/microcreditos-normales-automotriz.component';
+import {
+  IfisNegocioPropioPreaprovaodsAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/ifis-automotriz/negocio-propio-preaprovaods-automotriz/ifis-negocio-propio-preaprovaods-automotriz.component';
+import {
+  IfisMicrocreditosPreAprovadosAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/ifis-automotriz/microcreditos-pre-aprovados-automotriz/ifis-microcreditos-pre-aprovados-automotriz.component';
+import {
+  IfisEmpleadosPreaprovaodsAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/ifis-automotriz/empleados-preaprovaods-automotriz/ifis-empleados-preaprovaods-automotriz.component';
+import {
+  EmpleadosPreaprovaodsAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/empleados-preaprovaods-automotriz/empleados-preaprovaods-automotriz.component';
+import {
+  EmpleadosAutomotrizComponent
+} from './vistas/center/automotriz-solicitudes-creditos/empleados-automotriz/empleados-automotriz.component';
+import {AlfaAutomotrizComponent} from './vistas/center/automotriz-solicitudes-creditos/alfa-automotriz/alfa-automotriz.component';
+import {UploadAutomotrizComponent} from './vistas/corp/cargarCreditosAutomotriz/vistas/upload/upload-automotriz.component';
 
 
 const routes = [
@@ -128,7 +167,10 @@ const routes = [
         path: 'cargarBig-Puntos', component: CargarSuperMonedasCorpComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'cargarCreditosEmpleados', component: UploadComponent, canActivate: [AuthGuard]
+        path: 'cargarCreditosdeConsumo', component: UploadComponent, canActivate: [AuthGuard]
+      },
+      {
+        path: 'cargarCreditosAutomotriz', component: UploadAutomotrizComponent, canActivate: [AuthGuard]
       },
       {
         path: 'cargarCreditosNegocios', component: UploadLineasCreditos, canActivate: [AuthGuard]
@@ -296,6 +338,72 @@ const routes = [
         ]
       },
       {
+        path: 'solicitudes-creditos-automotriz',
+        children: [
+          {path: '', redirectTo: 'empleados', pathMatch: 'full'},
+          {
+            path: 'empleados-automotriz',
+            component: EmpleadosAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'negocios-automotriz',
+            component: NegocioPropioAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'negocios-propios-pre-aprobados-automotriz',
+            component: NegocioPropioPreaprovaodsAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'empelados-pre-aprobados-automotriz',
+            component: EmpleadosPreaprovaodsAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'microcreditPreAprovado-automotriz',
+            component: MicrocreditosPreAprovadosAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'microcreditNormales-automotriz',
+            component: MicrocreditosNormalesAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'ifis/negocios-propios-pre-aprobados-automotriz',
+            component: IfisNegocioPropioPreaprovaodsAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'ifis/empelados-pre-aprobados-automotriz',
+            component: IfisEmpleadosPreaprovaodsAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'ifis/microcreditPreAprovado-automotriz',
+            component: IfisMicrocreditosPreAprovadosAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'alfa-automotriz',
+            component: AlfaAutomotrizComponent,
+            // data: {roles: [Role.BigPuntos]},
+            canActivate: [AuthGuard]
+          },
+        ]
+      },
+      {
         path: 'solicitud-pago-proveedores', component: SolicitudesPagoProveedoresComponent, canActivate: [AuthGuard]
       },
       {
@@ -372,6 +480,23 @@ const routes = [
     SolicitudesPagoEmpleadosComponent,
     RecargarLineasCreditos,
     ConfirmacionRecargarLineasCreditos,
+      // creéditos automotriz
+    ValoresProcesoAutomotrizComponent,
+    RevisionDocumentosAutomotrizComponent,
+    ResumenAutomotrizComponent,
+    NegocioPropioPreaprovaodsAutomotrizComponent,
+    NegocioPropioAutomotrizComponent,
+    MicrocreditosPreAprovadosAutomotrizComponent,
+    MicrocreditosNormalesAutomotrizComponent,
+    IfisNegocioPropioPreaprovaodsAutomotrizComponent,
+    IfisMicrocreditosPreAprovadosAutomotrizComponent,
+    IfisEmpleadosPreaprovaodsAutomotrizComponent,
+    EmpleadosPreaprovaodsAutomotrizComponent,
+    EmpleadosAutomotrizComponent,
+    AlfaAutomotrizComponent,
+    SolicitudesCreditosAutomotrizComponent,
+      //
+    UploadAutomotrizComponent
   ],
   imports: [
     CoreCommonModule,

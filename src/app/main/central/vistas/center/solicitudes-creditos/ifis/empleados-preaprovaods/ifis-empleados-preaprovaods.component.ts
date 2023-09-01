@@ -44,6 +44,7 @@ export class IfisEmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit
     {'label': 'Buro credito', 'valor': false},
     {'label': 'Calificacion buro', 'valor': false},
     {'label': 'Observación', 'valor': false},
+    {'label': 'Autorización y validación de información', 'valor': true},
   ];
   // Formulario
   public soltero = false;

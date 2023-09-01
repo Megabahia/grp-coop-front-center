@@ -6,6 +6,7 @@ export const environment = {
     production: false,
     hmr: false,
     apiUrl: 'https://api-coop-test.bigpuntos.com',
+    // apiUrl: 'http://127.0.0.1:8000',
     setKey: '6Lf0IKglAAAAABFz3mTDdcDwDjhmDm2ZILZQnhB-',
     firebaseConfig : {
         apiKey: 'AIzaSyCJjLY5GLMkwBgxQqyj2q-GDOEjHNg07ig',
