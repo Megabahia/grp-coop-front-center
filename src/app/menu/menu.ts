@@ -456,7 +456,7 @@ export const menu: CoreMenu[] = [
       },
       {
         id: 'solicitudesAutomotriz',
-        title: '-->Solicitudes de créditos Automotriz',
+        title: 'S. Créditos Automotriz',
         // translate: 'MENU.HOME',
         // role: [Role.BigPuntos],
         type: 'collapsible',
