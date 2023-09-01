@@ -531,8 +531,8 @@
 </ng-template>
 <!-- FIN MODAL USER-->
 
-<app-revision-documentos *ngIf="pantalla === 1" (pantalla)="cambiarEstado($event)"
-                         [checks]="checks"></app-revision-documentos>
+<app-revision-documentos-automotriz *ngIf="pantalla === 1" (pantalla)="cambiarEstado($event)"
+                         [checks]="checks"></app-revision-documentos-automotriz>
 
 <div *ngIf="pantalla === 2" class="slideout-content">
     <!-- Modal to add new user starts-->
@@ -1033,10 +1033,10 @@
     <!-- Modal to add new user Ends-->
 </div>
 
-<app-valores-proceso *ngIf="pantalla === 3" (pantalla)="cambiarEstado($event)"
-                     [credito]="credito"></app-valores-proceso>
+<app-valores-proceso-automotriz *ngIf="pantalla === 3" (pantalla)="cambiarEstado($event)"
+                     [credito]="credito"></app-valores-proceso-automotriz>
 
-<app-resumen *ngIf="pantalla === 4" (pantalla)="cambiarEstado($event)" [credito]="credito"></app-resumen>
+<app-resumen-automotriz *ngIf="pantalla === 4" (pantalla)="cambiarEstado($event)" [credito]="credito"></app-resumen-automotriz>
 
 <!-- INICIO MODAL USER -->
 <ng-template #modalMotivo let-modal>

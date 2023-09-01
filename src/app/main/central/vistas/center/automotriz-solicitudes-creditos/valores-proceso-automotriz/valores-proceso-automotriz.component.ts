@@ -6,7 +6,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ValidacionesPropias} from '../../../../../../../utils/customer.validators';
 
 @Component({
-  selector: 'app-valores-proceso',
+  selector: 'app-valores-proceso-automotriz',
   templateUrl: './valores-proceso-automotriz.component.html',
   styleUrls: ['./valores-proceso-automotriz.component.scss']
 })

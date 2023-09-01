@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-revision-documentos',
+  selector: 'app-revision-documentos-automotriz',
   templateUrl: './revision-documentos-automotriz.component.html',
   styleUrls: ['./revision-documentos-automotriz.component.scss']
 })
