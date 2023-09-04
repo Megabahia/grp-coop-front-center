@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SolicitudesCreditosAutomotrizService} from '../solicitudes-creditos-automotriz.service';
 
 @Component({
-  selector: 'app-resumen',
+  selector: 'app-resumen-automotriz',
   templateUrl: './resumen-automotriz.component.html',
   styleUrls: ['./resumen-automotriz.component.scss']
 })
