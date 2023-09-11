@@ -315,6 +315,120 @@ export const menu: CoreMenu[] = [
         ]
       },
       {
+        id: 'solicitudesCreditosLocal',
+        title: 'Visado D. de documentos preliminar',
+        // translate: 'MENU.HOME',
+        // role: [Role.BigPuntos],
+        type: 'collapsible',
+        icon: 'credit-card',
+        children: [
+          {
+            id: 'creditoComsumoLocalDigital',
+            title: 'D. Créditos de consumo',
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'empleadosLocalDigital',
+                title: 'D. Créditos empleados',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local-digital/empleados-center-digital'
+              },
+              {
+                id: 'negociosDigital',
+                title: 'D. Créditos negocios',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local-digital/negocios-propio-center-digital'
+              },
+              {
+                id: 'propios-pre-aprovadosDigital',
+                title: 'D. Pre aprobados negocios propios',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local-digital/negocios-propios-pre-aprobados-center-digital'
+              },
+              {
+                id: 'empelados-pre-aprovadosDigital',
+                title: 'D. Pre aprobados empelados',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local-digital/empelados-pre-aprobados-center-digital'
+              },
+              {
+                id: 'ifisPreaprobadosDigital',
+                title: 'D. IFIS Preaprobados',
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'propios-pre-aprovadosDigital',
+                    title: 'D. Pre aprobados negocios propios',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-local-digital/ifis/negocios-propios-pre-aprobados-center-digital'
+                  },
+                  {
+                    id: 'empelados-pre-aprovadosDigital',
+                    title: 'D. Pre aprobados empelados',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-local-digital/ifis/empelados-pre-aprobados-center-digital'
+                  },
+                ],
+              },
+            ]
+          },
+          {
+            id: 'lineasCreditoDigital',
+            title: 'D. Líneas de crédito',
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'microcreditpreaprobadoDigital',
+                title: 'D. PYMES pre-aprobados ',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local-digital/microcreditpreaprobado-center-digital'
+              },
+              {
+                id: 'microcreditsolicitudDigital',
+                title: 'D. PYMES Normales ',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local-digital/microcreditsolicitud-center-digital'
+              },
+              {
+                id: 'pymesIfisDigital',
+                title: 'D. Pymes Ifis',
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'microcreditpreaprobadoDigital',
+                    title: 'D. PYMES pre-aprobados ',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-local-digital/ifis/microcreditpreaprobado-center-digital'
+                  },
+                ]
+              }
+            ]
+          },
+        ]
+      },
+      {
         id: 'solicitudesCreditos',
         title: 'Solicitudes de créditos',
         // translate: 'MENU.HOME',
@@ -387,6 +501,147 @@ export const menu: CoreMenu[] = [
                     url: 'central/center/solicitudes-creditos/ifis/empelados-pre-aprobados'
                   },
                 ]
+              },
+
+            ]
+          },
+          {
+            id: 'solicitudesAutomotriz',
+            title: 'S. Créditos Automotriz',
+            // translate: 'MENU.HOME',
+            // role: [Role.BigPuntos],
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'creditoComsumoAutomotriz',
+                title: 'Créditos de consumo',
+                // translate: 'MENU.HOME',
+                // role: [Role.BigPuntos],
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'empleadosAutomotriz',
+                    title: 'Créditos empleados',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/empleados-automotriz'
+                  },
+                  {
+                    id: 'negociosAutomotriz',
+                    title: 'Créditos negocios',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/negocios-automotriz'
+                  },
+                  {
+                    id: 'propios-pre-aprovadosAutomotriz',
+                    title: 'Pre aprobados negocios propios',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/negocios-propios-pre-aprobados-automotriz'
+                  },
+                  {
+                    id: 'empelados-pre-aprovadosAutomotriz',
+                    title: 'Pre aprobados empelados',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/empelados-pre-aprobados-automotriz'
+                  },
+                  {
+                    id: 'creditoComsumoIFIAutomotriz',
+                    title: 'IFIS Preaprobados',
+                    // translate: 'MENU.HOME',
+                    // role: [Role.BigPuntos],
+                    type: 'collapsible',
+                    icon: 'credit-card',
+                    children: [
+                      {
+                        id: 'preaprobado-negociosPropiosIFIAutomotriz',
+                        title: 'Negocios propios',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'central/center/solicitudes-creditos-automotriz/ifis/negocios-propios-pre-aprobados-automotriz'
+                      },
+                      {
+                        id: 'preaprobado-empleadosIFIAutomotriz',
+                        title: 'Empleados',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'central/center/solicitudes-creditos-automotriz/ifis/empelados-pre-aprobados-automotriz'
+                      },
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'lineasCredito',
+                title: 'Líneas de crédito',
+                // translate: 'MENU.HOME',
+                // role: [Role.BigPuntos],
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'microcreditPreAprovado',
+                    title: 'PYMES pre-aprobados ',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/microcreditPreAprovado-automotriz'
+                  },
+                  {
+                    id: 'microcreditNormales',
+                    title: 'PYMES Normales ',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/microcreditNormales-automotriz'
+                  },
+                  {
+                    id: 'microcreditNormalesIFI',
+                    title: 'Pymes Ifis',
+                    // translate: 'MENU.HOME',
+                    // role: [Role.BigPuntos],
+                    type: 'collapsible',
+                    icon: 'credit-card',
+                    children: [
+                      {
+                        id: 'preaprobado-negociosPropiosIFI',
+                        title: 'PYMES IFIs',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'central/center/solicitudes-creditos-automotriz/ifis/microcreditPreAprovado-automotriz'
+                      },
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'creditoAlfa',
+                title: 'Créditos Alfa',
+                // translate: 'MENU.HOME',
+                // role: [Role.BigPuntos],
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'alfa',
+                    title: 'Credito Alfa',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/alfa-automotriz'
+                  },
+                ]
               }
             ]
           },
@@ -454,16 +709,17 @@ export const menu: CoreMenu[] = [
           }
         ]
       },
+
       {
-        id: 'solicitudesAutomotriz',
-        title: 'S. Créditos Automotriz',
+        id: 'solicitudesCreditosDigital',
+        title: 'Solicitudes D. de créditos',
         // translate: 'MENU.HOME',
         // role: [Role.BigPuntos],
         type: 'collapsible',
         icon: 'credit-card',
         children: [
           {
-            id: 'creditoComsumoAutomotriz',
+            id: 'creditoComsumo',
             title: 'Créditos de consumo',
             // translate: 'MENU.HOME',
             // role: [Role.BigPuntos],
@@ -471,39 +727,39 @@ export const menu: CoreMenu[] = [
             icon: 'credit-card',
             children: [
               {
-                id: 'empleadosAutomotriz',
+                id: 'empleados',
                 title: 'Créditos empleados',
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-automotriz/empleados-automotriz'
+                url: 'central/center/solicitudes-creditos/empleados'
               },
               {
-                id: 'negociosAutomotriz',
+                id: 'negocios',
                 title: 'Créditos negocios',
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-automotriz/negocios-automotriz'
+                url: 'central/center/solicitudes-creditos/negocios'
               },
               {
-                id: 'propios-pre-aprovadosAutomotriz',
+                id: 'propios-pre-aprovados',
                 title: 'Pre aprobados negocios propios',
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-automotriz/negocios-propios-pre-aprobados-automotriz'
+                url: 'central/center/solicitudes-creditos/negocios-propios-pre-aprobados'
               },
               {
-                id: 'empelados-pre-aprovadosAutomotriz',
+                id: 'empelados-pre-aprovados',
                 title: 'Pre aprobados empelados',
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-automotriz/empelados-pre-aprobados-automotriz'
+                url: 'central/center/solicitudes-creditos/empelados-pre-aprobados'
               },
               {
-                id: 'creditoComsumoIFIAutomotriz',
+                id: 'creditoComsumoIFI',
                 title: 'IFIS Preaprobados',
                 // translate: 'MENU.HOME',
                 // role: [Role.BigPuntos],
@@ -511,20 +767,161 @@ export const menu: CoreMenu[] = [
                 icon: 'credit-card',
                 children: [
                   {
-                    id: 'preaprobado-negociosPropiosIFIAutomotriz',
+                    id: 'preaprobado-negociosPropiosIFI',
                     title: 'Negocios propios',
                     // translate: 'MENU.APPS.EMAIL',
                     type: 'item',
                     icon: 'circle',
-                    url: 'central/center/solicitudes-creditos-automotriz/ifis/negocios-propios-pre-aprobados-automotriz'
+                    url: 'central/center/solicitudes-creditos/ifis/negocios-propios-pre-aprobados'
                   },
                   {
-                    id: 'preaprobado-empleadosIFIAutomotriz',
+                    id: 'preaprobado-empleadosIFI',
                     title: 'Empleados',
                     // translate: 'MENU.APPS.EMAIL',
                     type: 'item',
                     icon: 'circle',
-                    url: 'central/center/solicitudes-creditos-automotriz/ifis/empelados-pre-aprobados-automotriz'
+                    url: 'central/center/solicitudes-creditos/ifis/empelados-pre-aprobados'
+                  },
+                ]
+              },
+
+            ]
+          },
+          {
+            id: 'solicitudesAutomotriz',
+            title: 'S. Créditos Automotriz',
+            // translate: 'MENU.HOME',
+            // role: [Role.BigPuntos],
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'creditoComsumoAutomotriz',
+                title: 'Créditos de consumo',
+                // translate: 'MENU.HOME',
+                // role: [Role.BigPuntos],
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'empleadosAutomotriz',
+                    title: 'Créditos empleados',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/empleados-automotriz'
+                  },
+                  {
+                    id: 'negociosAutomotriz',
+                    title: 'Créditos negocios',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/negocios-automotriz'
+                  },
+                  {
+                    id: 'propios-pre-aprovadosAutomotriz',
+                    title: 'Pre aprobados negocios propios',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/negocios-propios-pre-aprobados-automotriz'
+                  },
+                  {
+                    id: 'empelados-pre-aprovadosAutomotriz',
+                    title: 'Pre aprobados empelados',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/empelados-pre-aprobados-automotriz'
+                  },
+                  {
+                    id: 'creditoComsumoIFIAutomotriz',
+                    title: 'IFIS Preaprobados',
+                    // translate: 'MENU.HOME',
+                    // role: [Role.BigPuntos],
+                    type: 'collapsible',
+                    icon: 'credit-card',
+                    children: [
+                      {
+                        id: 'preaprobado-negociosPropiosIFIAutomotriz',
+                        title: 'Negocios propios',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'central/center/solicitudes-creditos-automotriz/ifis/negocios-propios-pre-aprobados-automotriz'
+                      },
+                      {
+                        id: 'preaprobado-empleadosIFIAutomotriz',
+                        title: 'Empleados',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'central/center/solicitudes-creditos-automotriz/ifis/empelados-pre-aprobados-automotriz'
+                      },
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'lineasCredito',
+                title: 'Líneas de crédito',
+                // translate: 'MENU.HOME',
+                // role: [Role.BigPuntos],
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'microcreditPreAprovado',
+                    title: 'PYMES pre-aprobados ',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/microcreditPreAprovado-automotriz'
+                  },
+                  {
+                    id: 'microcreditNormales',
+                    title: 'PYMES Normales ',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/microcreditNormales-automotriz'
+                  },
+                  {
+                    id: 'microcreditNormalesIFI',
+                    title: 'Pymes Ifis',
+                    // translate: 'MENU.HOME',
+                    // role: [Role.BigPuntos],
+                    type: 'collapsible',
+                    icon: 'credit-card',
+                    children: [
+                      {
+                        id: 'preaprobado-negociosPropiosIFI',
+                        title: 'PYMES IFIs',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'central/center/solicitudes-creditos-automotriz/ifis/microcreditPreAprovado-automotriz'
+                      },
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'creditoAlfa',
+                title: 'Créditos Alfa',
+                // translate: 'MENU.HOME',
+                // role: [Role.BigPuntos],
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                  {
+                    id: 'alfa',
+                    title: 'Credito Alfa',
+                    // translate: 'MENU.APPS.EMAIL',
+                    type: 'item',
+                    icon: 'circle',
+                    url: 'central/center/solicitudes-creditos-automotriz/alfa-automotriz'
                   },
                 ]
               }
@@ -544,7 +941,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-automotriz/microcreditPreAprovado-automotriz'
+                url: 'central/center/solicitudes-creditos/microcreditPreAprovado'
               },
               {
                 id: 'microcreditNormales',
@@ -552,7 +949,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-automotriz/microcreditNormales-automotriz'
+                url: 'central/center/solicitudes-creditos/microcreditNormales'
               },
               {
                 id: 'microcreditNormalesIFI',
@@ -568,7 +965,7 @@ export const menu: CoreMenu[] = [
                     // translate: 'MENU.APPS.EMAIL',
                     type: 'item',
                     icon: 'circle',
-                    url: 'central/center/solicitudes-creditos-automotriz/ifis/microcreditPreAprovado-automotriz'
+                    url: 'central/center/solicitudes-creditos/ifis/microcreditPreAprovado'
                   },
                 ]
               }
@@ -588,12 +985,13 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-automotriz/alfa-automotriz'
+                url: 'central/center/solicitudes-creditos/alfa'
               },
             ]
           }
         ]
       },
+
       {
         id: 'consumoCreditos',
         title: 'Solicitudes de Pago a proveedores',
