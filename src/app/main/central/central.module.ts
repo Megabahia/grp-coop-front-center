@@ -170,6 +170,32 @@ import {
 import {
     RevisionDocumentosDigitalComponent
 } from './vistas/center/solicitudes-creditos-local-digital/revision-documentos-digital/revision-documentos-digital.component';
+import {EmpleadosDigitalComponent} from './vistas/center/solicitudes-creditos-digitales/empleados-digital/empleados-digital.component';
+import {
+    NegocioPropioDigitalComponent
+} from './vistas/center/solicitudes-creditos-digitales/negocio-propio-digital/negocio-propio-digital.component';
+import {
+    NegocioPropioPreaprovaodsDigitalComponent
+} from './vistas/center/solicitudes-creditos-digitales/negocio-propio-preaprovaods-digital/negocio-propio-preaprovaods-digital.component';
+import {
+    EmpleadosPreaprovaodsDigitalComponent
+} from './vistas/center/solicitudes-creditos-digitales/empleados-preaprovaods-digital/empleados-preaprovaods-digital.component';
+import {
+    MicrocreditosPreAprovadosDigitalComponent
+} from './vistas/center/solicitudes-creditos-digitales/microcreditos-pre-aprovados-digital/microcreditos-pre-aprovados-digital.component';
+import {
+    MicrocreditosNormalesDigitalComponent
+} from './vistas/center/solicitudes-creditos-digitales/microcreditos-normales-digital/microcreditos-normales-digital.component';
+import {
+    IfisNegocioPropioPreaprovaodsDigitalComponent
+} from './vistas/center/solicitudes-creditos-digitales/ifis-digital/negocio-propio-preaprovaods-digital/ifis-negocio-propio-preaprovaods-digital.component';
+import {
+    IfisEmpleadosPreaprovaodsDigitalComponent
+} from './vistas/center/solicitudes-creditos-digitales/ifis-digital/empleados-preaprovaods-digital/ifis-empleados-preaprovaods-digital.component';
+import {
+    IfisMicrocreditosPreAprovadosDigitalComponent
+} from './vistas/center/solicitudes-creditos-digitales/ifis-digital/microcreditos-pre-aprovados-digital/ifis-microcreditos-pre-aprovados-digital.component';
+import {AlfaDigitalComponent} from './vistas/center/solicitudes-creditos-digitales/alfa-digital/alfa-digital.component';
 
 
 const routes = [
@@ -426,141 +452,75 @@ const routes = [
                     },
                 ]
             },
-            {
-                path: 'solicitudes-creditos-automotriz',
-                children: [
-                    {path: '', redirectTo: 'empleados', pathMatch: 'full'},
-                    {
-                        path: 'empleados-automotriz',
-                        component: EmpleadosAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'negocios-automotriz',
-                        component: NegocioPropioAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'negocios-propios-pre-aprobados-automotriz',
-                        component: NegocioPropioPreaprovaodsAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'empelados-pre-aprobados-automotriz',
-                        component: EmpleadosPreaprovaodsAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'microcreditPreAprovado-automotriz',
-                        component: MicrocreditosPreAprovadosAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'microcreditNormales-automotriz',
-                        component: MicrocreditosNormalesAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'ifis/negocios-propios-pre-aprobados-automotriz',
-                        component: IfisNegocioPropioPreaprovaodsAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'ifis/empelados-pre-aprobados-automotriz',
-                        component: IfisEmpleadosPreaprovaodsAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'ifis/microcreditPreAprovado-automotriz',
-                        component: IfisMicrocreditosPreAprovadosAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'alfa-automotriz',
-                        component: AlfaAutomotrizComponent,
-                        // data: {roles: [Role.BigPuntos]},
-                        canActivate: [AuthGuard]
-                    },
-                ]
-            },
             // fin solicitudes créditos
-
             // solicitudes créditos digitales
             {
-                path: 'solicitudes-creditos',
+                path: 'solicitudes-creditos-digital',
                 children: [
-                    {path: '', redirectTo: 'empleados', pathMatch: 'full'},
+                    {path: '', redirectTo: 'empleados-digital', pathMatch: 'full'},
                     {
-                        path: 'empleados',
-                        component: EmpleadosComponent,
+                        path: 'empleados-digital',
+                        component: EmpleadosDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                     {
-                        path: 'negocios',
-                        component: NegocioPropioComponent,
+                        path: 'negocios-digital',
+                        component: NegocioPropioDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                     {
-                        path: 'negocios-propios-pre-aprobados',
-                        component: NegocioPropioPreaprovaodsComponent,
+                        path: 'negocios-propios-pre-aprobados-digital',
+                        component: NegocioPropioPreaprovaodsDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                     {
-                        path: 'empelados-pre-aprobados',
-                        component: EmpleadosPreaprovaodsComponent,
+                        path: 'empelados-pre-aprobados-digital',
+                        component: EmpleadosPreaprovaodsDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                     {
-                        path: 'microcreditPreAprovado',
-                        component: MicrocreditosPreAprovadosComponent,
+                        path: 'microcreditPreAprovado-digital',
+                        component: MicrocreditosPreAprovadosDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                     {
-                        path: 'microcreditNormales',
-                        component: MicrocreditosNormalesComponent,
+                        path: 'microcreditNormales-digital',
+                        component: MicrocreditosNormalesDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                     {
-                        path: 'ifis/negocios-propios-pre-aprobados',
-                        component: IfisNegocioPropioPreaprovaodsComponent,
+                        path: 'ifis/negocios-propios-pre-aprobados-digital',
+                        component: IfisNegocioPropioPreaprovaodsDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                     {
-                        path: 'ifis/empelados-pre-aprobados',
-                        component: IfisEmpleadosPreaprovaodsComponent,
+                        path: 'ifis/empelados-pre-aprobados-digital',
+                        component: IfisEmpleadosPreaprovaodsDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                     {
-                        path: 'ifis/microcreditPreAprovado',
-                        component: IfisMicrocreditosPreAprovadosComponent,
+                        path: 'ifis/microcreditPreAprovado-digital',
+                        component: IfisMicrocreditosPreAprovadosDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                     {
-                        path: 'alfa',
-                        component: AlfaComponent,
+                        path: 'alfa-digital',
+                        component: AlfaDigitalComponent,
                         // data: {roles: [Role.BigPuntos]},
                         canActivate: [AuthGuard]
                     },
                 ]
             },
+            // fin solicitudes créditos digital
             {
                 path: 'solicitudes-creditos-automotriz',
                 children: [
@@ -627,12 +587,6 @@ const routes = [
                     },
                 ]
             },
-            // fin solicitudes créditos digitales
-
-
-
-
-
             {
                 path: 'solicitud-pago-proveedores', component: SolicitudesPagoProveedoresComponent, canActivate: [AuthGuard]
             },
@@ -698,7 +652,21 @@ const routes = [
         IfisMicrocreditosPreAprovadosComponent,
         SolicitudesEmpleadosCenterComponent,
         NegocioPropioCenterComponent,
-        // Solicitud creditos digitales
+        // Solicitudes creditos digitales
+        EmpleadosDigitalComponent,
+        NegocioPropioDigitalComponent,
+        NegocioPropioPreaprovaodsDigitalComponent,
+        EmpleadosPreaprovaodsDigitalComponent,
+        MicrocreditosPreAprovadosDigitalComponent,
+        MicrocreditosNormalesDigitalComponent,
+        IfisNegocioPropioPreaprovaodsDigitalComponent,
+        IfisEmpleadosPreaprovaodsDigitalComponent,
+        IfisMicrocreditosPreAprovadosDigitalComponent,
+        AlfaDigitalComponent,
+        // Fin Solicitudes creditos digitales
+
+
+        // Visado solicitud creditos digitales
         SolicitudesEmpleadosCenterDigitalComponent,
         EmpleadosPreaprovadosCenterDigitalComponent,
         IfisEmpleadosPreaprovadosCenterDigitalComponent,
@@ -709,8 +677,6 @@ const routes = [
         NegocioPropioCenterDigitalComponent,
         NegocioPropioPreaprovadosCenterDigitalComponent,
         RevisionDocumentosDigitalComponent,
-        // SolicitudesCreditosDigitalComponent,
-        // SolicitudesCreditosCenterComponent,
         NegocioPropioPreaprovadosCenterComponent,
         EmpleadosPreaprovadosCenterComponent,
         MicrocreditosPreAprovadosCenterComponent,
