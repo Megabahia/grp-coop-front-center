@@ -196,6 +196,7 @@ import {
     IfisMicrocreditosPreAprovadosDigitalComponent
 } from './vistas/center/solicitudes-creditos-digitales/ifis-digital/microcreditos-pre-aprovados-digital/ifis-microcreditos-pre-aprovados-digital.component';
 import {AlfaDigitalComponent} from './vistas/center/solicitudes-creditos-digitales/alfa-digital/alfa-digital.component';
+import {UploadDigitalesComponent} from './vistas/corp/cargarCreditosDigitales/vistas/upload/upload-digitales.component';
 
 
 const routes = [
@@ -231,6 +232,9 @@ const routes = [
             },
             {
                 path: 'cargarCreditosdeConsumo', component: UploadComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'cargarCreditosdeConsumoDigitales', component: UploadDigitalesComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'cargarCreditosAutomotriz', component: UploadAutomotrizComponent, canActivate: [AuthGuard]
@@ -627,6 +631,7 @@ const routes = [
         // SolicitudesCreditosComponent,
         PublicacionesListar,
         UploadComponent,
+        UploadDigitalesComponent,
         ProductosBienvenidaListar,
         ProductosMensajeListar,
         ProductosNuestraFamiliaListar,
