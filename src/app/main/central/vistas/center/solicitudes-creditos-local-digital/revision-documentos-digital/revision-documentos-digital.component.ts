@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-revision-documentos',
+  selector: 'app-revision-documentos-digital',
   templateUrl: './revision-documentos-digital.component.html',
   styleUrls: ['./revision-documentos-digital.component.scss']
 })

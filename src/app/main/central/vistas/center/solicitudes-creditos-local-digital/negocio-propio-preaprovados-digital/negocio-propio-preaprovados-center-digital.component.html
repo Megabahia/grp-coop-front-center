@@ -463,8 +463,8 @@
 </ng-template>
 <!-- FIN MODAL USER-->
 
-<app-revision-documentos *ngIf="pantalla === 1" (pantalla)="cambiarEstado($event)"
-                         [checks]="checks"></app-revision-documentos>
+<app-revision-documentos-digital *ngIf="pantalla === 1" (pantalla)="cambiarEstado($event)"
+                         [checks]="checks"></app-revision-documentos-digital>
 
 <div *ngIf="pantalla === 2" class="slideout-content">
     <!-- Modal to add new user starts-->
