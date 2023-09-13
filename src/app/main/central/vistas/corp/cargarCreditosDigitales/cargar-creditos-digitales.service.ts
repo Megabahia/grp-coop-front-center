@@ -28,6 +28,6 @@ export class CargarCreditosDigitalesService {
     return this._httpClient.delete<any>(`${environment.apiUrl}/corp/creditoArchivos/delete/${id}`);
   }
   subirArchivosPreAprobados(id) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoArchivos/upload/creditos/preaprobados/empleados/${id}`, {});
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoArchivos/upload/creditos/preaprobadosDigitales/empleados/${id}`, {});
   }
 }
