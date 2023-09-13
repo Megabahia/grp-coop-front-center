@@ -98,7 +98,7 @@ export class NegocioPropioPreaprovadosCenterDigitalComponent implements OnInit, 
             page_size: this.page_size,
             page: this.page - 1,
             tipoCredito: 'Credito Consumo Negocio-PreAprobado',
-            cargarOrigen: 'BIGPUNTOS',
+            cargarOrigen: 'IFIS',
             alcance: 'LOCAL',
         }).subscribe(info => {
             this.collectionSize = info.cont;

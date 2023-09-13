@@ -97,7 +97,7 @@ export class EmpleadosPreaprovadosCenterDigitalComponent implements OnInit, Afte
             page_size: this.page_size,
             page: this.page - 1,
             tipoCredito: 'Credito Consumo Empleado-PreAprobado',
-            cargarOrigen: 'BIGPUNTOS',
+            cargarOrigen: 'IFIS',
             alcance: 'LOCAL',
         }).subscribe(info => {
             this.collectionSize = info.cont;

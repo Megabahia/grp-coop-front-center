@@ -99,8 +99,8 @@ export class EmpleadosPreaprovaodsDigitalComponent implements OnInit, AfterViewI
       page_size: this.page_size,
       page: this.page - 1,
       tipoCredito: 'Credito Consumo Empleado-PreAprobado',
-      cargarOrigen: 'BIGPUNTOS',
-      alcance: ['LOCAL', 'OMNIGLOBAL'],
+      cargarOrigen: 'IFIS',
+      alcance: ['LOCAL'],
       enviado: 1,
     }).subscribe(info => {
       this.collectionSize = info.cont;
