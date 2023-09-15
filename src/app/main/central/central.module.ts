@@ -197,6 +197,9 @@ import {
 } from './vistas/center/solicitudes-creditos-digitales/ifis-digital/microcreditos-pre-aprovados-digital/ifis-microcreditos-pre-aprovados-digital.component';
 import {AlfaDigitalComponent} from './vistas/center/solicitudes-creditos-digitales/alfa-digital/alfa-digital.component';
 import {UploadDigitalesComponent} from './vistas/corp/cargarCreditosDigitales/vistas/upload/upload-digitales.component';
+import {
+    AlfaPreaprovadosCenterDigitalComponent
+} from './vistas/center/solicitudes-creditos-local-digital/alfa-preaprovados-digital/alfa-preaprovados-center-digital.component';
 
 
 const routes = [
@@ -358,6 +361,11 @@ const routes = [
                     {
                         path: 'empelados-pre-aprobados-center-digital',
                         component: EmpleadosPreaprovadosCenterDigitalComponent,
+                        canActivate: [AuthGuard]
+                    },
+                    {
+                        path: 'empelados-pre-aprobados-center-digital-alfa',
+                        component: AlfaPreaprovadosCenterDigitalComponent,
                         canActivate: [AuthGuard]
                     },
                     {
@@ -674,6 +682,7 @@ const routes = [
         // Visado solicitud creditos digitales
         SolicitudesEmpleadosCenterDigitalComponent,
         EmpleadosPreaprovadosCenterDigitalComponent,
+        AlfaPreaprovadosCenterDigitalComponent,
         IfisEmpleadosPreaprovadosCenterDigitalComponent,
         IfisMicrocreditosPreAprovadosCenterDigitalComponent,
         IfisNegocioPropioPreaprovadosCenterDigitalComponent,

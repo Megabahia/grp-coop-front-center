@@ -370,6 +370,14 @@ export const menu: CoreMenu[] = [
                 icon: 'circle',
                 url: 'central/center/solicitudes-creditos-local-digital/empelados-pre-aprobados-center-digital'
               },
+              {
+                id: 'alfa-pre-aprovadosDigital',
+                title: 'Alfa D. Pre aprobados empelados',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local-digital/empelados-pre-aprobados-center-digital-alfa'
+              },
               // {
               //   id: 'ifisPreaprobadosDigital',
               //   title: 'D. IFIS Preaprobados',
