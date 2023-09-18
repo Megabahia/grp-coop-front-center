@@ -397,11 +397,11 @@ export const menu: CoreMenu[] = [
                 url: 'central/center/solicitudes-creditos-automotriz-digital-local/alfa-center-digital'
               },
             ]
-          },
+          }
         ]
       },
       {
-        id: 'solicitudesCreditosLocal',
+        id: 'solicitudesCreditosLocalDigital',
         title: 'Visado D. de documentos preliminar',
         // translate: 'MENU.HOME',
         // role: [Role.BigPuntos],
@@ -480,46 +480,30 @@ export const menu: CoreMenu[] = [
               // },
             ]
           },
-          // {
-          //   id: 'lineasCreditoDigital',
-          //   title: 'D. Líneas de crédito',
-          //   type: 'collapsible',
-          //   icon: 'credit-card',
-          //   children: [
-          //     {
-          //       id: 'microcreditpreaprobadoDigital',
-          //       title: 'D. PYMES pre-aprobados ',
-          //       // translate: 'MENU.APPS.EMAIL',
-          //       type: 'item',
-          //       icon: 'circle',
-          //       url: 'central/center/solicitudes-creditos-local-digital/microcreditpreaprobado-center-digital'
-          //     },
-          //     {
-          //       id: 'microcreditsolicitudDigital',
-          //       title: 'D. PYMES Normales ',
-          //       // translate: 'MENU.APPS.EMAIL',
-          //       type: 'item',
-          //       icon: 'circle',
-          //       url: 'central/center/solicitudes-creditos-local-digital/microcreditsolicitud-center-digital'
-          //     },
-          //     {
-          //       id: 'pymesIfisDigital',
-          //       title: 'D. Pymes Ifis',
-          //       type: 'collapsible',
-          //       icon: 'credit-card',
-          //       children: [
-          //         {
-          //           id: 'microcreditpreaprobadoDigital',
-          //           title: 'D. PYMES pre-aprobados ',
-          //           // translate: 'MENU.APPS.EMAIL',
-          //           type: 'item',
-          //           icon: 'circle',
-          //           url: 'central/center/solicitudes-creditos-local-digital/ifis/microcreditpreaprobado-center-digital'
-          //         },
-          //       ]
-          //     }
-          //   ]
-          // },
+          {
+            id: 'lineasCreditoDigital',
+            title: 'D. Líneas de crédito',
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'microcreditpreaprobadoDigital',
+                title: 'D. PYMES pre-aprobados ',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local-digital/microcreditpreaprobado-center-digital'
+              },
+              {
+                id: 'microcreditsolicitudDigital',
+                title: 'D. PYMES Normales ',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-local-digital/microcreditsolicitud-center-digital'
+              },
+            ]
+          },
         ]
       },
       {
@@ -803,7 +787,6 @@ export const menu: CoreMenu[] = [
           }
         ]
       },
-
       {
         id: 'solicitudesCreditosDigital',
         title: 'Solicitudes D. de créditos',
@@ -852,78 +835,34 @@ export const menu: CoreMenu[] = [
                 icon: 'circle',
                 url: 'central/center/solicitudes-creditos-digital/empelados-pre-aprobados-digital'
               },
-              // {
-              //   id: 'creditoComsumoIFI-digital',
-              //   title: '--D. IFIS Preaprobados',
-              //   // translate: 'MENU.HOME',
-              //   // role: [Role.BigPuntos],
-              //   type: 'collapsible',
-              //   icon: 'credit-card',
-              //   children: [
-              //     {
-              //       id: 'preaprobado-negociosPropiosIFI-digital',
-              //       title: 'D. Negocios propios',
-              //       // translate: 'MENU.APPS.EMAIL',
-              //       type: 'item',
-              //       icon: 'circle',
-              //       url: 'central/center/solicitudes-creditos-digital/ifis/negocios-propios-pre-aprobados-digital'
-              //     },
-              //     {
-              //       id: 'preaprobado-empleadosIFI',
-              //       title: 'D. Empleados',
-              //       // translate: 'MENU.APPS.EMAIL',
-              //       type: 'item',
-              //       icon: 'circle',
-              //       url: 'central/center/solicitudes-creditos-digital/ifis/empelados-pre-aprobados-digital'
-              //     },
-              //   ]
-              // },
             ]
           },
-          // {
-          //   id: 'lineasCredito',
-          //   title: 'D. Líneas de crédito',
-          //   // translate: 'MENU.HOME',
-          //   // role: [Role.BigPuntos],
-          //   type: 'collapsible',
-          //   icon: 'credit-card',
-          //   children: [
-          //     {
-          //       id: 'microcreditPreAprovado',
-          //       title: 'D. PYMES pre-aprobados ',
-          //       // translate: 'MENU.APPS.EMAIL',
-          //       type: 'item',
-          //       icon: 'circle',
-          //       url: 'central/center/solicitudes-creditos-digital/microcreditPreAprovado-digital'
-          //     },
-          //     {
-          //       id: 'microcreditNormales',
-          //       title: 'D. PYMES Normales ',
-          //       // translate: 'MENU.APPS.EMAIL',
-          //       type: 'item',
-          //       icon: 'circle',
-          //       url: 'central/center/solicitudes-creditos-digital/microcreditNormales-digital'
-          //     },
-          //     {
-          //       id: 'microcreditNormalesIFI',
-          //       title: 'D. Pymes Ifis',
-          //       // translate: 'MENU.HOME',
-          //       // role: [Role.BigPuntos],
-          //       type: 'collapsible',
-          //       icon: 'credit-card',
-          //       children: [
-          //         {
-          //           id: 'preaprobado-negociosPropiosIFI',
-          //           title: 'D. PYMES IFIs',
-          //           // translate: 'MENU.APPS.EMAIL',
-          //           type: 'item',
-          //           icon: 'circle',
-          //           url: 'central/center/solicitudes-creditos-digital/ifis/microcreditPreAprovado-digital'
-          //         },
-          //       ]
-          //     }
-          //   ]
-          // },
+          {
+            id: 'lineasCredito',
+            title: 'D. Líneas de crédito',
+            // translate: 'MENU.HOME',
+            // role: [Role.BigPuntos],
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'microcreditPreAprovado',
+                title: '----D. PYMES pre-aprobados ',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-digital/microcreditPreAprovado-digital'
+              },
+              {
+                id: 'microcreditNormales',
+                title: 'D. PYMES Normales ',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-digital/microcreditNormales-digital'
+              },
+            ]
+          },
           {
             id: 'creditoAlfa-digital',
             title: 'D. Créditos Alfa',
@@ -1005,7 +944,6 @@ export const menu: CoreMenu[] = [
           },
         ]
       },
-
       {
         id: 'consumoCreditos',
         title: 'Solicitudes de Pago a proveedores',
