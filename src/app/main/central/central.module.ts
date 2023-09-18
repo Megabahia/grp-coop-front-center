@@ -57,7 +57,9 @@ import {EmpleadosComponent as EmpleadosCorp} from './vistas/corp/empleados/emple
 import {
     SolicitudPagoCasasComercialesComponent
 } from './vistas/center/solicitud-pago-casas-comerciales/solicitud-pago-casas-comerciales.component';
-import {UploadLineasCreditosComponent} from './vistas/corp/cargarLineasCreditos/vistas/upload/upload-lineas-creditos.component';
+import {
+    UploadLineasCreditosComponent
+} from './vistas/corp/cargarLineasCreditos/vistas/upload/upload-lineas-creditos.component';
 import {ViewFileComponent} from './vistas/corp/cargarLineasCreditos/vistas/view-file/view-file.component';
 import {
     IfisEmpleadosPreaprovaodsComponent
@@ -201,6 +203,9 @@ import {
     AlfaPreaprovadosCenterDigitalComponent
 } from './vistas/center/solicitudes-creditos-local-digital/alfa-preaprovados-digital/alfa-preaprovados-center-digital.component';
 import {
+    UploadAutomotrizDigitalComponent
+} from './vistas/corp/cargarCreditosAutomotrizDigital/vistas/upload/upload-automotriz-digital.component';
+import {
     UploadLineasCreditosDigitalComponent
 } from './vistas/corp/cargarLineasCreditosDigital/vistas/upload/upload-lineas-creditos-digital.component';
 import {ViewFileDigitalComponent} from './vistas/corp/cargarLineasCreditosDigital/vistas/view-file/view-file-digital.component';
@@ -245,6 +250,9 @@ const routes = [
             },
             {
                 path: 'cargarCreditosAutomotriz', component: UploadAutomotrizComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'cargarCreditosAutomotrizDigital', component: UploadAutomotrizDigitalComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'cargarCreditosNegocios', component: UploadLineasCreditosComponent, canActivate: [AuthGuard]
@@ -401,6 +409,13 @@ const routes = [
                         canActivate: [AuthGuard]
                     },
                 ]
+            },
+            // fin visado solicitud de créditos digitales
+            // visado solicitud de créditos automotriz digitales
+            {
+                path: 'solicitudes-creditos-automotriz-digital-local',
+                loadChildren: () =>
+                  import('./vistas/center/solicitudes-creditos-automotriz-digitales-local/solicitudes-creditos-automotriz-digitales-local.module').then((m) => m.SolicitudesCreditosAutomotrizDigitalesLocalModule)
             },
             // fin visado solicitud de créditos digitales
 
@@ -607,6 +622,11 @@ const routes = [
                 ]
             },
             {
+                path: 'solicitudes-creditos-automotriz-digital-revision',
+                loadChildren: () =>
+                  import('./vistas/center/solicitudes-creditos-automotriz-digital/solicitudes-creditos-automotriz-digital.module').then((m) => m.SolicitudesCreditosAutomotrizDigitalModule)
+            },
+            {
                 path: 'solicitud-pago-proveedores', component: SolicitudesPagoProveedoresComponent, canActivate: [AuthGuard]
             },
             {
@@ -646,6 +666,7 @@ const routes = [
         // SolicitudesCreditosComponent,
         PublicacionesListar,
         UploadComponent,
+        UploadAutomotrizDigitalComponent,
         UploadDigitalesComponent,
         ProductosBienvenidaListar,
         ProductosMensajeListar,
@@ -728,7 +749,8 @@ const routes = [
         UploadAutomotrizComponent,
         // microcreditos digitales
         UploadLineasCreditosDigitalComponent,
-        ViewFileDigitalComponent
+        ViewFileDigitalComponent,
+        UploadAutomotrizComponent,
 
     ],
     imports: [

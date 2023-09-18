@@ -83,6 +83,15 @@ export const menu: CoreMenu[] = [
         url: 'central/corp/cargarCreditosdeConsumo',
       },
       {
+        id: 'creditosEmpleados',
+        title: 'Cargar C.D. Automotriz',
+        // translate: 'MENU.HOME',
+        // role: [Role.SuperMonedas],
+        type: 'item',
+        icon: 'dollar-sign',
+        url: 'central/corp/cargarCreditosAutomotrizDigital',
+      },
+      {
         id: 'creditosDigitales',
         title: 'Cargar Créditos Digitales',
         // translate: 'MENU.HOME',
@@ -329,6 +338,64 @@ export const menu: CoreMenu[] = [
                   },
                 ]
               }
+            ]
+          },
+        ]
+      },
+      {
+        id: 'solicitudesCreditosAutomotrizDigitalLocal',
+        title: 'Visado D. Automotriz Digital',
+        // translate: 'MENU.HOME',
+        // role: [Role.BigPuntos],
+        type: 'collapsible',
+        icon: 'credit-card',
+        children: [
+          {
+            id: 'creditoAutomotrizDigitalLocal',
+            title: 'Créditos de consumo',
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'empleadosLocal',
+                title: 'Créditos empleados',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-local/empleados-center-digital'
+              },
+              {
+                id: 'negocios',
+                title: 'Créditos negocios',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-local/negocios-propio-center-digital'
+              },
+              {
+                id: 'propios-pre-aprovados',
+                title: 'Pre aprobados negocios propios',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-local/negocios-propios-pre-aprobados-center-digital'
+              },
+              {
+                id: 'empelados-pre-aprovados',
+                title: 'Pre aprobados empelados',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-local/empelados-pre-aprobados-center-digital'
+              },
+              {
+                id: 'alfa-automotriz-digital',
+                title: 'Alfa',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-local/alfa-center-digital'
+              },
             ]
           },
         ]
@@ -875,6 +942,67 @@ export const menu: CoreMenu[] = [
               },
             ]
           }
+        ]
+      },
+      // Revision solicitudes creditos automotriz
+      {
+        id: 'solicitudesCreditosAutomotrizDigital',
+        title: 'Solicitudes C. Automotriz Digital',
+        // translate: 'MENU.HOME',
+        // role: [Role.BigPuntos],
+        type: 'collapsible',
+        icon: 'credit-card',
+        children: [
+          {
+            id: 'creditoComsumo',
+            title: 'Créditos de consumo',
+            // translate: 'MENU.HOME',
+            // role: [Role.BigPuntos],
+            type: 'collapsible',
+            icon: 'credit-card',
+            children: [
+              {
+                id: 'empleados',
+                title: 'Créditos empleados',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-revision/empleados-center-digital'
+              },
+              {
+                id: 'negocios',
+                title: 'Créditos negocios',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-revision/negocios-propio-center-digital'
+              },
+              {
+                id: 'propios-pre-aprovados',
+                title: 'Pre aprobados negocios propios',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-revision/negocios-propios-pre-aprobados-center-digital'
+              },
+              {
+                id: 'empelados-pre-aprovados',
+                title: 'Pre aprobados empelados',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-revision/empelados-pre-aprobados-center-digital'
+              },
+              {
+                id: 'alfa-center-preaprovados',
+                title: 'Alfa',
+                // translate: 'MENU.APPS.EMAIL',
+                type: 'item',
+                icon: 'circle',
+                url: 'central/center/solicitudes-creditos-automotriz-digital-revision/alfa-center-digital'
+              },
+            ]
+          },
         ]
       },
 
