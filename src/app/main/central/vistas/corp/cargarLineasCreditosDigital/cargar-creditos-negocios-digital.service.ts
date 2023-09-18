@@ -31,7 +31,7 @@ export class CargarCreditosNegociosDigitalService {
     }
 
     subirArchivosPreAprobados(id) {
-        return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoArchivos/upload/creditos/preaprobados/negocios/${id}`, {});
+        return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoArchivos/upload/creditos/preaprobadosLineasCreditosDigitales/empleados/${id}`, {});
     }
 
     verDatosArchivosPreAprobados(id: number) {
