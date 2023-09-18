@@ -102,6 +102,15 @@ export const menu: CoreMenu[] = [
         url: 'central/corp/cargarCreditosNegocios',
       },
       {
+        id: 'creditosEmpleados',
+        title: 'Cargar Líneas D. de Crédito',
+        // translate: 'MENU.HOME',
+        // role: [Role.SuperMonedas],
+        type: 'item',
+        icon: 'dollar-sign',
+        url: 'central/corp/cargarCreditosNegociosDigitales',
+      },
+      {
         id: 'recargarLineasCredito',
         title: 'Recargar Cupo de Líneas de Crédito',
         // translate: 'MENU.HOME',

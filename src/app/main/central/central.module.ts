@@ -57,7 +57,7 @@ import {EmpleadosComponent as EmpleadosCorp} from './vistas/corp/empleados/emple
 import {
     SolicitudPagoCasasComercialesComponent
 } from './vistas/center/solicitud-pago-casas-comerciales/solicitud-pago-casas-comerciales.component';
-import {UploadLineasCreditos} from './vistas/corp/cargarLineasCreditos/vistas/upload/upload-lineas-creditos.component';
+import {UploadLineasCreditosComponent} from './vistas/corp/cargarLineasCreditos/vistas/upload/upload-lineas-creditos.component';
 import {ViewFileComponent} from './vistas/corp/cargarLineasCreditos/vistas/view-file/view-file.component';
 import {
     IfisEmpleadosPreaprovaodsComponent
@@ -200,6 +200,10 @@ import {UploadDigitalesComponent} from './vistas/corp/cargarCreditosDigitales/vi
 import {
     AlfaPreaprovadosCenterDigitalComponent
 } from './vistas/center/solicitudes-creditos-local-digital/alfa-preaprovados-digital/alfa-preaprovados-center-digital.component';
+import {
+    UploadLineasCreditosDigitalComponent
+} from './vistas/corp/cargarLineasCreditosDigital/vistas/upload/upload-lineas-creditos-digital.component';
+import {ViewFileDigitalComponent} from './vistas/corp/cargarLineasCreditosDigital/vistas/view-file/view-file-digital.component';
 
 
 const routes = [
@@ -243,7 +247,10 @@ const routes = [
                 path: 'cargarCreditosAutomotriz', component: UploadAutomotrizComponent, canActivate: [AuthGuard]
             },
             {
-                path: 'cargarCreditosNegocios', component: UploadLineasCreditos, canActivate: [AuthGuard]
+                path: 'cargarCreditosNegocios', component: UploadLineasCreditosComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'cargarCreditosNegociosDigitales', component: UploadLineasCreditosDigitalComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'recargarLineasCreditos', component: RecargarLineasCreditos, canActivate: [AuthGuard]
@@ -658,7 +665,7 @@ const routes = [
         SolicitudesPagoCasasComercialComponent,
         EmpleadosCorp,
         SolicitudPagoCasasComercialesComponent,
-        UploadLineasCreditos,
+        UploadLineasCreditosComponent,
         ViewFileComponent,
         IfisEmpleadosPreaprovaodsComponent,
         IfisNegocioPropioPreaprovaodsComponent,
@@ -718,7 +725,11 @@ const routes = [
         AlfaAutomotrizComponent,
         SolicitudesCreditosAutomotrizComponent,
         //
-        UploadAutomotrizComponent
+        UploadAutomotrizComponent,
+        // microcreditos digitales
+        UploadLineasCreditosDigitalComponent,
+        ViewFileDigitalComponent
+
     ],
     imports: [
         CoreCommonModule,
