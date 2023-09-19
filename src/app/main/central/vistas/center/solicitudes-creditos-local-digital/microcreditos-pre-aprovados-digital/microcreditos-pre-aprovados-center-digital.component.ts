@@ -126,8 +126,8 @@ export class MicrocreditosPreAprovadosCenterDigitalComponent implements OnInit, 
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Pymes-PreAprobado',
-            cargarOrigen: 'BIGPUNTOS',
+            tipoCredito: 'Lineas Credito Digital Pymes-PreAprobado',
+            cargarOrigen: 'IFIS',
             alcance: 'LOCAL',
         }).subscribe(info => {
             this.collectionSize = info.cont;

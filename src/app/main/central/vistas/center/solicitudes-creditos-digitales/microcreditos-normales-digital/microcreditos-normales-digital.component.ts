@@ -201,9 +201,9 @@ export class MicrocreditosNormalesDigitalComponent implements OnInit, AfterViewI
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Pymes-Normales',
-          cargarOrigen: 'BIGPUNTOS',
-            alcance: ['LOCAL', 'OMNIGLOBAL'],
+            tipoCredito: 'Lineas Credito Digital Pymes-Normales',
+          cargarOrigen: 'IFIS',
+            alcance: ['LOCAL'],
             enviado: 1,
         }).subscribe(info => {
             this.collectionSize = info.cont;

@@ -5,16 +5,16 @@ import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as XLSX from 'xlsx-js-style';
 import moment from 'moment';
-import {CargarCreditosNegociosService} from '../../cargar-creditos-negocios.service';
+import {CargarCreditosNegociosDigitalService} from '../../cargar-creditos-negocios-digital.service';
 
 type AOA = any[][];
 
 @Component({
     selector: 'app-upload-lineas-creditos',
-    templateUrl: './upload-lineas-creditos.component.html',
-    styleUrls: ['./upload-lineas-creditos.component.scss']
+    templateUrl: './upload-lineas-creditos-digital.component.html',
+    styleUrls: ['./upload-lineas-creditos-digital.component.scss']
 })
-export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
+export class UploadLineasCreditosDigitalComponent implements OnInit, OnDestroy {
     @ViewChild('mensajeModal') mensajeModal;
     @ViewChild('confirmarModal') confirmarModal;
     @ViewChild(NgbPagination) paginator: NgbPagination;
@@ -48,7 +48,7 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
     public idEmpresa = '';
 
     constructor(
-        private _cargarCreditosNegocios: CargarCreditosNegociosService,
+        private _cargarCreditosNegocios: CargarCreditosNegociosDigitalService,
         private _coreMenuService: CoreMenuService,
         private _formBuilder: FormBuilder,
         private modalService: NgbModal,
@@ -106,7 +106,7 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
             user_id: '',
             campania: '',
             empresa_comercial: this.empresa_comercial,
-            tipoCredito: 'Negocio'
+            tipoCredito: 'Lineas Credito Digital'
         }).subscribe((info) => {
                 this.listaArchivosPreAprobados = info.info;
             },
@@ -186,7 +186,7 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
         this.nuevoArchivo.append('usuarioCargo', this.usuario.persona.nombres);
         this.nuevoArchivo.delete('user_id');
         this.nuevoArchivo.append('user_id', this.usuario.id);
-        this.nuevoArchivo.append('tipoCredito', 'Negocio');
+        this.nuevoArchivo.append('tipoCredito', 'Lineas Credito Digital');
         this.nuevoArchivo.append('empresa_financiera', this.idEmpresa);
         /*this.nuevoArchivo.delete('empresa_comercial');
         this.nuevoArchivo.append('empresa_comercial', this.empresaIfi._id);*/

@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-revision-documentos-digital',
-  templateUrl: './revision-documentos-digital.component.html',
-  styleUrls: ['./revision-documentos-digital.component.scss']
+  selector: 'app-revision-documentos-automotriz-digital',
+  templateUrl: './revision-automotriz-digital-documentos.component.html',
+  styleUrls: ['./revision-automotriz-digital-documentos.component.scss']
 })
-export class RevisionDocumentosDigitalComponent implements OnInit {
+export class RevisionAutomotrizDigitalDocumentosComponent implements OnInit {
 
   @Input() checks: string;
   @Output() pantalla = new EventEmitter<number>();
@@ -14,7 +14,6 @@ export class RevisionDocumentosDigitalComponent implements OnInit {
 
   constructor() {
     this.completado = false;
-    console.log('cjesks', this.checks)
   }
 
   ngOnInit(): void {
