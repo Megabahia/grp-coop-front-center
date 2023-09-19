@@ -98,7 +98,7 @@ export class NegocioPropioCenterDigitalComponent implements OnInit, AfterViewIni
             page_size: this.page_size,
             page: this.page - 1,
             tipoCredito: 'Credito Consumo Negocio propio',
-            cargarOrigen: 'BIGPUNTOS',
+            cargarOrigen: 'IFIS',
             alcance: 'LOCAL',
         }).subscribe(info => {
             this.collectionSize = info.cont;
