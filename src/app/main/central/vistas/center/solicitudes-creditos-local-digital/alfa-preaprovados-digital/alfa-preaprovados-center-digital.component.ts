@@ -96,7 +96,7 @@ export class AlfaPreaprovadosCenterDigitalComponent implements OnInit, AfterView
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Digital Alfa',
+            tipoCredito: 'Credito Consumo Digital Digital Alfa',
             cargarOrigen: 'IFIS',
             alcance: 'LOCAL',
             enviado: 1,

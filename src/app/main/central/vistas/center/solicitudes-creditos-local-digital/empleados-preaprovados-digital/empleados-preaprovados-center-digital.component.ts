@@ -96,7 +96,7 @@ export class EmpleadosPreaprovadosCenterDigitalComponent implements OnInit, Afte
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Empleado-PreAprobado',
+            tipoCredito: 'Credito Consumo Digital Empleado-PreAprobado',
             cargarOrigen: 'IFIS',
             alcance: 'LOCAL',
         }).subscribe(info => {
