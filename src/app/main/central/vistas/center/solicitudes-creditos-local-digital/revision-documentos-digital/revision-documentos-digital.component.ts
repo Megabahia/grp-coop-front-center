@@ -14,6 +14,7 @@ export class RevisionDocumentosDigitalComponent implements OnInit {
 
   constructor() {
     this.completado = false;
+    console.log('cjesks', this.checks)
   }
 
   ngOnInit(): void {

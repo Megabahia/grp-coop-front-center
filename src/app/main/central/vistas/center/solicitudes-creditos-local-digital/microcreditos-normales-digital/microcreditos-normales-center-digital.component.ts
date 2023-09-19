@@ -174,8 +174,8 @@ export class MicrocreditosNormalesCenterDigitalComponent implements OnInit, Afte
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Pymes-Normales',
-            cargarOrigen: 'BIGPUNTOS',
+            tipoCredito: 'Lineas Credito Digital Pymes-Normales',
+            cargarOrigen: 'IFIS',
             alcance: 'LOCAL',
         }).subscribe(info => {
             console.log('info', info);

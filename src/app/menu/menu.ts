@@ -847,7 +847,7 @@ export const menu: CoreMenu[] = [
             children: [
               {
                 id: 'microcreditPreAprovado',
-                title: '----D. PYMES pre-aprobados ',
+                title: 'D. PYMES pre-aprobados ',
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
