@@ -1,24 +1,24 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CoreMenuService} from '@core/components/core-menu/core-menu.service';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
+import {CargarCreditosAutomotrizDigitalService} from '../../cargar-creditos-automotriz-digital.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as XLSX from 'xlsx-js-style';
 import moment from 'moment';
-import {CargarCreditosNegociosService} from '../../cargar-creditos-negocios.service';
 
 type AOA = any[][];
 
 @Component({
-    selector: 'app-upload-lineas-creditos',
-    templateUrl: './upload-lineas-creditos.component.html',
-    styleUrls: ['./upload-lineas-creditos.component.scss']
+    selector: 'app-upload-automotriz-digital',
+    templateUrl: './upload-automotriz-digital.component.html',
+    styleUrls: ['./upload-automotriz-digital.component.scss']
 })
-export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
+export class UploadAutomotrizDigitalComponent implements OnInit {
     @ViewChild('mensajeModal') mensajeModal;
     @ViewChild('confirmarModal') confirmarModal;
     @ViewChild(NgbPagination) paginator: NgbPagination;
-
+    blockButton = false;
 
     // public
     public page = 1;
@@ -38,17 +38,18 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
     public empresaIfi;
     public empresaCorp;
 
-    public empresa_comercial = '';
+    public cantidadMonedas;
     public usuario;
     public cargandoUsuario = false;
     public listaArchivosPreAprobados = [];
-    public inicio;
-    public fin;
+    inicio;
+    fin;
+    public errores = false;
     public nombreEmpresa = '';
     public idEmpresa = '';
 
     constructor(
-        private _cargarCreditosNegocios: CargarCreditosNegociosService,
+        private _cargarCreditosEmpleados: CargarCreditosAutomotrizDigitalService,
         private _coreMenuService: CoreMenuService,
         private _formBuilder: FormBuilder,
         private modalService: NgbModal,
@@ -66,17 +67,15 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
         this.obtenerListaEmpresasIfis();
         this.obtenerListaArchivosPreAprobados();
         this.usuarioForm = this._formBuilder.group({
-                empresaIfis_id: ['', [Validators.required]],
-                empresaComercial_id: ['', [Validators.required]],
+                empresaIfis_id: [this.idEmpresa, [Validators.required]],
+                empresaComercial_id: ['', []],
             }
         );
     }
 
     obtenerListaEmpresasCorp() {
-        this._cargarCreditosNegocios.obtenerListaEmpresasCorps({}).subscribe((info) => {
+        this._cargarCreditosEmpleados.obtenerListaEmpresasCorps({}).subscribe((info) => {
                 this.listaEmpresasCorps = info.info;
-
-
             },
             (error) => {
 
@@ -84,11 +83,10 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
     }
 
     obtenerListaEmpresasIfis() {
-        this._cargarCreditosNegocios.obtenerListaEmpresasIfis({}).subscribe((info) => {
+        this._cargarCreditosEmpleados.obtenerListaEmpresasIfis({}).subscribe((info) => {
                 this.listaEmpresasIfis = info.info;
                 this.nombreEmpresa = info.info[0].nombreEmpresa;
                 this.idEmpresa = info.info[0]._id;
-
             },
             (error) => {
 
@@ -96,7 +94,7 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
     }
 
     obtenerListaArchivosPreAprobados() {
-        this._cargarCreditosNegocios.obtenerListaArchivosPreAprobados({
+        this._cargarCreditosEmpleados.obtenerListaArchivosPreAprobados({
             page_size: 10,
             page: 0,
             minimoCarga: this.inicio,
@@ -105,8 +103,7 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
             maximaCreacion: '',
             user_id: '',
             campania: '',
-            empresa_comercial: this.empresa_comercial,
-            tipoCredito: 'Negocio'
+            tipoCredito: 'Automotriz Digital'
         }).subscribe((info) => {
                 this.listaArchivosPreAprobados = info.info;
             },
@@ -147,21 +144,44 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
                 const ws: XLSX.WorkSheet = wb.Sheets[wsname];
                 /* save data */
                 data.push(<AOA>XLSX.utils.sheet_to_json(ws, {header: 1}));
-
-                // Recuep
-                // data[0].map((item, index) => {
-                //   if (index > 0) {
-                //     if(item[8] != this.empresaIfi.ruc){
-                //       this.mensaje = "No coicide el ruc de la empresa Ifi con la seleccionada."
-                //       this.abrirModal(this.mensajeModal);
-                //     }
-                //     console.log(item[8]);
-                //   }
-                // });
+                const cedulas = data[0].slice(1).map((item) => {
+                    return '' + item[8];
+                });
+                const duplicates = this.findDuplicateStringPositions(cedulas);
+                if (duplicates.size > 0) {
+                    this.mensaje = '';
+                    duplicates.forEach((positions, item) => {
+                        this.mensaje += `La cédula "${item}" se repite en las filas: ${positions.join(', ')}<br>`;
+                    });
+                    this.abrirModal(this.mensajeModal);
+                    this.blockButton = true;
+                } else {
+                    this.blockButton = false;
+                }
                 this.numeroRegistros = data[0].length - 1;
             };
             reader.readAsBinaryString(target.files[0]);
         }
+    }
+
+    findDuplicateStringPositions(array) {
+        const positions = new Map();
+        const duplicatePositions = new Map();
+
+        for (let i = 0; i < array.length; i++) {
+            const item = array[i];
+
+            if (positions.has(item)) {
+                if (!duplicatePositions.has(item)) {
+                    duplicatePositions.set(item, [positions.get(item)]);
+                }
+                duplicatePositions.get(item).push(i + 1);
+            } else {
+                positions.set(item, i + 1);
+            }
+        }
+
+        return duplicatePositions;
     }
 
     cargar() {
@@ -178,6 +198,8 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
     }
 
     guardar() {
+        this.nuevoArchivo.delete('estado');
+        this.nuevoArchivo.append('estado', 'Pendiente Carga');
         this.nuevoArchivo.delete('fechaCargaArchivo');
         this.nuevoArchivo.append('fechaCargaArchivo', String(moment().format('YYYY-MM-DD')));
         this.nuevoArchivo.delete('registrosCargados');
@@ -186,11 +208,11 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
         this.nuevoArchivo.append('usuarioCargo', this.usuario.persona.nombres);
         this.nuevoArchivo.delete('user_id');
         this.nuevoArchivo.append('user_id', this.usuario.id);
-        this.nuevoArchivo.append('tipoCredito', 'Negocio');
+        this.nuevoArchivo.append('tipoCredito', 'Automotriz Digital');
         this.nuevoArchivo.append('empresa_financiera', this.idEmpresa);
-        /*this.nuevoArchivo.delete('empresa_comercial');
-        this.nuevoArchivo.append('empresa_comercial', this.empresaIfi._id);*/
-        this._cargarCreditosNegocios.crearArchivoPreAprobados(
+        // this.nuevoArchivo.delete('empresa_comercial');
+        // this.nuevoArchivo.append('empresa_comercial', this.empresaCorp._id);
+        this._cargarCreditosEmpleados.crearArchivoPreAprobados(
             this.nuevoArchivo
         ).subscribe(info => {
             this.nombreArchivo = '';
@@ -201,7 +223,7 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
     }
 
     eliminarArchivoPreAprobado(id) {
-        this._cargarCreditosNegocios.eliminarArchivosPreAprobados(id).subscribe(info => {
+        this._cargarCreditosEmpleados.eliminarArchivosPreAprobados(id).subscribe(info => {
             this.obtenerListaArchivosPreAprobados();
             this.mensaje = 'Se elimino correctamente.';
             this.abrirModal(this.mensajeModal);
@@ -209,22 +231,18 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
     }
 
     subirArchivoPreAprobado(id) {
-        this._cargarCreditosNegocios.subirArchivosPreAprobados(id).subscribe(info => {
+        this._cargarCreditosEmpleados.subirArchivosPreAprobados(id).subscribe(info => {
             this.obtenerListaArchivosPreAprobados();
             this.mensaje = `${info.mensaje} <br> correctos: ${info.correctos} <br>
                         incorrectos: ${info.incorrectos} <br> errores: `;
             info.errores.map((item) => {
                 this.mensaje += item.error + '<br>';
             });
-            this.abrirModal(this.mensajeModal);
-        });
-    }
-
-    verDatos(archivoId: number) {
-        this._cargarCreditosNegocios.verDatosArchivosPreAprobados(archivoId).subscribe(info => {
-            console.log(info[0][0]);
-            // this.mensaje = `${info.mensaje} <br> correctos: ${info.correctos} <br>
-            //             incorrectos: ${info.incorrectos} <br> errores: `;
+            if (info.errores.length > 0) {
+                this.errores = true;
+                this.mensaje += 'Algunos de los empleados a los que intenta precalificar a un crédito no se encuentran registrados, ' +
+                    'por favor diríjase a la opción de menú CARGAR EMPLEADOS IFIS y registre a sus empleados para continuar.';
+            }
             this.abrirModal(this.mensajeModal);
         });
     }
@@ -234,7 +252,6 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
         downloadInicial.href = url;
         downloadInicial.target = '_blank';
         downloadInicial.download = 'downloadFile';
-
         document.body.appendChild(downloadInicial);
         downloadInicial.click();
         document.body.removeChild(downloadInicial);
@@ -249,6 +266,7 @@ export class UploadLineasCreditosComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
