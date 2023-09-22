@@ -99,7 +99,7 @@ export class EmpleadosAutomotrizComponent implements OnInit, AfterViewInit {
             page_size: this.page_size,
             page: this.page - 1,
             tipoCredito: 'Credito Automotriz Empleado',
-            cargarOrigen: 'BIGPUNTOS',
+            cargarOrigen: ['BIGPUNTOS', 'IFIS'],
             alcance: ['LOCAL', 'OMNIGLOBAL'],
             enviado: 1,
         }).subscribe(info => {
@@ -112,7 +112,7 @@ export class EmpleadosAutomotrizComponent implements OnInit, AfterViewInit {
         this.credito = credito;
         const user = credito.user;
         this.soltero = (user.estadoCivil === 'Solter@' || user.estadoCivil === 'Soltero' ||
-          user.estadoCivil === 'Divorciad@' || user.estadoCivil === 'Divorciado');
+            user.estadoCivil === 'Divorciad@' || user.estadoCivil === 'Divorciado');
         this.casaPropia = (user.tipoVivienda === 'Propia');
         this.modalOpenSLC(modal);
         this.userViewData = user;
@@ -129,8 +129,8 @@ export class EmpleadosAutomotrizComponent implements OnInit, AfterViewInit {
         this.actualizarCreditoFormData = new FormData();
         this.pantalla = 1;
         this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
-          credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
-          credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
+            credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
+            credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
         console.log(this.soltero, 'this.soltero');
         this.actualizarCreditoForm = this._formBuilder.group({
             id: [credito._id, [Validators.required]],
@@ -150,7 +150,7 @@ export class EmpleadosAutomotrizComponent implements OnInit, AfterViewInit {
             checkCalificacionBuroIfis: ['', [Validators.requiredTrue]],
             checkBuroRevisado: ['', [Validators.requiredTrue]],
             checkIdenficicacion: ['', [Validators.requiredTrue]],
-            checkRuc: ['', ],
+            checkRuc: ['',],
             checkFotoCarnet: ['', [Validators.requiredTrue]],
             checkPapeletaVotacion: ['', [Validators.requiredTrue]],
             checkIdentificacionConyuge: ['', this.soltero ? [] : [Validators.requiredTrue]],
@@ -235,20 +235,20 @@ export class EmpleadosAutomotrizComponent implements OnInit, AfterViewInit {
             this.checks.splice(3, 2);
         }
         this.cargando = true;
-        if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+        if (this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar') {
             this.actualizarCreditoFormData.delete('estado');
             this.actualizarCreditoFormData.append('estado', this.estadoCredito);
         }
         this.actualizarCreditoFormData.delete('motivo');
         this.actualizarCreditoFormData.append('motivo', this.motivo);
         this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
-              this.cerrarModal();
+                this.cerrarModal();
                 this.cargando = false;
-              if (estado === 'Negado' || estado === 'Por Completar') {
-                  this.pantalla = 0;
-              } else {
-                  this.pantalla = 3;
-              }
+                if (estado === 'Negado' || estado === 'Por Completar') {
+                    this.pantalla = 0;
+                } else {
+                    this.pantalla = 3;
+                }
                 this.obtenerSolicitudesCreditos();
                 this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
             },
@@ -302,9 +302,9 @@ export class EmpleadosAutomotrizComponent implements OnInit, AfterViewInit {
         this.motivo = '';
         this.estadoCredito = estadoCredito;
         this.modalService.open(modalMotivo, {
-              centered: true,
-              size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
-          }
+                centered: true,
+                size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+            }
         );
     }
 
