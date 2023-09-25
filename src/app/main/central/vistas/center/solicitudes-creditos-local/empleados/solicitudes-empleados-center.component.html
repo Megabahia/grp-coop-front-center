@@ -21,35 +21,32 @@
         <!-- users list start -->
         <section class="app-user-list">
 
-                    <!-- navbar -->
+            <!-- navbar -->
 
-                        <div class="row">
-                            <div class="col-5 m-1">
-                                <button class="form-control " (click)="consumirAWS()">
-                                    Actualizar
-                                </button>
-                            </div>
+            <div class="row">
+                <div class="col-5 m-1">
+                    <button class="form-control " (click)="consumirAWS()">
+                        Actualizar
+                    </button>
+                </div>
 
-                            <div  class="col-6  text-right"  >
-                                <label>Mostrar</label>
-                                <select class="form-control-sm" [(ngModel)]="page_size"
-                                        (change)="obtenerSolicitudesCreditos()">
-                                    <option value="4">4</option>
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                            </div>
+                <div class="col-6  text-right">
+                    <label>Mostrar</label>
+                    <select class="form-control-sm" [(ngModel)]="page_size"
+                            (change)="obtenerSolicitudesCreditos()">
+                        <option value="4">4</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
 
-                        </div>
-
-
+            </div>
 
 
-
-                        <!--/ collapse  -->
-                    <!--/ navbar -->
+            <!--/ collapse  -->
+            <!--/ navbar -->
 
 
             <!-- list section end -->
@@ -68,6 +65,7 @@
                         <th>Estado</th>
                         <th>Documentos</th>
                         <th>Solicitud de crédito</th>
+                        <th>Locales Comerciales</th>
                         <th>Observaciones</th>
                         <th>Acciones</th>
                     </tr>
@@ -95,6 +93,71 @@
                                     rippleEffect>
                                 Enlace
                             </button>
+                        </td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button
+                                    type="button"
+                                    (click)="viewEnterprise(modalSelect,credito._id)"
+                                    class="btn btn-outline-primary btn-block"
+                                    rippleEffect
+                            >
+                                Seleccionar {{ credito.empresasAplican != null ? '(' + credito.empresasAplican.length + ')' : '' }}
+                            </button>
+
+                            <!-- Modal -->
+                            <ng-template #modalSelect let-modal>
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel1">Empresas que aplican</h4>
+                                    <button type="button" class="close" (click)="modal.dismiss('Cross click')"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" tabindex="0" ngbAutofocus>
+                                    <label>Seleccione las empresas</label>
+
+                                    <div class="form-group">
+                                        <!-- Select Custom header footer template -->
+                                        <ng-select
+                                                [multiple]="true"
+                                                [items]="selectCustomHeaderFooter"
+                                                [(ngModel)]="selectCustomHeaderFooterSelected"
+                                                (change)="updateEnterprise(credito._id)"
+                                                placeholder="Seleccione empresas"
+                                                bindLabel="nombreEmpresa"
+                                                bindValue="ruc"
+                                        >
+                                            <ng-template ng-header-tmp>
+                                                <button
+                                                        (click)="customHeaderFooterSelectAll()"
+                                                        class="btn btn-sm btn-secondary mr-1"
+                                                        rippleEffect
+                                                >
+                                                    Seleccionar todo
+                                                </button>
+                                                <button (click)="customHeaderFooterUnselectAll()"
+                                                        class="btn btn-sm btn-secondary" rippleEffect>
+                                                    Deselecciona todo
+                                                </button>
+                                            </ng-template>
+                                            <ng-template ng-footer-tmp>
+                                                Recuento seleccionado: {{ selectCustomHeaderFooterSelected.length }}
+                                            </ng-template>
+                                        </ng-select>
+                                        <br/>
+
+                                        <!--/ Select Custom header footer template -->
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')"
+                                            rippleEffect>
+                                        Cerrar
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <!-- / Modal -->
                         </td>
                         <td>{{credito.observacion}}</td>
                         <td class="d-flex">
@@ -224,15 +287,15 @@
                 <input type="text" class="form-control"
                        value="{{userViewData.nivelInstruccion}}" disabled/>
             </div>
-<!--            <div class="form-group col-md-6">-->
-<!--                <label class="form-label">Número de cargas</label>-->
-<!--                <input-->
-<!--                        type="text"-->
-<!--                        class="form-control"-->
-<!--                        value="{{userViewData.numeroCargas}}"-->
-<!--                        disabled-->
-<!--                />-->
-<!--            </div>-->
+            <!--            <div class="form-group col-md-6">-->
+            <!--                <label class="form-label">Número de cargas</label>-->
+            <!--                <input-->
+            <!--                        type="text"-->
+            <!--                        class="form-control"-->
+            <!--                        value="{{userViewData.numeroCargas}}"-->
+            <!--                        disabled-->
+            <!--                />-->
+            <!--            </div>-->
         </div>
         <div class="row">
             <div class="form-group col-md-4">
@@ -334,11 +397,11 @@
                 <input type="text" class="form-control"
                        value="{{ocupacionSolicitante.cargoDesempeno}}" disabled/>
             </div>
-<!--            <div class="form-group col-md-4">-->
-<!--                <label class="form-label" for="vertical-modern-username">Sueldo que percibe</label>-->
-<!--                <input type="text" class="form-control"-->
-<!--                       value="{{ocupacionSolicitante.sueldoPercibe}}" disabled/>-->
-<!--            </div>-->
+            <!--            <div class="form-group col-md-4">-->
+            <!--                <label class="form-label" for="vertical-modern-username">Sueldo que percibe</label>-->
+            <!--                <input type="text" class="form-control"-->
+            <!--                       value="{{ocupacionSolicitante.sueldoPercibe}}" disabled/>-->
+            <!--            </div>-->
 
         </div>
         <div class="content-header">
@@ -445,7 +508,7 @@
                     articulos de revista en mi tiempo libre, etc.):</label>
 
                 <input value="{{userViewData.ingresosSolicitante.descripcion}}"
-                        type="text" class="form-control" disabled>
+                       type="text" class="form-control" disabled>
 
 
             </div>
@@ -572,37 +635,37 @@
                     </div>
                 </div>
             </div>
-<!--            <div class="form-group">-->
-<!--                <label>Copia de Ruc</label>-->
-<!--                <div class="custom-file">-->
-<!--                    <input type="file" class="custom-file-input" id="ruc"-->
-<!--                           formControlName="ruc"-->
-<!--                           (change)="subirDoc( $event, 'ruc')"-->
-<!--                           accept="image/jpeg,image/png,application/pdf"/>-->
-<!--                    <label class="custom-file-label"-->
-<!--                           id="ruclbl" for="ruc">{{actualizarCreditoForm.get('ruc').value}}</label>-->
-<!--                    <div *ngIf="submitted && controlsFrom.ruc.errors" class="invalid-feedback"-->
-<!--                         style="display: block;">-->
-<!--                        <div *ngIf="controlsFrom.ruc.errors.required">Ruc es requerido-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+            <!--            <div class="form-group">-->
+            <!--                <label>Copia de Ruc</label>-->
+            <!--                <div class="custom-file">-->
+            <!--                    <input type="file" class="custom-file-input" id="ruc"-->
+            <!--                           formControlName="ruc"-->
+            <!--                           (change)="subirDoc( $event, 'ruc')"-->
+            <!--                           accept="image/jpeg,image/png,application/pdf"/>-->
+            <!--                    <label class="custom-file-label"-->
+            <!--                           id="ruclbl" for="ruc">{{actualizarCreditoForm.get('ruc').value}}</label>-->
+            <!--                    <div *ngIf="submitted && controlsFrom.ruc.errors" class="invalid-feedback"-->
+            <!--                         style="display: block;">-->
+            <!--                        <div *ngIf="controlsFrom.ruc.errors.required">Ruc es requerido-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
 
-<!--                <div class="custom-file">-->
-<!--                    <label class="form-check-label mr-2" for="checkRuc">Valido</label>-->
-<!--                    <input class="form-check-input" type="checkbox" id="checkRuc"-->
-<!--                           formControlName="checkRuc"/>-->
-<!--                    <a *ngIf="credito.ruc" href="{{credito.ruc}}" target="_blank">-->
-<!--                        Ver-->
-<!--                    </a>-->
-<!--                    <div *ngIf="submitted && controlsFrom.checkRuc.errors" class="invalid-feedback"-->
-<!--                         style="display: block;">-->
-<!--                        <div *ngIf="controlsFrom.checkRuc.errors.required">Copia de Ruc es-->
-<!--                            requerido-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--                <div class="custom-file">-->
+            <!--                    <label class="form-check-label mr-2" for="checkRuc">Valido</label>-->
+            <!--                    <input class="form-check-input" type="checkbox" id="checkRuc"-->
+            <!--                           formControlName="checkRuc"/>-->
+            <!--                    <a *ngIf="credito.ruc" href="{{credito.ruc}}" target="_blank">-->
+            <!--                        Ver-->
+            <!--                    </a>-->
+            <!--                    <div *ngIf="submitted && controlsFrom.checkRuc.errors" class="invalid-feedback"-->
+            <!--                         style="display: block;">-->
+            <!--                        <div *ngIf="controlsFrom.checkRuc.errors.required">Copia de Ruc es-->
+            <!--                            requerido-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
             <div class="form-group">
                 <label for="fotoCarnet">Foto tamaño carnet</label>
                 <div class="custom-file">
