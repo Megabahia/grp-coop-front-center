@@ -32,8 +32,9 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
     public gastosSolicitante;
     public pantalla = 0;
     public credito;
-    public selectCustomHeaderFooter = [];
-    public selectCustomHeaderFooterSelected = [];
+    // Select Custom header footer template
+    public selectEmpresasCorp = [{name: 'Holaaa'}];
+    public selectEmpresasCorpSelected = [];
     public checks = [
         {'label': 'Identificacion', 'valor': false},
         {'label': 'Foto Carnet', 'valor': false},
@@ -63,26 +64,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         private _formBuilder: FormBuilder,
         private datePipe: DatePipe,
     ) {
-        this._solicitudCreditosService.obtenerEmpresasCorp({}).subscribe(info => {
-            this.selectCustomHeaderFooter = info.info;
-        });
-    }
-
-    async updateEnterprise(id) {
-        await this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
-            _id: id,
-            empresasAplican: this.selectCustomHeaderFooterSelected
-        }).subscribe(() => {
-        });
-        this.obtenerSolicitudesCreditos();
-    }
-
-    customHeaderFooterSelectAll() {
-        this.selectCustomHeaderFooterSelected = this.selectCustomHeaderFooter.map((x: any) => x.ruc);
-    }
-
-    customHeaderFooterUnselectAll() {
-        this.selectCustomHeaderFooterSelected = [];
+        this.obtenerEmpresasCorp();
     }
 
     ngOnInit(): void {
@@ -140,10 +122,6 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         this.referenciasSolicitante = user.referenciasSolicitante;
         this.ingresosSolicitante = user.ingresosSolicitante;
         this.gastosSolicitante = user.gastosSolicitante;
-    }
-    viewEnterprise(modal, _id) {
-        this.selectCustomHeaderFooterSelected = this.listaCreditos.find(item => item._id = _id).empresasAplican;
-        this.modalOpenSLC(modal);
     }
 
     verDocumentos(credito) {
@@ -279,5 +257,39 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
             this.obtenerSolicitudesCreditos();
         });
+    }
+
+    obtenerEmpresasCorp() {
+        this._solicitudCreditosService.obtenerEmpresasCorp({}).subscribe((info) => {
+            this.selectEmpresasCorp = info.info;
+        });
+    }
+
+    actualizarEmpresasAplican(credito_id) {
+        this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+            _id: credito_id, empresasAplican: JSON.stringify(this.selectEmpresasCorpSelected)
+        }).subscribe(next => {
+            this.obtenerSolicitudesCreditos();
+            this.cerrarModal();
+        });
+    }
+
+    customHeaderFooterSelectAll() {
+        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map(x => x.name);
+    }
+
+    customHeaderFooterUnselectAll() {
+        this.selectEmpresasCorpSelected = [];
+    }
+
+    modalSelectOpen(modalSelect, empresasAplican) {
+        this.selectEmpresasCorpSelected = empresasAplican;
+        this.modalService.open(modalSelect, {
+            windowClass: 'modal'
+        });
+    }
+
+    cerrarModal() {
+        this.modalService.dismissAll();
     }
 }

@@ -99,19 +99,18 @@
                             <!-- Button trigger modal -->
                             <button
                                     type="button"
-                                    (click)="viewEnterprise(modalSelect,credito._id)"
+                                    (click)="modalSelectOpen(modalSelect, credito.empresasAplican)"
                                     class="btn btn-outline-primary btn-block"
                                     rippleEffect
+                                    *ngIf="credito.estado !== 'Enviado'"
                             >
-                                Seleccionar {{ credito.empresasAplican != null ? '(' + credito.empresasAplican.length + ')' : '' }}
+                                Seleccionar {{ credito.empresasAplican != null ? credito?.empresasAplican.length : 0}}
                             </button>
-
                             <!-- Modal -->
                             <ng-template #modalSelect let-modal>
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel1">Empresas que aplican</h4>
-                                    <button type="button" class="close" (click)="modal.dismiss('Cross click')"
-                                            aria-label="Close">
+                                    <h4 class="modal-title" id="myModalLabel">Empresas que aplican</h4>
+                                    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -122,10 +121,9 @@
                                         <!-- Select Custom header footer template -->
                                         <ng-select
                                                 [multiple]="true"
-                                                [items]="selectCustomHeaderFooter"
-                                                [(ngModel)]="selectCustomHeaderFooterSelected"
-                                                (change)="updateEnterprise(credito._id)"
-                                                placeholder="Seleccione empresas"
+                                                [items]="selectEmpresasCorp"
+                                                [(ngModel)]="selectEmpresasCorpSelected"
+                                                placeholder="Seleccione las empresas"
                                                 bindLabel="nombreEmpresa"
                                                 bindValue="ruc"
                                         >
@@ -137,23 +135,19 @@
                                                 >
                                                     Seleccionar todo
                                                 </button>
-                                                <button (click)="customHeaderFooterUnselectAll()"
-                                                        class="btn btn-sm btn-secondary" rippleEffect>
+                                                <button (click)="customHeaderFooterUnselectAll()" class="btn btn-sm btn-secondary" rippleEffect>
                                                     Deselecciona todo
                                                 </button>
                                             </ng-template>
-                                            <ng-template ng-footer-tmp>
-                                                Recuento seleccionado: {{ selectCustomHeaderFooterSelected.length }}
-                                            </ng-template>
                                         </ng-select>
-                                        <br/>
-
                                         <!--/ Select Custom header footer template -->
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')"
-                                            rippleEffect>
+                                    <button type="button" class="btn btn-primary" (click)="actualizarEmpresasAplican(credito._id)"rippleEffect>
+                                        Guardar
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" (click)="modal.close('Accept click')" rippleEffect>
                                         Cerrar
                                     </button>
                                 </div>
