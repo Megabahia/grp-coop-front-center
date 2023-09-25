@@ -164,7 +164,7 @@
                             <!-- Button trigger modal -->
                             <button
                                     type="button"
-                                    (click)="viewEnterprise(modalFamiliares,credito._id)"
+                                    (click)="viewReferences(modalFamiliares,credito.user?.referenciasSolicitante)"
                                     class="btn btn-outline-primary btn-block"
                                     rippleEffect
                             >
@@ -184,13 +184,17 @@
                                     <ul>Referencias Familiares:
                                         <li *ngFor="let familiar of credito.user?.referenciasSolicitante; let i = index">
                                             <div class="custom-control custom-switch custom-success my-2">
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch15{{familiar?.referenciaSolicitante}}"
-                                                       checked/>
-                                                <label class="custom-control-label" for="customSwitch15{{familiar?.referenciaSolicitante}}">
+                                                <input type="checkbox"
+                                                       (change)="familiarIsValid($event, i)"
+                                                       class="custom-control-input"
+                                                       id="customSwitch15{{familiar?.referenciaSolicitante}}"
+                                                       [checked]="familiar.valido "/>
+                                                <label class="custom-control-label"
+                                                       for="customSwitch15{{familiar?.referenciaSolicitante}}">
                                                     <span class="switch-icon-left"><i data-feather="check"></i></span>
                                                     <span class="switch-icon-right"><i data-feather="x"></i></span>
                                                 </label>   Referencia
-                                                {{i+1}}: {{familiar?.referenciaSolicitante}}
+                                                {{i + 1}}: {{familiar?.referenciaSolicitante}}
 
                                             </div>
                                         </li>
@@ -201,6 +205,11 @@
 
                                 </div>
                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary mr-1"
+                                            (click)="guardarReferencias(credito)"
+                                            rippleEffect>
+                                        Guardar
+                                    </button>
                                     <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')"
                                             rippleEffect>
                                         Cerrar
