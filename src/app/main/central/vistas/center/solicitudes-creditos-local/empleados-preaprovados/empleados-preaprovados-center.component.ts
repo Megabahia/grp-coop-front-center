@@ -100,7 +100,7 @@ export class EmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewIn
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Empleado-PreAprobado',
+            tipoCredito: 'Credito Consumo Empleado-PreAprobado',
             cargarOrigen: 'BIGPUNTOS',
             alcance: 'LOCAL',
         }).subscribe(info => {

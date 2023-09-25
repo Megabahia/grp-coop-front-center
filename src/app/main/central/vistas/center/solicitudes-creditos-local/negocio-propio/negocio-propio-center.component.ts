@@ -101,7 +101,7 @@ export class NegocioPropioCenterComponent implements OnInit, AfterViewInit {
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Negocio propio',
+            tipoCredito: 'Credito Consumo Negocio propio',
             cargarOrigen: 'BIGPUNTOS',
             alcance: 'LOCAL',
         }).subscribe(info => {
