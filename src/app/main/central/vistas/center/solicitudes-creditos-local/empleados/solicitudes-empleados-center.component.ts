@@ -72,7 +72,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         await this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
             _id: id,
             empresasAplican: this.selectCustomHeaderFooterSelected
-        }).subscribe((info) => {
+        }).subscribe(() => {
         });
         this.obtenerSolicitudesCreditos();
     }
