@@ -98,7 +98,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Empleado',
+            tipoCredito: 'Credito Consumo Empleado',
             cargarOrigen: 'BIGPUNTOS',
             alcance: 'LOCAL',
         }).subscribe(info => {

@@ -97,7 +97,7 @@ export class NegocioPropioPreaprovadosCenterComponent implements OnInit, AfterVi
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Negocio-PreAprobado',
+            tipoCredito: 'Credito Consumo Negocio-PreAprobado',
             cargarOrigen: 'BIGPUNTOS',
             alcance: 'LOCAL',
         }).subscribe(info => {
