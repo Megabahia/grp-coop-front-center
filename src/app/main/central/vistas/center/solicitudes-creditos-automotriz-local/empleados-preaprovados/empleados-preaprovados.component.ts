@@ -1,18 +1,18 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {SolicitudesCreditosDigitalService} from '../solicitudes-creditos-digital.service';
-import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {SolicitudesCreditosService} from '../solicitudes-creditos.service';
+import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {Subject} from 'rxjs';
 
 @Component({
-    selector: 'app-empleados-center',
-    templateUrl: './solicitudes-empleados-center-digital.component.html',
-    styleUrls: ['./solicitudes-empleados-center-digital.component.scss'],
+    selector: 'app-empleados-preaprovados',
+    templateUrl: './empleados-preaprovados.component.html',
+    styleUrls: ['./empleados-preaprovados.component.scss'],
     providers: [DatePipe],
 })
-export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, AfterViewInit {
+export class EmpleadosPreaprovadosComponent implements OnInit, AfterViewInit {
 
     @ViewChild(NgbPagination) paginator: NgbPagination;
 
@@ -22,7 +22,6 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
     public collectionSize;
     private _unsubscribeAll: Subject<any>;
 
-
     // Variables
     public listaCreditos;
     public userViewData;
@@ -31,8 +30,6 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
     public ingresosSolicitante;
     public gastosSolicitante;
     public pantalla = 0;
-    public credito;
-
     public checks = [
         {'label': 'Identificacion', 'valor': false},
         {'label': 'Foto Carnet', 'valor': false},
@@ -53,10 +50,11 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
     public submitted = false;
     public cargando = false;
     public actualizarCreditoFormData;
+    private credito;
     public casaPropia = false;
 
     constructor(
-        private _solicitudCreditosService: SolicitudesCreditosDigitalService,
+        private _solicitudCreditosService: SolicitudesCreditosService,
         private modalService: NgbModal,
         private _coreSidebarService: CoreSidebarService,
         private _formBuilder: FormBuilder,
@@ -98,9 +96,8 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Digital Empleado',
-            cargarOrigen: 'IFIS',
-            alcance: 'LOCAL',
+            tipoCredito: 'Credito Automotriz Empleado-PreAprobado',
+            cargarOrigen: 'BIGPUNTOS'
         }).subscribe(info => {
             this.collectionSize = info.cont;
             this.listaCreditos = info.info;
@@ -129,16 +126,14 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
         this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
             credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
             credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
+        console.log(this.soltero, 'this.soltero');
         this.actualizarCreditoForm = this._formBuilder.group({
             id: [credito._id, [Validators.required]],
             identificacion: ['', credito.identificacion ? [] : [Validators.required]],
-            // ruc: ['', credito.identificacion ? [] : [Validators.required]],
             fotoCarnet: ['', credito.fotoCarnet ? [] : [Validators.required]],
             papeletaVotacion: ['', credito.papeletaVotacion ? [] : [Validators.required]],
             identificacionConyuge: ['', this.soltero ? credito?.identificacionConyuge : [Validators.required]],
             papeletaVotacionConyuge: ['', this.soltero ? [] : [Validators.required]],
-            // identificacionConyuge: ['', credito.identificacionConyuge ? [] : [Validators.required]],
-            // papeletaVotacionConyuge: ['', credito.papeletaVotacionConyuge ? [] : [Validators.required]],
             planillaLuzDomicilio: ['', credito.planillaLuzDomicilio ? [] : [Validators.required]],
             mecanizadoIess: ['', credito.mecanizadoIess ? [] : [Validators.required]],
             matriculaVehiculo: [''],
@@ -147,7 +142,6 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
             calificacionBuro: [credito.calificacionBuro, [Validators.required]],
             observacion: [credito.observacion, [Validators.required]],
             checkIdenficicacion: ['', [Validators.requiredTrue]],
-            // checkRuc: ['', [Validators.requiredTrue]],
             checkFotoCarnet: ['', [Validators.requiredTrue]],
             checkPapeletaVotacion: ['', [Validators.requiredTrue]],
             checkIdentificacionConyuge: ['', this.soltero ? [] : [Validators.requiredTrue]],
@@ -160,7 +154,7 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
             checkCalificacionBuro: ['', [Validators.requiredTrue]],
             checkObservacion: ['', [Validators.requiredTrue]],
         });
-        this.checks = credito.checks;
+        this.checks = typeof credito.checks === 'object' ? credito.checks : JSON.parse(credito.checks);
     }
 
     cambiarEstado($event) {
@@ -174,17 +168,15 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
     subirDoc(event, key) {
         if (event.target.files && event.target.files[0]) {
             const doc = event.target.files[0];
-            const x = document.getElementById(key + 'lbl');
-            x.innerHTML = '' + Date.now() + '_' + doc.name;
             this.actualizarCreditoFormData.delete(`${key}`);
             this.actualizarCreditoFormData.append(`${key}`, doc, Date.now() + '_' + doc.name);
-            // this.actualizarCreditoFormData.set(`${key}`, doc, Date.now() + '_' + doc.name);
         }
     }
 
     actualizarSolicitudCredito() {
         this.submitted = true;
         if (this.actualizarCreditoForm.invalid) {
+            console.log('this.actualizarCreditoForm', this.actualizarCreditoForm);
             return;
         }
         const {
@@ -226,6 +218,7 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
             {'label': 'Buro credito', 'valor': resto.checkBuroCredito},
             {'label': 'Calificacion buro', 'valor': resto.checkCalificacionBuro},
             {'label': 'Observación', 'valor': resto.checkObservacion},
+            {'label': 'Autorización y validación de información', 'valor': true},
         ];
         if (this.soltero) {
             this.checks.splice(3, 2);
@@ -252,6 +245,7 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
 
     consumirAWS() {
         this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
+            console.log(info);
             this.obtenerSolicitudesCreditos();
         });
     }

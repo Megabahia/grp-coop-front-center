@@ -1,18 +1,18 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {SolicitudesCreditosDigitalService} from '../solicitudes-creditos-digital.service';
+import {SolicitudesCreditosService} from '../solicitudes-creditos.service';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {Subject} from 'rxjs';
 
 @Component({
-    selector: 'app-empleados-center',
-    templateUrl: './solicitudes-empleados-center-digital.component.html',
-    styleUrls: ['./solicitudes-empleados-center-digital.component.scss'],
+    selector: 'app-empleados',
+    templateUrl: './empleados.component.html',
+    styleUrls: ['./empleados.component.scss'],
     providers: [DatePipe],
 })
-export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, AfterViewInit {
+export class EmpleadosComponent implements OnInit, AfterViewInit {
 
     @ViewChild(NgbPagination) paginator: NgbPagination;
 
@@ -56,7 +56,7 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
     public casaPropia = false;
 
     constructor(
-        private _solicitudCreditosService: SolicitudesCreditosDigitalService,
+        private _solicitudCreditosService: SolicitudesCreditosService,
         private modalService: NgbModal,
         private _coreSidebarService: CoreSidebarService,
         private _formBuilder: FormBuilder,
@@ -98,9 +98,8 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Digital Empleado',
-            cargarOrigen: 'IFIS',
-            alcance: 'LOCAL',
+            tipoCredito: 'Credito Automotriz Empleado',
+            cargarOrigen: 'BIGPUNTOS'
         }).subscribe(info => {
             this.collectionSize = info.cont;
             this.listaCreditos = info.info;
@@ -115,6 +114,7 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
         this.casaPropia = (user.tipoVivienda === 'Propia');
         this.modalOpenSLC(modal);
         this.userViewData = user;
+        console.log('user', user);
         this.ocupacionSolicitante = user.ocupacionSolicitante;
         this.referenciasSolicitante = user.referenciasSolicitante;
         this.ingresosSolicitante = user.ingresosSolicitante;
@@ -129,9 +129,10 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
         this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
             credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
             credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
+        console.log(this.soltero, 'this.soltero');
         this.actualizarCreditoForm = this._formBuilder.group({
             id: [credito._id, [Validators.required]],
-            identificacion: ['', credito.identificacion ? [] : [Validators.required]],
+            identificacion: ['', this.credito?.identificacion ? [] : (credito.identificacion ? [] : [Validators.required])],
             // ruc: ['', credito.identificacion ? [] : [Validators.required]],
             fotoCarnet: ['', credito.fotoCarnet ? [] : [Validators.required]],
             papeletaVotacion: ['', credito.papeletaVotacion ? [] : [Validators.required]],
@@ -185,6 +186,7 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
     actualizarSolicitudCredito() {
         this.submitted = true;
         if (this.actualizarCreditoForm.invalid) {
+            console.log('form', this.actualizarCreditoForm);
             return;
         }
         const {
@@ -226,6 +228,7 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
             {'label': 'Buro credito', 'valor': resto.checkBuroCredito},
             {'label': 'Calificacion buro', 'valor': resto.checkCalificacionBuro},
             {'label': 'Observación', 'valor': resto.checkObservacion},
+            {'label': 'Autorización y validación de información', 'valor': true},
         ];
         if (this.soltero) {
             this.checks.splice(3, 2);
@@ -252,6 +255,7 @@ export class SolicitudesEmpleadosCenterDigitalComponent implements OnInit, After
 
     consumirAWS() {
         this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
+            console.log(info);
             this.obtenerSolicitudesCreditos();
         });
     }

@@ -98,9 +98,9 @@ export class EmpleadosDigitalComponent implements OnInit, AfterViewInit {
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Empleado',
-            cargarOrigen: 'BIGPUNTOS',
-            alcance: ['LOCAL', 'OMNIGLOBAL'],
+            tipoCredito: 'Credito Consumo Digital Empleado',
+            cargarOrigen: 'IFIS',
+            alcance: ['LOCAL'],
             enviado: 1,
         }).subscribe(info => {
             this.collectionSize = info.cont;

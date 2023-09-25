@@ -99,7 +99,7 @@ public actualizarCreditoFormData;
     this._solicitudCreditosService.obtenerSolicitudesCreditos({
       page_size: this.page_size,
       page: this.page - 1,
-      tipoCredito: 'Credito Consumo Negocio-PreAprobado',
+      tipoCredito: 'Credito Consumo Digital Negocio-PreAprobado',
       cargarOrigen: 'IFIS',
       alcance: ['LOCAL'],
       enviado: 1,

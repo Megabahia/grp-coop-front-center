@@ -97,8 +97,8 @@ export class NegocioPropioCenterDigitalComponent implements OnInit, AfterViewIni
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Negocio propio',
-            cargarOrigen: 'BIGPUNTOS',
+            tipoCredito: 'Credito Consumo Digital Negocio propio',
+            cargarOrigen: 'IFIS',
             alcance: 'LOCAL',
         }).subscribe(info => {
             this.collectionSize = info.cont;

@@ -351,6 +351,11 @@ const routes = [
                         component: IfisMicrocreditosPreAprovadosCenterComponent,
                         canActivate: [AuthGuard]
                     },
+                    {
+                        path: 'automotriz-local',
+                        loadChildren: () =>
+                          import('./vistas/center/solicitudes-creditos-automotriz-local/solicitudes-creditos-automotriz.module').then((m) => m.SolicitudesCreditosAutomotrizModule)
+                    },
                 ]
             },
 
