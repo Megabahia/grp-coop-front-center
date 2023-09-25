@@ -153,8 +153,10 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
             user: {...credito.user, referenciasSolicitante: this.referenciasSolicitante}
         }).subscribe((info) => {
             console.log('actualizo');
+            this.obtenerSolicitudesCreditos();
+            this.cerrarModal();
         });
-        this.obtenerSolicitudesCreditos();
+
     }
 
     verDocumentos(credito) {
