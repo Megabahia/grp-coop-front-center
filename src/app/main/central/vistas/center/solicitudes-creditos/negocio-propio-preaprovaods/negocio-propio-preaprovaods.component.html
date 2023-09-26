@@ -8,7 +8,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">
+                            <li class="breadcrumb-item"><a class="text-primary" >
                                 Solicitud de crédito Negocio Propio
                             </a>
                             </li>
@@ -116,7 +116,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" tabindex="0" ngbAutofocus>
+                                <div class="modal-body" tabindex="0" >
                                     <label>Seleccione las empresas</label>
 
                                     <div class="form-group">
@@ -146,7 +146,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" (click)="actualizarEmpresasAplican(credito._id)"rippleEffect>
+                                    <button type="button" class="btn btn-primary" (click)="actualizarEmpresasAplican(credito._id)">
                                         Guardar
                                     </button>
                                     <button type="button" class="btn btn-secondary" (click)="modal.close('Accept click')" rippleEffect>
@@ -170,13 +170,13 @@
                             <!-- Modal -->
                             <ng-template #modalFamiliares let-modal>
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel1">Empresas que aplican</h4>
+                                    <h4 class="modal-title" id="modalFamiliares">Empresas que aplican</h4>
                                     <button type="button" class="close" (click)="modal.dismiss('Cross click')"
                                             aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" tabindex="0" ngbAutofocus>
+                                <div class="modal-body" tabindex="0" >
                                     <ul>Referencias Familiares:
                                         <li *ngFor="let familiar of credito.user?.referenciasSolicitante; let i = index">
                                             <div class="custom-control custom-switch custom-success my-2">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label class="form-label" for="vertical-modern-username">Fecha de creación de solicitud</label>
-                <input type="text" id="vertical-modern-username" class="form-control"
+                <input type="text" id="vertical-modern-username_2" class="form-control"
                        value="{{credito.created_at | date: 'yyyy-MM-dd'}}" disabled/>
             </div>
             <div class="form-group col-md-4">

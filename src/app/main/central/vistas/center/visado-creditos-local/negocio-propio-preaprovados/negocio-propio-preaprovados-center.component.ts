@@ -4,6 +4,7 @@ import {VisadoCreditosLocalService} from '../visado-creditos-local.service';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+
 @Component({
     selector: 'app-negocio-propio-preaprovados-center',
     templateUrl: './negocio-propio-preaprovados-center.component.html',
@@ -92,6 +93,7 @@ export class NegocioPropioPreaprovadosCenterComponent implements OnInit, AfterVi
             }
         );
     }
+
 
     obtenerSolicitudesCreditos() {
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
@@ -310,7 +312,7 @@ export class NegocioPropioPreaprovadosCenterComponent implements OnInit, AfterVi
     }
 
     customHeaderFooterSelectAll() {
-        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map(x => x.name);
+        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map((x: any) => x.ruc);
     }
 
     customHeaderFooterUnselectAll() {

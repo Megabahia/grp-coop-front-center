@@ -4,6 +4,7 @@ import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {VisadoCreditosLocalService} from '../visado-creditos-local.service';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
+
 @Component({
     selector: 'app-empleados-preaprovados-center',
     templateUrl: './empleados-preaprovados-center.component.html',
@@ -64,6 +65,7 @@ export class EmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewIn
 
     ngOnInit(): void {
     }
+
 
     ngAfterViewInit() {
         this.iniciarPaginador();
@@ -267,7 +269,7 @@ export class EmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewIn
     }
 
     customHeaderFooterSelectAll() {
-        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map(x => x.name);
+        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map((x: any) => x.ruc);
     }
 
     customHeaderFooterUnselectAll() {
@@ -284,6 +286,7 @@ export class EmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewIn
     cerrarModal() {
         this.modalService.dismissAll();
     }
+
     viewReferences(modal, referenciasSolicitante) {
         this.obtenerSolicitudesCreditos();
         this.referenciasSolicitante = referenciasSolicitante;

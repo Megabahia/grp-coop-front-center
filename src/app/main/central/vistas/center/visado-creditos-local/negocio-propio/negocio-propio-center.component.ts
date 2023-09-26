@@ -164,7 +164,7 @@ export class NegocioPropioCenterComponent implements OnInit, AfterViewInit {
         this.pantalla = 1;
         this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
             credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
-        credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
+            credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
         console.log(this.soltero, 'this.soltero');
         this.actualizarCreditoForm = this._formBuilder.group({
             id: [credito._id, [Validators.required]],
@@ -178,7 +178,7 @@ export class NegocioPropioCenterComponent implements OnInit, AfterViewInit {
             planillaLuzDomicilio: ['', credito.planillaLuzDomicilio ? [] : [Validators.required]],
             facturasVentas2meses: ['', [Validators.required]],
             facturasVentas2meses2: ['', [Validators.required]],
-            facturasVentasCertificado: ['', ],
+            facturasVentasCertificado: [''],
             matriculaVehiculo: [''],
             impuestoPredial: [''],
             buroCredito: ['', credito.buroCredito ? [] : [Validators.required]],
@@ -319,7 +319,7 @@ export class NegocioPropioCenterComponent implements OnInit, AfterViewInit {
     }
 
     customHeaderFooterSelectAll() {
-        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map(x => x.name);
+        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map((x: any) => x.ruc);
     }
 
     customHeaderFooterUnselectAll() {

@@ -8,7 +8,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">
+                            <li class="breadcrumb-item"><a class="text-primary" >
                                 Solicitud de crédito de Negocios Propios
                             </a>
                             </li>
@@ -117,7 +117,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" tabindex="0" ngbAutofocus>
+                                <div class="modal-body" tabindex="0" >
                                     <label>Seleccione las empresas</label>
 
                                     <div class="form-group">
@@ -147,7 +147,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" (click)="actualizarEmpresasAplican(credito._id)"rippleEffect>
+                                    <button type="button" class="btn btn-primary" (click)="actualizarEmpresasAplican(credito._id)">
                                         Guardar
                                     </button>
                                     <button type="button" class="btn btn-secondary" (click)="modal.close('Accept click')" rippleEffect>
@@ -171,13 +171,13 @@
                             <!-- Modal -->
                             <ng-template #modalFamiliares let-modal>
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel1">Empresas que aplican</h4>
+                                    <h4 class="modal-title" id="modalFamiliares">Empresas que aplican</h4>
                                     <button type="button" class="close" (click)="modal.dismiss('Cross click')"
                                             aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" tabindex="0" ngbAutofocus>
+                                <div class="modal-body" tabindex="0" >
                                     <ul>Referencias Familiares:
                                         <li *ngFor="let familiar of credito.user?.referenciasSolicitante; let i = index">
                                             <div class="custom-control custom-switch custom-success my-2">
@@ -335,17 +335,30 @@
                         disabled
                 />
             </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Estado civil</label>
+                <input
+                        type="text"
+                        value="{{userViewData.estadoCivil}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Edad</label>
+                <input
+                        type="text"
+                        value="{{userViewData.edad}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6">
                 <label class="form-label" for="vertical-modern-username">Nivel de instrucción</label>
                 <input type="text" class="form-control"
                        value="{{userViewData.nivelInstruccion}}" disabled/>
-            </div>
-            <div class="form-group col-md-6">
-                <label class="form-label" for="vertical-modern-username">Edad</label>
-                <input type="text" class="form-control"
-                       value="{{userViewData.edad}}" disabled/>
             </div>
         </div>
         <div class="row">
@@ -457,7 +470,7 @@
                 <input type="text" class="form-control"
                        value="{{ocupacionSolicitante.cargoDesempeno}}" disabled/>
             </div>
-            <div class="form-group col-md-4">
+            <div *ngIf="ocupacionSolicitante.sueldoPercibe" class="form-group col-md-4">
                 <label class="form-label" for="vertical-modern-username">Sueldo que percibe</label>
                 <input type="text" class="form-control"
                        value="{{ocupacionSolicitante.sueldoPercibe}}" disabled/>

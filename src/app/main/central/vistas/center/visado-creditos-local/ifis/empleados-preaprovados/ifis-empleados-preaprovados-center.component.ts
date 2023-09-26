@@ -62,6 +62,7 @@ export class IfisEmpleadosPreaprovadosCenterComponent implements OnInit, AfterVi
     ngOnInit(): void {
     }
 
+
     ngAfterViewInit() {
         this.iniciarPaginador();
         this.obtenerSolicitudesCreditos();
