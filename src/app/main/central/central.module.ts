@@ -209,6 +209,7 @@ import {
     UploadLineasCreditosDigitalComponent
 } from './vistas/corp/cargarLineasCreditosDigital/vistas/upload/upload-lineas-creditos-digital.component';
 import {ViewFileDigitalComponent} from './vistas/corp/cargarLineasCreditosDigital/vistas/view-file/view-file-digital.component';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 
 const routes = [
@@ -776,6 +777,7 @@ const routes = [
         FlatpickrModule.forRoot(),
         MatTreeModule,
         SweetAlert2Module,
+        NgSelectModule,
     ],
     exports: [
 

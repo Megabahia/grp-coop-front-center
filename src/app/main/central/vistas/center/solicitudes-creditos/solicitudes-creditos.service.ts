@@ -47,4 +47,7 @@ export class SolicitudesCreditosService {
           { nombre, tipo }
         );
     }
+    obtenerEmpresasCorp(datos) {
+        return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/list/comercial`, datos);
+    }
 }

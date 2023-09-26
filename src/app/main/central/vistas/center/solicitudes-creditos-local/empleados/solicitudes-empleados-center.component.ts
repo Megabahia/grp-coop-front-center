@@ -32,7 +32,9 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
     public gastosSolicitante;
     public pantalla = 0;
     public credito;
-
+    // Select Custom header footer template
+    public selectEmpresasCorp = [{name: 'Holaaa'}];
+    public selectEmpresasCorpSelected = [];
     public checks = [
         {'label': 'Identificacion', 'valor': false},
         {'label': 'Foto Carnet', 'valor': false},
@@ -62,6 +64,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         private _formBuilder: FormBuilder,
         private datePipe: DatePipe,
     ) {
+        this.obtenerEmpresasCorp();
     }
 
     ngOnInit(): void {
@@ -98,7 +101,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Empleado',
+            tipoCredito: 'Empleado',
             cargarOrigen: 'BIGPUNTOS',
             alcance: 'LOCAL',
         }).subscribe(info => {
@@ -120,6 +123,42 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         this.ingresosSolicitante = user.ingresosSolicitante;
         this.gastosSolicitante = user.gastosSolicitante;
     }
+
+
+    viewReferences(modal, referenciasSolicitante) {
+        this.obtenerSolicitudesCreditos();
+        this.referenciasSolicitante = referenciasSolicitante;
+        console.log('ahora tiene', this.referenciasSolicitante);
+
+        this.modalOpenSLC(modal);
+    }
+
+    familiarIsValid(event, index) {
+        const checkbox = event.target as HTMLInputElement;
+        if (checkbox.checked) {
+            console.log('El checkbox está seleccionado');
+            this.referenciasSolicitante[index].valido = true;
+        } else {
+            console.log('El checkbox no está seleccionado');
+            this.referenciasSolicitante[index].valido = false;
+
+            // Realiza aquí las acciones que desees cuando el checkbox se desmarca.
+        }
+    }
+
+    guardarReferencias(credito) {
+
+        this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+            _id: credito._id,
+            user: {...credito.user, referenciasSolicitante: this.referenciasSolicitante}
+        }).subscribe((info) => {
+            console.log('actualizo');
+            this.obtenerSolicitudesCreditos();
+            this.cerrarModal();
+        });
+
+    }
+
 
     verDocumentos(credito) {
         this.credito = credito;
@@ -254,5 +293,39 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
             this.obtenerSolicitudesCreditos();
         });
+    }
+
+    obtenerEmpresasCorp() {
+        this._solicitudCreditosService.obtenerEmpresasCorp({}).subscribe((info) => {
+            this.selectEmpresasCorp = info.info;
+        });
+    }
+
+    actualizarEmpresasAplican(credito_id) {
+        this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+            _id: credito_id, empresasAplican: JSON.stringify(this.selectEmpresasCorpSelected)
+        }).subscribe(next => {
+            this.obtenerSolicitudesCreditos();
+            this.cerrarModal();
+        });
+    }
+
+    customHeaderFooterSelectAll() {
+        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map(x => x.name);
+    }
+
+    customHeaderFooterUnselectAll() {
+        this.selectEmpresasCorpSelected = [];
+    }
+
+    modalSelectOpen(modalSelect, empresasAplican) {
+        this.selectEmpresasCorpSelected = empresasAplican;
+        this.modalService.open(modalSelect, {
+            windowClass: 'modal'
+        });
+    }
+
+    cerrarModal() {
+        this.modalService.dismissAll();
     }
 }

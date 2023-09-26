@@ -1,10 +1,9 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {SolicitudesCreditosService} from '../solicitudes-creditos.service';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {Subject} from 'rxjs';
 
 @Component({
     selector: 'app-empleados',
@@ -20,8 +19,8 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
     public page_size: any = 4;
     public maxSize;
     public collectionSize;
-    private _unsubscribeAll: Subject<any>;
-
+    public selectEmpresasCorp = [{name: 'Holaaa'}];
+    public selectEmpresasCorpSelected = [];
     // Variables
     public listaCreditos;
     public userViewData;
@@ -62,6 +61,7 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
         private _formBuilder: FormBuilder,
         private datePipe: DatePipe,
     ) {
+        this.obtenerEmpresasCorp();
     }
 
     ngOnInit(): void {
@@ -120,6 +120,58 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
         this.referenciasSolicitante = typeof user.referenciasSolicitante === 'string' ? JSON.parse(user.referenciasSolicitante) : user.referenciasSolicitante;
         this.ingresosSolicitante = typeof user.ingresosSolicitante === 'string' ? JSON.parse(user.ingresosSolicitante) : user.ingresosSolicitante;
         this.gastosSolicitante = typeof user.gastosSolicitante === 'string' ? JSON.parse(user.gastosSolicitante) : user.gastosSolicitante;
+    }
+    obtenerEmpresasCorp() {
+        this._solicitudCreditosService.obtenerEmpresasCorp({}).subscribe((info) => {
+            this.selectEmpresasCorp = info.info;
+        });
+    }
+    actualizarEmpresasAplican(credito_id) {
+        this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+            _id: credito_id, empresasAplican: JSON.stringify(this.selectEmpresasCorpSelected)
+        }).subscribe(next => {
+            this.obtenerSolicitudesCreditos();
+            this.cerrarModal();
+        });
+    }
+    modalSelectOpen(modalSelect, empresasAplican) {
+        this.selectEmpresasCorpSelected = empresasAplican;
+        this.modalService.open(modalSelect, {
+            windowClass: 'modal'
+        });
+    }
+    viewReferences(modal, referenciasSolicitante) {
+        this.obtenerSolicitudesCreditos();
+        this.referenciasSolicitante = referenciasSolicitante;
+        console.log('ahora tiene', this.referenciasSolicitante);
+
+        this.modalOpenSLC(modal);
+    }
+
+    familiarIsValid(event, index) {
+        const checkbox = event.target as HTMLInputElement;
+        if (checkbox.checked) {
+            console.log('El checkbox está seleccionado');
+            this.referenciasSolicitante[index].valido = true;
+        } else {
+            console.log('El checkbox no está seleccionado');
+            this.referenciasSolicitante[index].valido = false;
+
+            // Realiza aquí las acciones que desees cuando el checkbox se desmarca.
+        }
+    }
+
+    guardarReferencias(credito) {
+
+        this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+            _id: credito._id,
+            user: {...credito.user, referenciasSolicitante: this.referenciasSolicitante}
+        }).subscribe((info) => {
+            console.log('actualizo');
+            this.obtenerSolicitudesCreditos();
+            this.cerrarModal();
+        });
+
     }
 
     verDocumentos(credito) {
