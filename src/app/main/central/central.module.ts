@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {PrincipalComponent} from './vistas/principal/principal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CoreCommonModule} from '@core/common.module';
@@ -10,8 +9,7 @@ import {SwiperModule} from 'ngx-swiper-wrapper';
 import {FormsModule} from '@angular/forms';
 import {CoreTouchspinModule} from '@core/components/core-touchspin/core-touchspin.module';
 import {CoreSidebarModule} from '@core/components';
-import {AuthGuard} from '../../auth/helpers/auth.guards';
-import {Role} from '../../auth/models/role';
+import {AuthGuard} from '../../auth/helpers';
 import 'flatpickr/dist/flatpickr.css'; // you may need to adjust the css import depending on your build tool
 import {FlatpickrModule} from 'angularx-flatpickr';
 import {Ng2FlatpickrModule} from 'ng2-flatpickr';
@@ -71,31 +69,6 @@ import {
     IfisMicrocreditosPreAprovadosComponent
 } from './vistas/center/solicitudes-creditos/ifis/microcreditos-pre-aprovados/ifis-microcreditos-pre-aprovados.component';
 import {MatTreeModule} from '@angular/material/tree';
-import {
-    SolicitudesEmpleadosCenterComponent
-} from './vistas/center/solicitudes-creditos-local/empleados/solicitudes-empleados-center.component';
-import {NegocioPropioCenterComponent} from './vistas/center/solicitudes-creditos-local/negocio-propio/negocio-propio-center.component';
-import {
-    NegocioPropioPreaprovadosCenterComponent
-} from './vistas/center/solicitudes-creditos-local/negocio-propio-preaprovados/negocio-propio-preaprovados-center.component';
-import {
-    EmpleadosPreaprovadosCenterComponent
-} from './vistas/center/solicitudes-creditos-local/empleados-preaprovados/empleados-preaprovados-center.component';
-import {
-    MicrocreditosPreAprovadosCenterComponent
-} from './vistas/center/solicitudes-creditos-local/microcreditos-pre-aprovados/microcreditos-pre-aprovados-center.component';
-import {
-    MicrocreditosNormalesCenterComponent
-} from './vistas/center/solicitudes-creditos-local/microcreditos-normales/microcreditos-normales-center.component';
-import {
-    IfisNegocioPropioPreaprovadosCenterComponent
-} from './vistas/center/solicitudes-creditos-local/ifis/negocio-propio-preaprovados/ifis-negocio-propio-preaprovados-center.component';
-import {
-    IfisEmpleadosPreaprovadosCenterComponent
-} from './vistas/center/solicitudes-creditos-local/ifis/empleados-preaprovados/ifis-empleados-preaprovados-center.component';
-import {
-    IfisMicrocreditosPreAprovadosCenterComponent
-} from './vistas/center/solicitudes-creditos-local/ifis/microcreditos-pre-aprovados/ifis-microcreditos-pre-aprovados-center.component';
 import {AlfaComponent} from './vistas/center/solicitudes-creditos/alfa/alfa.component';
 import {SolicitudesPagoEmpleadosComponent} from './vistas/center/solicitudes-pago-empleados/solicitudes-pago-empleados.component';
 import {RecargarLineasCreditos} from './vistas/corp/recargarLineasCreditos/vistas/upload/recargar-lineas-creditos.component';
@@ -303,65 +276,15 @@ const routes = [
             },
             // visado solicitud de créditos
             {
-                path: 'solicitudes-creditos-local',
-                children: [
-                    {path: '', redirectTo: 'empleados-center', pathMatch: 'full'},
-                    {
-                        path: 'empleados-center',
-                        component: SolicitudesEmpleadosCenterComponent,
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'negocios-propio-center',
-                        component: NegocioPropioCenterComponent,
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'negocios-propios-pre-aprobados-center',
-                        component: NegocioPropioPreaprovadosCenterComponent,
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'empelados-pre-aprobados-center',
-                        component: EmpleadosPreaprovadosCenterComponent,
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'microcreditpreaprobado-center',
-                        component: MicrocreditosPreAprovadosCenterComponent,
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'microcreditsolicitud-center',
-                        component: MicrocreditosNormalesCenterComponent,
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'ifis/negocios-propios-pre-aprobados-center',
-                        component: IfisNegocioPropioPreaprovadosCenterComponent,
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'ifis/empelados-pre-aprobados-center',
-                        component: IfisEmpleadosPreaprovadosCenterComponent,
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'ifis/microcreditpreaprobado-center',
-                        component: IfisMicrocreditosPreAprovadosCenterComponent,
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'automotriz-local',
-                        loadChildren: () =>
-                          import('./vistas/center/solicitudes-creditos-automotriz-local/solicitudes-creditos-automotriz.module').then((m) => m.SolicitudesCreditosAutomotrizModule)
-                    },
-                ]
+                path: 'visado-creditos-local',
+                loadChildren: () =>
+                    import('./vistas/center/visado-creditos-local/visado-creditos-local.module').then((m) => m.VisadoCreditosLocalModule)
             },
+            // fin visado solicitud de créditos
 
             // visado solicitud de créditos digitales
             {
-                path: 'solicitudes-creditos-local-digital',
+                path: 'visado-creditos-local-digital',
                 children: [
                     {path: '', redirectTo: 'empleados-center-digital', pathMatch: 'full'},
                     {
@@ -421,7 +344,7 @@ const routes = [
             {
                 path: 'solicitudes-creditos-automotriz-digital-local',
                 loadChildren: () =>
-                  import('./vistas/center/solicitudes-creditos-automotriz-digitales-local/solicitudes-creditos-automotriz-digitales-local.module').then((m) => m.SolicitudesCreditosAutomotrizDigitalesLocalModule)
+                    import('./vistas/center/solicitudes-creditos-automotriz-digitales-local/solicitudes-creditos-automotriz-digitales-local.module').then((m) => m.SolicitudesCreditosAutomotrizDigitalesLocalModule)
             },
             // fin visado solicitud de créditos digitales
 
@@ -630,7 +553,8 @@ const routes = [
             {
                 path: 'solicitudes-creditos-automotriz-digital-revision',
                 loadChildren: () =>
-                  import('./vistas/center/solicitudes-creditos-automotriz-digital/solicitudes-creditos-automotriz-digital.module').then((m) => m.SolicitudesCreditosAutomotrizDigitalModule)
+                    import('./vistas/center/solicitudes-creditos-automotriz-digital/solicitudes-creditos-automotriz-digital.module')
+                        .then((m) => m.SolicitudesCreditosAutomotrizDigitalModule)
             },
             {
                 path: 'solicitud-pago-proveedores', component: SolicitudesPagoProveedoresComponent, canActivate: [AuthGuard]
@@ -697,8 +621,6 @@ const routes = [
         IfisEmpleadosPreaprovaodsComponent,
         IfisNegocioPropioPreaprovaodsComponent,
         IfisMicrocreditosPreAprovadosComponent,
-        SolicitudesEmpleadosCenterComponent,
-        NegocioPropioCenterComponent,
         // Solicitudes creditos digitales
         EmpleadosDigitalComponent,
         NegocioPropioDigitalComponent,
@@ -725,13 +647,6 @@ const routes = [
         NegocioPropioCenterDigitalComponent,
         NegocioPropioPreaprovadosCenterDigitalComponent,
         RevisionDocumentosDigitalComponent,
-        NegocioPropioPreaprovadosCenterComponent,
-        EmpleadosPreaprovadosCenterComponent,
-        MicrocreditosPreAprovadosCenterComponent,
-        MicrocreditosNormalesCenterComponent,
-        IfisNegocioPropioPreaprovadosCenterComponent,
-        IfisEmpleadosPreaprovadosCenterComponent,
-        IfisMicrocreditosPreAprovadosCenterComponent,
         AlfaComponent,
         SolicitudesPagoEmpleadosComponent,
         RecargarLineasCreditos,
