@@ -127,6 +127,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
 
 
     viewReferences(modal, referenciasSolicitante) {
+        this.obtenerSolicitudesCreditos();
         this.referenciasSolicitante = referenciasSolicitante;
         console.log('ahora tiene', this.referenciasSolicitante);
 
@@ -158,6 +159,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         });
 
     }
+
 
     verDocumentos(credito) {
         this.credito = credito;
