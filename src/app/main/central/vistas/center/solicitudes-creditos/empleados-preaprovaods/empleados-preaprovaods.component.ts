@@ -21,7 +21,8 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
   public maxSize;
   public collectionSize;
   private _unsubscribeAll: Subject<any>;
-
+  public selectEmpresasCorp = [{name: 'Holaaa'}];
+  public selectEmpresasCorpSelected = [];
   // Variables
   public listaCreditos;
   public userViewData;
@@ -62,6 +63,7 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
       private _formBuilder: FormBuilder,
       private datePipe: DatePipe,
   ) {
+    this.obtenerEmpresasCorp();
   }
 
   ngOnInit(): void {
@@ -120,6 +122,58 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
     this.referenciasSolicitante = user.referenciasSolicitante;
     this.ingresosSolicitante = user.ingresosSolicitante;
     this.gastosSolicitante = user.gastosSolicitante;
+  }
+  obtenerEmpresasCorp() {
+    this._solicitudCreditosService.obtenerEmpresasCorp({}).subscribe((info) => {
+      this.selectEmpresasCorp = info.info;
+    });
+  }
+  actualizarEmpresasAplican(credito_id) {
+    this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+      _id: credito_id, empresasAplican: JSON.stringify(this.selectEmpresasCorpSelected)
+    }).subscribe(next => {
+      this.obtenerSolicitudesCreditos();
+      this.cerrarModal();
+    });
+  }
+  modalSelectOpen(modalSelect, empresasAplican) {
+    this.selectEmpresasCorpSelected = empresasAplican;
+    this.modalService.open(modalSelect, {
+      windowClass: 'modal'
+    });
+  }
+  viewReferences(modal, referenciasSolicitante) {
+    this.obtenerSolicitudesCreditos();
+    this.referenciasSolicitante = referenciasSolicitante;
+    console.log('ahora tiene', this.referenciasSolicitante);
+
+    this.modalOpenSLC(modal);
+  }
+
+  familiarIsValid(event, index) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      console.log('El checkbox está seleccionado');
+      this.referenciasSolicitante[index].valido = true;
+    } else {
+      console.log('El checkbox no está seleccionado');
+      this.referenciasSolicitante[index].valido = false;
+
+      // Realiza aquí las acciones que desees cuando el checkbox se desmarca.
+    }
+  }
+
+  guardarReferencias(credito) {
+
+    this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+      _id: credito._id,
+      user: {...credito.user, referenciasSolicitante: this.referenciasSolicitante}
+    }).subscribe((info) => {
+      console.log('actualizo');
+      this.obtenerSolicitudesCreditos();
+      this.cerrarModal();
+    });
+
   }
 
   verDocumentos(credito) {

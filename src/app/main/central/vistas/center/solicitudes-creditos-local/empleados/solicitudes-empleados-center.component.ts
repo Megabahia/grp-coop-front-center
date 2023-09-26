@@ -30,7 +30,6 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
     public referenciasSolicitante;
     public ingresosSolicitante;
     public gastosSolicitante;
-    public referenciasSolicitanteActualziado;
     public pantalla = 0;
     public credito;
     // Select Custom header footer template
@@ -102,7 +101,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Empleado',
+            tipoCredito: 'Empleado',
             cargarOrigen: 'BIGPUNTOS',
             alcance: 'LOCAL',
         }).subscribe(info => {

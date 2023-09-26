@@ -101,13 +101,46 @@ export class NegocioPropioPreaprovadosCenterComponent implements OnInit, AfterVi
         this._solicitudCreditosService.obtenerSolicitudesCreditos({
             page_size: this.page_size,
             page: this.page - 1,
-            tipoCredito: 'Credito Consumo Negocio-PreAprobado',
+            tipoCredito: 'Negocio-PreAprobado',
             cargarOrigen: 'BIGPUNTOS',
             alcance: 'LOCAL',
         }).subscribe(info => {
             this.collectionSize = info.cont;
             this.listaCreditos = info.info;
         });
+    }
+    viewReferences(modal, referenciasSolicitante) {
+        this.obtenerSolicitudesCreditos();
+        this.referenciasSolicitante = referenciasSolicitante;
+        console.log('ahora tiene', this.referenciasSolicitante);
+
+        this.modalOpenSLC(modal);
+    }
+
+    familiarIsValid(event, index) {
+        const checkbox = event.target as HTMLInputElement;
+        if (checkbox.checked) {
+            console.log('El checkbox está seleccionado');
+            this.referenciasSolicitante[index].valido = true;
+        } else {
+            console.log('El checkbox no está seleccionado');
+            this.referenciasSolicitante[index].valido = false;
+
+            // Realiza aquí las acciones que desees cuando el checkbox se desmarca.
+        }
+    }
+
+    guardarReferencias(credito) {
+
+        this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+            _id: credito._id,
+            user: {...credito.user, referenciasSolicitante: this.referenciasSolicitante}
+        }).subscribe((info) => {
+            console.log('actualizo');
+            this.obtenerSolicitudesCreditos();
+            this.cerrarModal();
+        });
+
     }
 
     viewDataUser(modal, credito) {
