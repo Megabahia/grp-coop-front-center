@@ -4,8 +4,6 @@ import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {VisadoCreditosLocalService} from '../visado-creditos-local.service';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
-import {Subject} from 'rxjs';
-
 @Component({
     selector: 'app-empleados-preaprovados-center',
     templateUrl: './empleados-preaprovados-center.component.html',
@@ -23,7 +21,7 @@ export class EmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewIn
     // Variables
     public listaCreditos;
     public userViewData;
-    private ocupacionSolicitante;
+    public ocupacionSolicitante;
     public referenciasSolicitante;
     public ingresosSolicitante;
     public gastosSolicitante;
@@ -48,7 +46,7 @@ export class EmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewIn
     public submitted = false;
     public cargando = false;
     public actualizarCreditoFormData;
-    private credito;
+    public credito;
     public casaPropia = false;
     // Select Custom header footer template
     public selectEmpresasCorp = [{name: 'Holaaa'}];

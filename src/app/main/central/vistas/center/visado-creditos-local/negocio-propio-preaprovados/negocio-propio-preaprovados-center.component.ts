@@ -4,8 +4,6 @@ import {VisadoCreditosLocalService} from '../visado-creditos-local.service';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {Subject} from 'rxjs';
-
 @Component({
     selector: 'app-negocio-propio-preaprovados-center',
     templateUrl: './negocio-propio-preaprovados-center.component.html',

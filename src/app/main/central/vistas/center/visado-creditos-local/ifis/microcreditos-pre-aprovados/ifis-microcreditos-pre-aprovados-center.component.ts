@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {VisadoCreditosLocalService} from '../../visado-creditos-local.service';
 import {CoreSidebarService} from '../../../../../../../../@core/components/core-sidebar/core-sidebar.service';
@@ -209,7 +208,7 @@ export class IfisMicrocreditosPreAprovadosCenterComponent implements OnInit, Aft
         this.modalOpenSLC(modal);
         this.casado = (infoEmpresa.esatdo_civil === 'Casad@' || infoEmpresa.esatdo_civil === 'Casado'
             || infoEmpresa.esatdo_civil === 'Union Libre' || infoEmpresa.esatdo_civil === 'Unión libre');
-        infoEmpresa?.familiares.forEach(item => this.agregarFamiliar());
+        infoEmpresa?.familiares.forEach(() => this.agregarFamiliar());
         this.formSolicitud.patchValue({...infoEmpresa});
     }
 
@@ -317,24 +316,8 @@ export class IfisMicrocreditosPreAprovadosCenterComponent implements OnInit, Aft
     actualizarSolicitudCredito(estado?: string) {
         this.submitted = true;
         if (this.actualizarCreditoForm.invalid) {
-            console.log('form', this.actualizarCreditoForm);
             return;
         }
-        const {
-            id,
-            identificacion,
-            fotoCarnet,
-            papeletaVotacion,
-            identificacionConyuge,
-            papeletaVotacionConyuge,
-            planillaLuzDomicilio,
-            mecanizadoIess,
-            matriculaVehiculo,
-            impuestoPredial,
-            buroCredito,
-            calificacionBuro,
-            observacion, ...resto
-        } = this.actualizarCreditoForm.value;
         const creditoValores = Object.values(this.actualizarCreditoForm.value);
         const creditoLlaves = Object.keys(this.actualizarCreditoForm.value);
         const remover = ['buroCredito', 'evaluacionCrediticia', 'identificacion', 'papeletaVotacion', 'identificacionConyuge', 'mecanizadoIess',

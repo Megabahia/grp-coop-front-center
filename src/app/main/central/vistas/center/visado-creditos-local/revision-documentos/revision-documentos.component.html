@@ -8,7 +8,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">REVISIÓN DE
+                            <li class="breadcrumb-item"><a class="text-primary" >REVISIÓN DE
                                 DOCUMENTOS</a>
                             </li>
                         </ol>
@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="form-control-sm" *ngFor="let requisito of checks">
                         <label>{{requisito?.label}}</label>
-                        <img *ngIf="requisito?.valor; else content" src="/assets/fonts/feather/check-green.png"/>
+                        <img alt='NO IMAGE' *ngIf="requisito?.valor; else content" src="/assets/fonts/feather/check-green.png"/>
                         <ng-template #content>
                             <img src="/assets/fonts/feather/mark-red.png" alt="NO IMAGE"/>
                         </ng-template>

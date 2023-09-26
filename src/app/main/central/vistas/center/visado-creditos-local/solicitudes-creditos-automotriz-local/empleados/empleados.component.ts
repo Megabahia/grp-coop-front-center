@@ -3,7 +3,6 @@ import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {SolicitudesCreditosService} from '../solicitudes-creditos.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {Subject} from 'rxjs';
 import {CoreSidebarService} from '../../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 
 @Component({

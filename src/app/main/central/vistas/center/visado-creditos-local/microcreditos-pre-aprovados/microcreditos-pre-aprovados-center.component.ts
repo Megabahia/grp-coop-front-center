@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {VisadoCreditosLocalService} from '../visado-creditos-local.service';
@@ -320,21 +319,6 @@ export class MicrocreditosPreAprovadosCenterComponent implements OnInit, AfterVi
             console.log('form', this.actualizarCreditoForm);
             return;
         }
-        const {
-            id,
-            identificacion,
-            fotoCarnet,
-            papeletaVotacion,
-            identificacionConyuge,
-            papeletaVotacionConyuge,
-            planillaLuzDomicilio,
-            mecanizadoIess,
-            matriculaVehiculo,
-            impuestoPredial,
-            buroCredito,
-            calificacionBuro,
-            observacion, ...resto
-        } = this.actualizarCreditoForm.value;
         const creditoValores = Object.values(this.actualizarCreditoForm.value);
         const creditoLlaves = Object.keys(this.actualizarCreditoForm.value);
         const remover = ['buroCredito', 'evaluacionCrediticia', 'identificacion', 'papeletaVotacion', 'identificacionConyuge', 'mecanizadoIess',

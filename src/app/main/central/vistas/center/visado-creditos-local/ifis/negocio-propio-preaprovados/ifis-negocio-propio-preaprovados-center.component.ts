@@ -2,7 +2,6 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {Subject} from 'rxjs';
 import {VisadoCreditosLocalService} from '../../visado-creditos-local.service';
 import {CoreSidebarService} from '../../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 
@@ -23,7 +22,7 @@ export class IfisNegocioPropioPreaprovadosCenterComponent implements OnInit, Aft
     // Variables
     public listaCreditos;
     public userViewData;
-    private ocupacionSolicitante;
+    public ocupacionSolicitante;
     public referenciasSolicitante;
     public ingresosSolicitante;
     public gastosSolicitante;
@@ -49,7 +48,7 @@ export class IfisNegocioPropioPreaprovadosCenterComponent implements OnInit, Aft
     public submitted = false;
     public cargando = false;
     public actualizarCreditoFormData;
-    private credito;
+    public credito;
     public casaPropia = false;
 
     constructor(
