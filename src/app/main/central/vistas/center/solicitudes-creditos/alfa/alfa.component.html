@@ -120,7 +120,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" tabindex="0" >
+                                <div class="modal-body" tabindex="0">
                                     <label>Seleccione las empresas</label>
 
                                     <div class="form-group">
@@ -183,7 +183,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" tabindex="0" >
+                                <div class="modal-body" tabindex="0">
                                     <ul>Referencias Familiares:
                                         <li *ngFor="let familiar of credito.user?.referenciasSolicitante; let i = index">
                                             <div class="custom-control custom-switch custom-success my-2">
@@ -408,7 +408,7 @@
             <div class="form-group col-md-4">
                 <label class="form-label" for="vertical-modern-username">Fecha de creación de solicitud</label>
                 <input type="text" id="vertical-modern-username_2" class="form-control"
-                       value="{{credito.created_at}}" disabled />
+                       value="{{credito.created_at}}" disabled/>
             </div>
             <div class="form-group col-md-4">
                 <label class="form-label">Nombres</label>
@@ -797,11 +797,11 @@
             </div>
         </div>
         <div class="row">
-        <div class="form-group col-md-6">
-            <label class="form-label" for="vertical-modern-username">Total gastos</label>
-            <input type="text" class="form-control"
-                   value="{{gastosSolicitante.totalGastos}}" disabled/>
-        </div>
+            <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-username">Total gastos</label>
+                <input type="text" class="form-control"
+                       value="{{gastosSolicitante.totalGastos}}" disabled/>
+            </div>
         </div>
     </div>
 
