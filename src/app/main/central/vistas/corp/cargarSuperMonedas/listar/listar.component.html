@@ -8,7 +8,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-facturas.html">Big Puntos</a>
+                            <li class="breadcrumb-item"><a class="text-primary">Big Puntos</a>
                             </li>
                         </ol>
                     </div>
@@ -19,33 +19,12 @@
     <div class="content-body">
         <!-- users list start -->
         <section class="app-user-list">
-            <!-- users filter start -->
-            <!-- <div class="card">
-                <h5 class="card-header">Filtros de búsqueda</h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i data-feather='calendar'></i></span>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm flatpickr-range flatpickr-input" placeholder="- Rango de fechas">
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- users filter end -->
-            <!-- list section start -->
             <div class="card">
 
                 <div class="row m-75">
                     <div class="col-lg-12 col-xl-6">
-                        <label>Mostrar</label>
+                        <label>Mostrar</label> 
                         <select class="form-control-sm">
                             <option value="10">10</option>
                             <option value="25">25</option>
@@ -69,12 +48,7 @@
                     <table class="user-list-table table table-striped">
                         <thead class="thead-light">
                         <tr>
-                            <th>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2"/>
-                                    <label class="custom-control-label" for="customCheck2"></label>
-                                </div>
-                            </th>
+
                             <th>Fecha de asignación</th>
                             <th>Identificación</th>
                             <th>Nombres</th>
@@ -88,12 +62,7 @@
                         </thead>
                         <tbody>
                         <tr *ngFor="let supermoneda of listaSupermonedas">
-                            <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2"/>
-                                    <label class="custom-control-label" for="customCheck2"></label>
-                                </div>
-                            </td>
+
                             <td>{{transformarFecha(supermoneda.created_at)}}</td>
                             <td>{{supermoneda.identificacion}}</td>
                             <td>{{supermoneda.nombres}}</td>
@@ -134,7 +103,7 @@
                     </div>
                     <div class="modal-body flex-grow-1">
                         <div class="form-group">
-                            <label for="customFile1">Adjuntar archivos (Excel)</label>
+                            <label for="customFile1">Adjuntar archivos (Excel)</label> 
                             <a href="assets/anexos/cargar_bigpuntos_ifis_center.xlsx">Anexo</a>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile1" required
@@ -165,7 +134,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body" tabindex="0" ngbAutofocus>
+    <div class="modal-body" tabindex="0" >
         <div [innerHTML]="mensaje"></div>
     </div>
     <div class="modal-footer">

@@ -8,7 +8,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">Solicitud de
+                            <li class="breadcrumb-item"><a class="text-primary">Solicitud de
                                 créditos empleados</a>
                             </li>
                         </ol>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="col-6  text-right">
-                    <label>Mostrar</label>
+                    <label>Mostrar</label> 
                     <select class="form-control-sm" [(ngModel)]="page_size"
                             (change)="obtenerSolicitudesCreditos()">
                         <option value="4">4</option>
@@ -104,7 +104,7 @@
                                     rippleEffect
                                     *ngIf="credito.estado !== 'Enviado'"
                             >
-                                Seleccionar {{ credito.empresasAplican != null ? credito?.empresasAplican.length : 0}}
+                                Seleccionar {{ credito.empresasAplican != null ? JSON.parse(credito?.empresasAplican).length : 0}}
                             </button>
                             <!-- Modal -->
                             <ng-template #modalSelect let-modal>
@@ -144,10 +144,10 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" (click)="actualizarEmpresasAplican(credito._id)"rippleEffect>
+                                    <button type="button" class="btn btn-primary" (click)="actualizarEmpresasAplican(credito._id)">
                                         Guardar
                                     </button>
-                                    <button type="button" class="btn btn-secondary" (click)="modal.close('Accept click')" rippleEffect>
+                                    <button type="button" class="btn btn-secondary" (click)="modal.close('Accept click')" >
                                         Cerrar
                                     </button>
                                 </div>

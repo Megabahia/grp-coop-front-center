@@ -53,7 +53,7 @@ export class NegocioPropioCenterComponent implements OnInit, AfterViewInit {
     // Select Custom header footer template
     public selectEmpresasCorp = [{name: 'Holaaa'}];
     public selectEmpresasCorpSelected = [];
-
+    public readonly JSON = JSON;
     constructor(
         private _solicitudCreditosService: VisadoCreditosLocalService,
         private modalService: NgbModal,
@@ -327,7 +327,7 @@ export class NegocioPropioCenterComponent implements OnInit, AfterViewInit {
     }
 
     modalSelectOpen(modalSelect, empresasAplican) {
-        this.selectEmpresasCorpSelected = empresasAplican;
+        this.selectEmpresasCorpSelected = JSON.parse(empresasAplican);
         this.modalService.open(modalSelect, {
             windowClass: 'modal'
         });

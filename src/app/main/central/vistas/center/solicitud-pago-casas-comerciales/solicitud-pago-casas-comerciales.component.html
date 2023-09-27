@@ -10,7 +10,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">
+                            <li class="breadcrumb-item"><a class="text-primary" >
                                 Solicitudes de pago a locales comerciales
                             </a>
                             </li>
@@ -26,7 +26,7 @@
             <div class="card card-company-table">
                 <div class="row m-75">
                     <div class="col-lg-12 col-xl-6">
-                        <label>Mostrar</label>
+                        <label>Mostrar</label> 
                         <select class="form-control-sm" [(ngModel)]="page_size" (click)="obtenerSolicitudesCreditos()">
                             <option value="4">4</option>
                             <option value="10">10</option>
@@ -67,10 +67,10 @@
                             <td>
                                 <div *ngIf="credito.estado === 'Pendiente'">
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#modals-slide-in"
-                                       (click)="seguroNegarModal(credito._id)" alt="Negar">
+                                       (click)="seguroNegarModal(credito._id)">
                                         Negar
                                     </a>
-                                    <a href="javascript:void(0);" (click)="procesarPago(credito)" alt="Procesar">
+                                    <a href="javascript:void(0);" (click)="procesarPago(credito)" >
                                         Procesar
                                     </a>
                                 </div>
@@ -80,7 +80,7 @@
                         </tbody>
                     </table>
                 </div>
-                <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [pageSize]="page_size"
+                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="page_size"
                                 [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
             </div>
             <!-- list section end -->
