@@ -1,17 +1,17 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {DatePipe} from '@angular/common';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SolicitudesCreditosService} from '../solicitudes-creditos.service';
-import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
-import {DatePipe} from '@angular/common';
+import {VisadoCreditosLocalService} from '../../visado-creditos-local.service';
+import {CoreSidebarService} from '../../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 
 @Component({
-    selector: 'app-empleados-preaprovaods',
-    templateUrl: './empleados-preaprovaods.component.html',
-    styleUrls: ['./empleados-preaprovaods.component.scss'],
+    selector: 'app-empleados-preaprovados-center',
+    templateUrl: './ifis-empleados-preaprovados-center.component.html',
+    styleUrls: ['./ifis-empleados-preaprovados-center.component.scss'],
     providers: [DatePipe],
 })
-export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
+export class IfisEmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewInit {
 
     @ViewChild(NgbPagination) paginator: NgbPagination;
 
@@ -19,8 +19,6 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
     public page_size: any = 4;
     public maxSize;
     public collectionSize;
-    public selectEmpresasCorp = [{name: 'Holaaa'}];
-    public selectEmpresasCorpSelected = [];
     // Variables
     public listaCreditos;
     public userViewData;
@@ -29,7 +27,6 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
     public ingresosSolicitante;
     public gastosSolicitante;
     public pantalla = 0;
-    public credito;
     public checks = [
         {'label': 'Identificacion', 'valor': false},
         {'label': 'Foto Carnet', 'valor': false},
@@ -50,22 +47,21 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
     public submitted = false;
     public cargando = false;
     public actualizarCreditoFormData;
+    public credito;
     public casaPropia = false;
-    public motivo: string;
-    public estadoCredito: any;
 
     constructor(
-        private _solicitudCreditosService: SolicitudesCreditosService,
+        private _solicitudCreditosService: VisadoCreditosLocalService,
         private modalService: NgbModal,
         private _coreSidebarService: CoreSidebarService,
         private _formBuilder: FormBuilder,
         private datePipe: DatePipe,
     ) {
-        this.obtenerEmpresasCorp();
     }
 
     ngOnInit(): void {
     }
+
 
     ngAfterViewInit() {
         this.iniciarPaginador();
@@ -99,9 +95,8 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
             page_size: this.page_size,
             page: this.page - 1,
             tipoCredito: 'Empleado-PreAprobado',
-            cargarOrigen: 'BIGPUNTOS',
-            alcance: ['LOCAL', 'OMNIGLOBAL'],
-            enviado: 1,
+            cargarOrigen: 'IFIS',
+            alcance: 'LOCAL',
         }).subscribe(info => {
             this.collectionSize = info.cont;
             this.listaCreditos = info.info;
@@ -122,69 +117,6 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
         this.gastosSolicitante = user.gastosSolicitante;
     }
 
-    customHeaderFooterSelectAll() {
-        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map((x: any) => x.ruc);
-    }
-
-    customHeaderFooterUnselectAll() {
-        this.selectEmpresasCorpSelected = [];
-    }
-
-    obtenerEmpresasCorp() {
-        this._solicitudCreditosService.obtenerEmpresasCorp({}).subscribe((info) => {
-            this.selectEmpresasCorp = info.info;
-        });
-    }
-
-    actualizarEmpresasAplican(credito_id) {
-        this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
-            _id: credito_id, empresasAplican: JSON.stringify(this.selectEmpresasCorpSelected)
-        }).subscribe(() => {
-            this.obtenerSolicitudesCreditos();
-            this.cerrarModal();
-        });
-    }
-
-    modalSelectOpen(modalSelect, empresasAplican) {
-        this.selectEmpresasCorpSelected = empresasAplican;
-        this.modalService.open(modalSelect, {
-            windowClass: 'modal'
-        });
-    }
-
-    viewReferences(modal, referenciasSolicitante) {
-        this.obtenerSolicitudesCreditos();
-        this.referenciasSolicitante = referenciasSolicitante;
-        console.log('ahora tiene', this.referenciasSolicitante);
-
-        this.modalOpenSLC(modal);
-    }
-
-    familiarIsValid(event, index) {
-        const checkbox = event.target as HTMLInputElement;
-        if (checkbox.checked) {
-            console.log('El checkbox está seleccionado');
-            this.referenciasSolicitante[index].valido = true;
-        } else {
-            console.log('El checkbox no está seleccionado');
-            this.referenciasSolicitante[index].valido = false;
-
-            // Realiza aquí las acciones que desees cuando el checkbox se desmarca.
-        }
-    }
-
-    guardarReferencias(credito) {
-
-        this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
-            _id: credito._id,
-            user: {...credito.user, referenciasSolicitante: this.referenciasSolicitante}
-        }).subscribe(() => {
-            this.obtenerSolicitudesCreditos();
-            this.cerrarModal();
-        });
-
-    }
-
     verDocumentos(credito) {
         this.credito = credito;
         this.submitted = false;
@@ -193,24 +125,24 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
         this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
             credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
             credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
+        console.log(this.soltero, 'this.soltero');
         this.actualizarCreditoForm = this._formBuilder.group({
             id: [credito._id, [Validators.required]],
-            solicitudCredito: ['', [Validators.required]],
-            evaluacionCrediticia: ['', [Validators.required]],
-            codigoClienteCreado: ['', [Validators.required]],
-            codigoCuentaCreada: ['', [Validators.required]],
-            buroCreditoIfis: ['', [Validators.required]],
-            calificacionBuroIfis: ['', [Validators.required]],
-            calificacionBuro: [credito.calificacionBuro],
-            observacion: [credito.observacion],
-            checkSolicitudCredito: ['', [Validators.requiredTrue]],
-            checkEvaluacionCrediticia: ['', [Validators.requiredTrue]],
-            checkCodigoClienteCreado: ['', [Validators.requiredTrue]],
-            checkCodigoCuentaCreada: ['', [Validators.requiredTrue]],
-            checkBuroCreditoIfis: ['', [Validators.requiredTrue]],
-            checkCalificacionBuroIfis: ['', [Validators.requiredTrue]],
-            checkBuroRevisado: ['', [Validators.requiredTrue]],
+            identificacion: ['', credito.identificacion ? [] : [Validators.required]],
+            ruc: ['', credito.identificacion ? [] : [Validators.required]],
+            fotoCarnet: ['', credito.fotoCarnet ? [] : [Validators.required]],
+            papeletaVotacion: ['', credito.papeletaVotacion ? [] : [Validators.required]],
+            identificacionConyuge: ['', this.soltero ? credito?.identificacionConyuge : [Validators.required]],
+            papeletaVotacionConyuge: ['', this.soltero ? [] : [Validators.required]],
+            planillaLuzDomicilio: ['', credito.planillaLuzDomicilio ? [] : [Validators.required]],
+            mecanizadoIess: ['', credito.mecanizadoIess ? [] : [Validators.required]],
+            matriculaVehiculo: [''],
+            impuestoPredial: [''],
+            buroCredito: ['', credito.buroCredito ? [] : [Validators.required]],
+            calificacionBuro: [credito.calificacionBuro, [Validators.required]],
+            observacion: [credito.observacion, [Validators.required]],
             checkIdenficicacion: ['', [Validators.requiredTrue]],
+            checkRuc: ['', [Validators.requiredTrue]],
             checkFotoCarnet: ['', [Validators.requiredTrue]],
             checkPapeletaVotacion: ['', [Validators.requiredTrue]],
             checkIdentificacionConyuge: ['', this.soltero ? [] : [Validators.requiredTrue]],
@@ -223,7 +155,7 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
             checkCalificacionBuro: ['', [Validators.requiredTrue]],
             checkObservacion: ['', [Validators.requiredTrue]],
         });
-        this.checks = (typeof credito.checks === 'object') ? credito.checks : JSON.parse(credito.checks);
+        this.checks = credito.checks;
     }
 
     cambiarEstado($event) {
@@ -242,12 +174,10 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
         }
     }
 
-    actualizarSolicitudCredito(estado?: string) {
+    actualizarSolicitudCredito() {
         this.submitted = true;
-        if (this.estadoCredito !== 'Por Completar' && this.estadoCredito !== 'Negado') {
-            if (this.actualizarCreditoForm.invalid) {
-                return;
-            }
+        if (this.actualizarCreditoForm.invalid) {
+            return;
         }
         const {
             id,
@@ -266,9 +196,9 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
         } = this.actualizarCreditoForm.value;
         const creditoValores = Object.values(this.actualizarCreditoForm.value);
         const creditoLlaves = Object.keys(this.actualizarCreditoForm.value);
-        const remover = ['buroCredito', 'evaluacionCrediticia', 'identificacion', 'papeletaVotacion', 'identificacionConyuge', 'mecanizadoIess',
-            'papeletaVotacionConyuge', 'planillaLuzNegocio', 'planillaLuzDomicilio', 'facturas', 'matriculaVehiculo', 'impuestoPredial', 'fotoCarnet',
-            'solicitudCredito', 'buroCreditoIfis'];
+        const remover = ['buroCredito', 'evaluacionCrediticia', 'identificacion', 'ruc', 'papeletaVotacion', 'identificacionConyuge', 'mecanizadoIess',
+            'papeletaVotacionConyuge', 'planillaLuzNegocio', 'planillaLuzDomicilio', 'facturas', 'facturasVentas2meses', 'facturasVentas2meses2', 'facturasVentasCertificado',
+            'matriculaVehiculo', 'impuestoPredial', 'fotoCarnet'];
         creditoLlaves.map((llaves, index) => {
             if (creditoValores[index] && !remover.find((item: any) => item === creditoLlaves[index])) {
                 this.actualizarCreditoFormData.delete(llaves);
@@ -293,83 +223,28 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
             this.checks.splice(3, 2);
         }
         this.cargando = true;
-        if (this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar') {
-            this.actualizarCreditoFormData.delete('estado');
-            this.actualizarCreditoFormData.append('estado', this.estadoCredito);
-        }
-        this.actualizarCreditoFormData.delete('motivo');
-        this.actualizarCreditoFormData.append('motivo', this.motivo);
-        this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe(() => {
-                this.cerrarModal();
-                this.cargando = false;
-                if (estado === 'Negado' || estado === 'Por Completar') {
-                    this.pantalla = 0;
-                } else {
-                    this.pantalla = 3;
-                }
-                this.obtenerSolicitudesCreditos();
-                this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
-            },
-            () => {
-                this.cargando = false;
-            });
-    }
-
-    actualizarSolicitudCreditoNegado(estado) {
-        const creditoValores = Object.values(this.actualizarCreditoForm.value);
-        const creditoLlaves = Object.keys(this.actualizarCreditoForm.value);
-        const remover = ['buroCredito', 'evaluacionCrediticia', 'identificacion', 'papeletaVotacion', 'identificacionConyuge', 'mecanizadoIess',
-            'papeletaVotacionConyuge', 'planillaLuzNegocio', 'planillaLuzDomicilio', 'facturas', 'matriculaVehiculo', 'impuestoPredial', 'fotoCarnet',
-            'solicitudCredito', 'buroCreditoIfis'];
-        creditoLlaves.map((llaves, index) => {
-            if (creditoValores[index] && !remover.find((item: any) => item === creditoLlaves[index])) {
-                this.actualizarCreditoFormData.delete(llaves);
-                this.actualizarCreditoFormData.append(llaves, creditoValores[index]);
-            }
-        });
-        this.cargando = true;
         this.actualizarCreditoFormData.delete('estado');
-        this.actualizarCreditoFormData.append('estado', estado);
+        this.actualizarCreditoFormData.append('estado', 'Enviado');
+        this.actualizarCreditoFormData.delete('checks');
+        this.actualizarCreditoFormData.append('checks', JSON.stringify(this.checks));
         this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe(() => {
                 this.cargando = false;
+                // this.mensaje = 'Crédito actualizado con éxito';
+                // this.cerrarModal('actualizar-credito');
+                this.pantalla = 0;
                 this.obtenerSolicitudesCreditos();
                 this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
-                if (estado === 'Negado') {
-                    this.pantalla = 0;
-                } else {
-                    this.pantalla = 3;
-                }
             },
             () => {
                 this.cargando = false;
-                if (estado === 'Negado') {
-                    this.pantalla = 0;
-                }
+                // this.mensaje = 'Error al actualizar el crédito';
+                // this.abrirModal(this.mensajeModal);
             });
-    }
-
-    abrirModalMotivo(modalMotivo, estadoCredito) {
-        if (estadoCredito === 'Aprobado') {
-            this.submitted = true;
-            if (this.actualizarCreditoForm.invalid) {
-                return;
-            }
-        }
-        this.motivo = '';
-        this.estadoCredito = estadoCredito;
-        this.modalService.open(modalMotivo, {
-                centered: true,
-                size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
-            }
-        );
-    }
-
-    cerrarModal() {
-        this.modalService.dismissAll();
     }
 
     consumirAWS() {
-        this._solicitudCreditosService.actualizarAWS().subscribe(() => {
+        this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
+            console.log(info);
             this.obtenerSolicitudesCreditos();
         });
     }
