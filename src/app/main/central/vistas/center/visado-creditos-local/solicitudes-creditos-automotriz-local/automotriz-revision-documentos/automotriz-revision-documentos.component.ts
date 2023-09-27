@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-revision-documentos',
-  templateUrl: './revision-documentos.component.html',
-  styleUrls: ['./revision-documentos.component.scss']
+  selector: 'app-automotriz-revision-documentos-local',
+  templateUrl: './automotriz-revision-documentos.component.html',
+  styleUrls: ['./automotriz-revision-documentos.component.scss']
 })
-export class RevisionDocumentosComponent implements OnInit {
+export class AutomotrizRevisionDocumentosComponent implements OnInit {
 
   @Input() checks: any;
   @Output() pantalla = new EventEmitter<number>();
