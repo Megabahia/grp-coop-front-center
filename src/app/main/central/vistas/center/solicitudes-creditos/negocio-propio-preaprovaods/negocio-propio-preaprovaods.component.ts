@@ -54,7 +54,7 @@ export class NegocioPropioPreaprovaodsComponent implements OnInit, AfterViewInit
     public casaPropia = false;
     public motivo: string;
     public estadoCredito: any;
-
+    protected readonly JSON = JSON;
     constructor(
         private _solicitudCreditosService: SolicitudesCreditosService,
         private modalService: NgbModal,
@@ -139,7 +139,7 @@ export class NegocioPropioPreaprovaodsComponent implements OnInit, AfterViewInit
     }
 
     modalSelectOpen(modalSelect, empresasAplican) {
-        this.selectEmpresasCorpSelected = empresasAplican;
+        this.selectEmpresasCorpSelected = JSON.parse(empresasAplican);
         this.modalService.open(modalSelect, {
             windowClass: 'modal'
         });
