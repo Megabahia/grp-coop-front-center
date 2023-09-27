@@ -7,13 +7,6 @@
                         Confirmación de Recargar Líneas de Crédito
                     </h2>
                     <div class="breadcrumb-wrapper">
-                        <!-- <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
-                            </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">Cargar créditos
-                                    pre aprobados</a>
-                            </li>
-                        </ol> -->
                     </div>
                 </div>
             </div>
@@ -27,7 +20,7 @@
                 <hr>
                 <div class="row m-75">
                     <div class="col-lg-12 col-xl-6">
-                        <label>Mostrar</label>
+                        <label>Mostrar</label> 
                         <select class="form-control-sm">
                             <option value="10">10</option>
                             <option value="25">25</option>
@@ -41,12 +34,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label" for="customCheck2"></label>
-                                </div>
-                            </th>
+
                             <th>Fecha de recarga</th>
                             <th>Nombre del negocio</th>
                             <th>RUC del negocio</th>
@@ -60,12 +48,7 @@
                         <tbody>
 
                         <tr *ngFor="let item of listaRecargarLineasCredito">
-                            <th>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck">
-                                    <label class="custom-control-label" for="customCheck2"></label>
-                                </div>
-                            </th>
+
                             <td>{{item.fechaRecarga}}</td>
                             <td>{{item.info.nombreNegocio}}</td>
                             <td>{{item.info.rucNegocio}}</td>

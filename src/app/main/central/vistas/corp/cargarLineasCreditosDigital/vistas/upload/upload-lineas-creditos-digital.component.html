@@ -103,7 +103,7 @@
                 <hr>
                 <div class="row m-75">
                     <div class="col-lg-12 col-xl-6">
-                        <label>Mostrar</label>
+                        <label>Mostrar</label> 
                         <select class="form-control-sm">
                             <option value="10">10</option>
                             <option value="25">25</option>
@@ -117,12 +117,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label" for="customCheck2"></label>
-                                </div>
-                            </th>
+
                             <th>Fecha de asignación</th>
                             <th>Registros cargados</th>
                             <th>Negocios cargados</th>
@@ -135,12 +130,7 @@
                         <tbody>
 
                         <tr *ngFor="let archivo of listaArchivosPreAprobados">
-                            <th>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label" for="customCheck2"></label>
-                                </div>
-                            </th>
+
                             <td>{{archivo.fechaCargaArchivo}}</td>
                             <td>{{archivo.registrosCargados}}</td>
                             <td><a [href]="archivo.linkArchivo">Link</a></td>

@@ -52,7 +52,7 @@ export class EmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewIn
     // Select Custom header footer template
     public selectEmpresasCorp = [{name: 'Holaaa'}];
     public selectEmpresasCorpSelected = [];
-
+    protected readonly JSON = JSON;
     constructor(
         private _solicitudCreditosService: VisadoCreditosLocalService,
         private modalService: NgbModal,
@@ -255,7 +255,7 @@ export class EmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewIn
 
     obtenerEmpresasCorp() {
         this._solicitudCreditosService.obtenerEmpresasCorp({}).subscribe((info) => {
-            this.selectEmpresasCorp = info.info;
+            this.selectEmpresasCorp = JSON.parse(info.info);
         });
     }
 
@@ -277,7 +277,7 @@ export class EmpleadosPreaprovadosCenterComponent implements OnInit, AfterViewIn
     }
 
     modalSelectOpen(modalSelect, empresasAplican) {
-        this.selectEmpresasCorpSelected = empresasAplican;
+        this.selectEmpresasCorpSelected = JSON.parse(empresasAplican);
         this.modalService.open(modalSelect, {
             windowClass: 'modal'
         });

@@ -30,7 +30,7 @@ export class SolicitudPagoCasasComercialesComponent implements OnInit, AfterView
     public usuario;
     public observacion = '';
     public idPagoProveedor = '';
-    private solicitudPago;
+    public solicitudPago;
 
 
     constructor(

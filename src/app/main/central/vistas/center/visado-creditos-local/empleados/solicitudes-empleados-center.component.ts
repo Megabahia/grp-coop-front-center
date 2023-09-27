@@ -13,6 +13,20 @@ import {DatePipe} from '@angular/common';
 })
 export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewInit {
 
+    constructor(
+        private _solicitudCreditosService: VisadoCreditosLocalService,
+        private modalService: NgbModal,
+        private _coreSidebarService: CoreSidebarService,
+        private _formBuilder: FormBuilder,
+        private datePipe: DatePipe,
+    ) {
+        this.obtenerEmpresasCorp();
+    }
+
+    get controlsFrom() {
+        return this.actualizarCreditoForm.controls;
+    }
+
     @ViewChild(NgbPagination) paginator: NgbPagination;
 
     public page = 1;
@@ -52,16 +66,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
     public cargando = false;
     public actualizarCreditoFormData;
     public casaPropia = false;
-
-    constructor(
-        private _solicitudCreditosService: VisadoCreditosLocalService,
-        private modalService: NgbModal,
-        private _coreSidebarService: CoreSidebarService,
-        private _formBuilder: FormBuilder,
-        private datePipe: DatePipe,
-    ) {
-        this.obtenerEmpresasCorp();
-    }
+    public readonly JSON = JSON;
 
     ngOnInit(): void {
     }
@@ -69,10 +74,6 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
     ngAfterViewInit() {
         this.iniciarPaginador();
         this.obtenerSolicitudesCreditos();
-    }
-
-    get controlsFrom() {
-        return this.actualizarCreditoForm.controls;
     }
 
     iniciarPaginador() {
@@ -310,7 +311,7 @@ export class SolicitudesEmpleadosCenterComponent implements OnInit, AfterViewIni
     }
 
     modalSelectOpen(modalSelect, empresasAplican) {
-        this.selectEmpresasCorpSelected = empresasAplican;
+        this.selectEmpresasCorpSelected = JSON.parse(empresasAplican);
         this.modalService.open(modalSelect, {
             windowClass: 'modal'
         });

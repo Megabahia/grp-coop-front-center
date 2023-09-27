@@ -53,7 +53,7 @@ export class NegocioPropioComponent implements OnInit, AfterViewInit {
     public casaPropia = false;
     public selectEmpresasCorp = [{name: 'Holaaa'}];
     public selectEmpresasCorpSelected = [];
-
+    protected readonly JSON = JSON;
     constructor(
         private _solicitudCreditosService: SolicitudesCreditosService,
         private modalService: NgbModal,
@@ -138,7 +138,7 @@ export class NegocioPropioComponent implements OnInit, AfterViewInit {
     }
 
     modalSelectOpen(modalSelect, empresasAplican) {
-        this.selectEmpresasCorpSelected = empresasAplican;
+        this.selectEmpresasCorpSelected = JSON.parse(empresasAplican);
         this.modalService.open(modalSelect, {
             windowClass: 'modal'
         });
