@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SolicitudesCreditosService} from '../solicitudes-creditos.service';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
@@ -12,7 +11,7 @@ import {DatePipe} from '@angular/common';
     styleUrls: ['./alfa.component.scss'],
     providers: [DatePipe],
 })
-export class AlfaComponent implements OnInit,AfterViewInit {
+export class AlfaComponent implements OnInit, AfterViewInit {
 
     @ViewChild(NgbPagination) paginator: NgbPagination;
 
@@ -20,12 +19,10 @@ export class AlfaComponent implements OnInit,AfterViewInit {
     public page_size: any = 4;
     public maxSize;
     public collectionSize;
-    private _unsubscribeAll: Subject<any>;
-
     // Variables
     public listaCreditos;
     public userViewData;
-    private ocupacionSolicitante;
+    public ocupacionSolicitante;
     public referenciasSolicitante;
     public ingresosSolicitante;
     public gastosSolicitante;
@@ -52,8 +49,8 @@ export class AlfaComponent implements OnInit,AfterViewInit {
     public cargando = false;
     public actualizarCreditoFormData;
     public casaPropia = false;
-    private motivo: string;
-    private estadoCredito: any;
+    public motivo: string;
+    public estadoCredito: any;
     public selectEmpresasCorp = [{name: 'Holaaa'}];
     public selectEmpresasCorpSelected = [];
 
@@ -119,10 +116,21 @@ export class AlfaComponent implements OnInit,AfterViewInit {
         this.casaPropia = (user.tipoVivienda === 'Propia');
         this.modalOpenSLC(modal);
         this.userViewData = user;
-        this.ocupacionSolicitante = typeof user.ocupacionSolicitante === 'string' ? JSON.parse(user.ocupacionSolicitante) : user.ocupacionSolicitante;
-        this.referenciasSolicitante = typeof user.referenciasSolicitante === 'string' ? JSON.parse(user.referenciasSolicitante) : user.referenciasSolicitante;
-        this.ingresosSolicitante = typeof user.ingresosSolicitante === 'string' ? JSON.parse(user.ingresosSolicitante) : user.ingresosSolicitante;
+        this.ocupacionSolicitante = typeof user.ocupacionSolicitante === 'string'
+            ? JSON.parse(user.ocupacionSolicitante) : user.ocupacionSolicitante;
+        this.referenciasSolicitante = typeof user.referenciasSolicitante === 'string'
+            ? JSON.parse(user.referenciasSolicitante) : user.referenciasSolicitante;
+        this.ingresosSolicitante = typeof user.ingresosSolicitante === 'string'
+            ? JSON.parse(user.ingresosSolicitante) : user.ingresosSolicitante;
         this.gastosSolicitante = typeof user.gastosSolicitante === 'string' ? JSON.parse(user.gastosSolicitante) : user.gastosSolicitante;
+    }
+
+    customHeaderFooterSelectAll() {
+        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map((x: any) => x.ruc);
+    }
+
+    customHeaderFooterUnselectAll() {
+        this.selectEmpresasCorpSelected = [];
     }
 
     obtenerEmpresasCorp() {
@@ -134,7 +142,7 @@ export class AlfaComponent implements OnInit,AfterViewInit {
     actualizarEmpresasAplican(credito_id) {
         this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
             _id: credito_id, empresasAplican: JSON.stringify(this.selectEmpresasCorpSelected)
-        }).subscribe(next => {
+        }).subscribe(() => {
             this.obtenerSolicitudesCreditos();
             this.cerrarModal();
         });
@@ -173,8 +181,7 @@ export class AlfaComponent implements OnInit,AfterViewInit {
         this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
             _id: credito._id,
             user: {...credito.user, referenciasSolicitante: this.referenciasSolicitante}
-        }).subscribe((info) => {
-            console.log('actualizo');
+        }).subscribe(() => {
             this.obtenerSolicitudesCreditos();
             this.cerrarModal();
         });
@@ -209,7 +216,7 @@ export class AlfaComponent implements OnInit,AfterViewInit {
             checkCalificacionBuroIfis: ['', [Validators.requiredTrue]],
             checkBuroRevisado: ['', [Validators.requiredTrue]],
             checkIdenficicacion: ['', [Validators.requiredTrue]],
-            checkRuc: ['',],
+            checkRuc: [''],
             checkFotoCarnet: ['', [Validators.requiredTrue]],
             checkPapeletaVotacion: ['', [Validators.requiredTrue]],
             checkIdentificacionConyuge: ['', this.soltero ? [] : [Validators.requiredTrue]],
@@ -310,7 +317,7 @@ export class AlfaComponent implements OnInit,AfterViewInit {
             this.actualizarCreditoFormData.append('checks', JSON.stringify(this.checks));
         }
         console.log('this.actualizarCreditoFormData', this.actualizarCreditoFormData);
-        this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
+        this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe(() => {
                 this.cerrarModal();
                 this.cargando = false;
                 if (estado === 'Negado' || estado === 'Por Completar') {
@@ -321,7 +328,7 @@ export class AlfaComponent implements OnInit,AfterViewInit {
                 this.obtenerSolicitudesCreditos();
                 this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
             },
-            (error) => {
+            () => {
                 this.cargando = false;
             });
     }
@@ -341,7 +348,7 @@ export class AlfaComponent implements OnInit,AfterViewInit {
         this.cargando = true;
         this.actualizarCreditoFormData.delete('estado');
         this.actualizarCreditoFormData.append('estado', estado);
-        this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
+        this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe(() => {
                 this.cargando = false;
                 this.obtenerSolicitudesCreditos();
                 this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
@@ -351,7 +358,7 @@ export class AlfaComponent implements OnInit,AfterViewInit {
                     this.pantalla = 3;
                 }
             },
-            (error) => {
+            () => {
                 this.cargando = false;
                 if (estado === 'Negado') {
                     this.pantalla = 0;

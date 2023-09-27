@@ -20,15 +20,15 @@ export class ValoresProcesoComponent implements OnInit {
   public cargando = false;
   public actualizarCreditoForm: FormGroup;
   public actualizarCreditoFormData;
-  private soltero: boolean;
-  private casaPropia: boolean;
-  private userViewData: any;
-  private ocupacionSolicitante: any;
-  private referenciasSolicitante: any;
-  private ingresosSolicitante: any;
-  private gastosSolicitante: any;
-  private empresa: any;
-  private casado: boolean;
+  public soltero: boolean;
+  public casaPropia: boolean;
+  public userViewData: any;
+  public ocupacionSolicitante: any;
+  public referenciasSolicitante: any;
+  public ingresosSolicitante: any;
+  public gastosSolicitante: any;
+  public empresa: any;
+  public casado: boolean;
   public formSolicitud: FormGroup;
   public formConyuge: FormGroup;
   public microEmpresa = false;
@@ -74,7 +74,7 @@ export class ValoresProcesoComponent implements OnInit {
     }
   }
 
-  actualizarSolicitudCredito(estado) {
+  actualizarSolicitudCredito() {
     this.submitted = true;
     if (this.actualizarCreditoForm.invalid) {
       console.log('form', this.actualizarCreditoForm);
@@ -97,12 +97,12 @@ export class ValoresProcesoComponent implements OnInit {
     });
     this.actualizarCreditoFormData.delete('estado');
     this.actualizarCreditoFormData.append('estado', 'Aprobado');
-    this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
+    this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe(() => {
         console.log('se guardo los valores proceso');
         this.cargando = false;
         this.pantalla.emit(4);
       },
-      (error) => {
+      () => {
         this.cargando = false;
       });
   }

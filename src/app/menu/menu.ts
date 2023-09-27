@@ -1,5 +1,4 @@
 import {CoreMenu} from '@core/types';
-import {Role} from '../auth/models/role';
 
 export const menu: CoreMenu[] = [
   {
@@ -248,7 +247,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/empleados-center'
+                url: 'central/center/visado-creditos-local/empleados-center'
               },
               {
                 id: 'negocios',
@@ -256,7 +255,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/negocios-propio-center'
+                url: 'central/center/visado-creditos-local/negocios-propio-center'
               },
               {
                 id: 'propios-pre-aprovados',
@@ -264,7 +263,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/negocios-propios-pre-aprobados-center'
+                url: 'central/center/visado-creditos-local/negocios-propios-pre-aprobados-center'
               },
               {
                 id: 'empelados-pre-aprovados',
@@ -272,7 +271,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/empelados-pre-aprobados-center'
+                url: 'central/center/visado-creditos-local/empelados-pre-aprobados-center'
               },
               {
                 id: 'ifisPreaprobados',
@@ -286,7 +285,7 @@ export const menu: CoreMenu[] = [
                     // translate: 'MENU.APPS.EMAIL',
                     type: 'item',
                     icon: 'circle',
-                    url: 'central/center/solicitudes-creditos-local/ifis/negocios-propios-pre-aprobados-center'
+                    url: 'central/center/visado-creditos-local/ifis/negocios-propios-pre-aprobados-center'
                   },
                   {
                     id: 'empelados-pre-aprovados',
@@ -294,7 +293,7 @@ export const menu: CoreMenu[] = [
                     // translate: 'MENU.APPS.EMAIL',
                     type: 'item',
                     icon: 'circle',
-                    url: 'central/center/solicitudes-creditos-local/ifis/empelados-pre-aprobados-center'
+                    url: 'central/center/visado-creditos-local/ifis/empelados-pre-aprobados-center'
                   },
                 ],
               },
@@ -312,7 +311,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/microcreditpreaprobado-center'
+                url: 'central/center/visado-creditos-local/microcreditpreaprobado-center'
               },
               {
                 id: 'microcreditsolicitud',
@@ -320,7 +319,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/microcreditsolicitud-center'
+                url: 'central/center/visado-creditos-local/microcreditsolicitud-center'
               },
               {
                 id: 'pymesIfis',
@@ -334,7 +333,7 @@ export const menu: CoreMenu[] = [
                     // translate: 'MENU.APPS.EMAIL',
                     type: 'item',
                     icon: 'circle',
-                    url: 'central/center/solicitudes-creditos-local/ifis/microcreditpreaprobado-center'
+                    url: 'central/center/visado-creditos-local/ifis/microcreditpreaprobado-center'
                   },
                 ]
               }
@@ -352,7 +351,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/automotriz-local/empleados-center'
+                url: 'central/center/visado-creditos-local/automotriz-local/empleados-center'
               },
               {
                 id: 'negocios',
@@ -360,7 +359,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/automotriz-local/negocios-propio-center'
+                url: 'central/center/visado-creditos-local/automotriz-local/negocios-propio-center'
               },
               {
                 id: 'propios-pre-aprovados',
@@ -368,7 +367,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/automotriz-local/negocios-propios-pre-aprobados-center'
+                url: 'central/center/visado-creditos-local/automotriz-local/negocios-propios-pre-aprobados-center'
               },
               {
                 id: 'empelados-pre-aprovados',
@@ -376,7 +375,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'central/center/solicitudes-creditos-local/automotriz-local/empelados-pre-aprobados-center'
+                url: 'central/center/visado-creditos-local/automotriz-local/empelados-pre-aprobados-center'
               },
             ]
           },
@@ -506,7 +505,7 @@ export const menu: CoreMenu[] = [
               //       // translate: 'MENU.APPS.EMAIL',
               //       type: 'item',
               //       icon: 'circle',
-              //       url: 'central/center/solicitudes-creditos-local-digital/ifis/negocios-propios-pre-aprobados-center-digital'
+              //       url: 'central/center/visado-creditos-local-digital/ifis/negocios-propios-pre-aprobados-center-digital'
               //     },
               //     {
               //       id: 'empelados-pre-aprovadosDigital',
@@ -514,7 +513,7 @@ export const menu: CoreMenu[] = [
               //       // translate: 'MENU.APPS.EMAIL',
               //       type: 'item',
               //       icon: 'circle',
-              //       url: 'central/center/solicitudes-creditos-local-digital/ifis/empelados-pre-aprobados-center-digital'
+              //       url: 'central/center/visado-creditos-local-digital/ifis/empelados-pre-aprobados-center-digital'
               //     },
               //   ],
               // },

@@ -8,7 +8,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">REVISIÓN DE
+                            <li class="breadcrumb-item"><a class="text-primary" >REVISIÓN DE
                                 DOCUMENTOS</a>
                             </li>
                         </ol>
@@ -202,7 +202,7 @@
 <!-- INICIO MODAL USER -->
 <ng-template #modalSLC let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel1">Buró de crédito</h4>
+        <h4 class="modal-title" id="modalSLC">Buró de crédito</h4>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -277,6 +277,15 @@
                 <input
                         type="text"
                         value="{{userViewData.tipoPersona}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Edad</label>
+                <input
+                        type="text"
+                        value="{{userViewData.edad}}"
                         class="form-control"
                         disabled
                 />
@@ -437,11 +446,6 @@
                 <input type="text" class="form-control"
                        value="{{userViewData.otrosIngresos}}" disabled/>
             </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-4">
-
-            </div>
             <div class="form-group col-md-4">
 
                 <label class="form-label" for="vertical-modern-username">Especifique otros ingresos(ejemplo: vendo
@@ -449,6 +453,17 @@
 
                 <input
                         type="text" class="form-control" disabled>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label class="form-label" for="vertical-modern-username">Total Ingresos</label>
+                <input type="text" class="form-control"
+                       value="{{userViewData.ingresosSolicitante.totalIngresos}}" disabled/>
+            </div>
+            <div class="form-group col-md-4">
 
 
             </div>
@@ -519,6 +534,13 @@
                     colegiaturas dividias,cuidado a terceras personas,etc.)</label>
                 <input type="text" class="form-control"
                        value="{{gastosSolicitante.deccripcion}}" disabled/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-username">Total gastos</label>
+                <input type="text" class="form-control"
+                       value="{{gastosSolicitante.totalGastos}}" disabled/>
             </div>
         </div>
     </div>

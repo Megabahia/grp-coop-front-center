@@ -24,7 +24,7 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
     // Variables
     public listaCreditos;
     public userViewData;
-    private ocupacionSolicitante;
+    public ocupacionSolicitante;
     public referenciasSolicitante;
     public ingresosSolicitante;
     public gastosSolicitante;
@@ -51,8 +51,8 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
     public cargando = false;
     public actualizarCreditoFormData;
     public casaPropia = false;
-    private motivo: string;
-    private estadoCredito: any;
+    public motivo: string;
+    public estadoCredito: any;
 
     constructor(
         private _solicitudCreditosService: SolicitudesCreditosService,
@@ -112,34 +112,49 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
         this.credito = credito;
         const user = credito.user;
         this.soltero = (user.estadoCivil === 'Solter@' || user.estadoCivil === 'Soltero' ||
-          user.estadoCivil === 'Divorciad@' || user.estadoCivil === 'Divorciado');
+            user.estadoCivil === 'Divorciad@' || user.estadoCivil === 'Divorciado');
         this.casaPropia = (user.tipoVivienda === 'Propia');
         this.modalOpenSLC(modal);
         this.userViewData = user;
-        this.ocupacionSolicitante = typeof user.ocupacionSolicitante === 'string' ? JSON.parse(user.ocupacionSolicitante) : user.ocupacionSolicitante;
-        this.referenciasSolicitante = typeof user.referenciasSolicitante === 'string' ? JSON.parse(user.referenciasSolicitante) : user.referenciasSolicitante;
-        this.ingresosSolicitante = typeof user.ingresosSolicitante === 'string' ? JSON.parse(user.ingresosSolicitante) : user.ingresosSolicitante;
+        this.ocupacionSolicitante = typeof user.ocupacionSolicitante === 'string'
+            ? JSON.parse(user.ocupacionSolicitante) : user.ocupacionSolicitante;
+        this.referenciasSolicitante = typeof user.referenciasSolicitante === 'string'
+            ? JSON.parse(user.referenciasSolicitante) : user.referenciasSolicitante;
+        this.ingresosSolicitante = typeof user.ingresosSolicitante === 'string'
+            ? JSON.parse(user.ingresosSolicitante) : user.ingresosSolicitante;
         this.gastosSolicitante = typeof user.gastosSolicitante === 'string' ? JSON.parse(user.gastosSolicitante) : user.gastosSolicitante;
     }
+
+    customHeaderFooterSelectAll() {
+        this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map((x: any) => x.ruc);
+    }
+
+    customHeaderFooterUnselectAll() {
+        this.selectEmpresasCorpSelected = [];
+    }
+
     obtenerEmpresasCorp() {
         this._solicitudCreditosService.obtenerEmpresasCorp({}).subscribe((info) => {
             this.selectEmpresasCorp = info.info;
         });
     }
+
     actualizarEmpresasAplican(credito_id) {
         this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
             _id: credito_id, empresasAplican: JSON.stringify(this.selectEmpresasCorpSelected)
-        }).subscribe(next => {
+        }).subscribe(() => {
             this.obtenerSolicitudesCreditos();
             this.cerrarModal();
         });
     }
+
     modalSelectOpen(modalSelect, empresasAplican) {
         this.selectEmpresasCorpSelected = empresasAplican;
         this.modalService.open(modalSelect, {
             windowClass: 'modal'
         });
     }
+
     viewReferences(modal, referenciasSolicitante) {
         this.obtenerSolicitudesCreditos();
         this.referenciasSolicitante = referenciasSolicitante;
@@ -166,7 +181,7 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
         this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
             _id: credito._id,
             user: {...credito.user, referenciasSolicitante: this.referenciasSolicitante}
-        }).subscribe((info) => {
+        }).subscribe(() => {
             console.log('actualizo');
             this.obtenerSolicitudesCreditos();
             this.cerrarModal();
@@ -181,8 +196,8 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
         this.actualizarCreditoFormData = new FormData();
         this.pantalla = 1;
         this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
-          credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
-          credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
+            credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
+            credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
         console.log(this.soltero, 'this.soltero');
         this.actualizarCreditoForm = this._formBuilder.group({
             id: [credito._id, [Validators.required]],
@@ -202,7 +217,7 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
             checkCalificacionBuroIfis: ['', [Validators.requiredTrue]],
             checkBuroRevisado: ['', [Validators.requiredTrue]],
             checkIdenficicacion: ['', [Validators.requiredTrue]],
-            checkRuc: ['', ],
+            checkRuc: [''],
             checkFotoCarnet: ['', [Validators.requiredTrue]],
             checkPapeletaVotacion: ['', [Validators.requiredTrue]],
             checkIdentificacionConyuge: ['', this.soltero ? [] : [Validators.requiredTrue]],
@@ -287,24 +302,24 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
             this.checks.splice(3, 2);
         }
         this.cargando = true;
-        if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+        if (this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar') {
             this.actualizarCreditoFormData.delete('estado');
             this.actualizarCreditoFormData.append('estado', this.estadoCredito);
         }
         this.actualizarCreditoFormData.delete('motivo');
         this.actualizarCreditoFormData.append('motivo', this.motivo);
-        this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
-              this.cerrarModal();
+        this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe(() => {
+                this.cerrarModal();
                 this.cargando = false;
-              if (estado === 'Negado' || estado === 'Por Completar') {
-                  this.pantalla = 0;
-              } else {
-                  this.pantalla = 3;
-              }
+                if (estado === 'Negado' || estado === 'Por Completar') {
+                    this.pantalla = 0;
+                } else {
+                    this.pantalla = 3;
+                }
                 this.obtenerSolicitudesCreditos();
                 this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
             },
-            (error) => {
+            () => {
                 this.cargando = false;
             });
     }
@@ -324,7 +339,7 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
         this.cargando = true;
         this.actualizarCreditoFormData.delete('estado');
         this.actualizarCreditoFormData.append('estado', estado);
-        this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
+        this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe(() => {
                 this.cargando = false;
                 this.obtenerSolicitudesCreditos();
                 this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
@@ -334,7 +349,7 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
                     this.pantalla = 3;
                 }
             },
-            (error) => {
+            () => {
                 this.cargando = false;
                 if (estado === 'Negado') {
                     this.pantalla = 0;
@@ -354,9 +369,9 @@ export class EmpleadosComponent implements OnInit, AfterViewInit {
         this.motivo = '';
         this.estadoCredito = estadoCredito;
         this.modalService.open(modalMotivo, {
-              centered: true,
-              size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
-          }
+                centered: true,
+                size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+            }
         );
     }
 

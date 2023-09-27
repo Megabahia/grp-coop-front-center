@@ -10,7 +10,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">
+                            <li class="breadcrumb-item"><a class="text-primary">
                                 Solicitudes de Crédito Alfa
                             </a>
                             </li>
@@ -115,11 +115,12 @@
                             <ng-template #modalSelect let-modal>
                                 <div class="modal-header">
                                     <h4 class="modal-title" id="myModalLabel">Empresas que aplican</h4>
-                                    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                                    <button type="button" class="close" (click)="modal.dismiss('Cross click')"
+                                            aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" tabindex="0" ngbAutofocus>
+                                <div class="modal-body" tabindex="0">
                                     <label>Seleccione las empresas</label>
 
                                     <div class="form-group">
@@ -140,7 +141,8 @@
                                                 >
                                                     Seleccionar todo
                                                 </button>
-                                                <button (click)="customHeaderFooterUnselectAll()" class="btn btn-sm btn-secondary" rippleEffect>
+                                                <button (click)="customHeaderFooterUnselectAll()"
+                                                        class="btn btn-sm btn-secondary" rippleEffect>
                                                     Deselecciona todo
                                                 </button>
                                             </ng-template>
@@ -149,10 +151,12 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" (click)="actualizarEmpresasAplican(credito._id)"rippleEffect>
+                                    <button type="button" class="btn btn-primary"
+                                            (click)="actualizarEmpresasAplican(credito._id)" rippleEffect>
                                         Guardar
                                     </button>
-                                    <button type="button" class="btn btn-secondary" (click)="modal.close('Accept click')" rippleEffect>
+                                    <button type="button" class="btn btn-secondary"
+                                            (click)="modal.close('Accept click')" rippleEffect>
                                         Cerrar
                                     </button>
                                 </div>
@@ -173,13 +177,13 @@
                             <!-- Modal -->
                             <ng-template #modalFamiliares let-modal>
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel1">Empresas que aplican</h4>
+                                    <h4 class="modal-title" id="modalFamiliares">Empresas que aplican</h4>
                                     <button type="button" class="close" (click)="modal.dismiss('Cross click')"
                                             aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" tabindex="0" ngbAutofocus>
+                                <div class="modal-body" tabindex="0">
                                     <ul>Referencias Familiares:
                                         <li *ngFor="let familiar of credito.user?.referenciasSolicitante; let i = index">
                                             <div class="custom-control custom-switch custom-success my-2">
@@ -209,7 +213,8 @@
                                             rippleEffect>
                                         Guardar
                                     </button>
-                                    <button type="button" class="btn btn-secondary" (click)="modal.close('Accept click')" rippleEffect>
+                                    <button type="button" class="btn btn-secondary"
+                                            (click)="modal.close('Accept click')" rippleEffect>
                                         Cerrar
                                     </button>
                                 </div>
@@ -352,7 +357,8 @@
                     <label>
                         Provincia de Trabajo de la Madrina o Padrino:
                     </label>
-                    <input [value]="userViewData.garante.provinciaTipoPersona" type="text" class="form-control" disabled>
+                    <input [value]="userViewData.garante.provinciaTipoPersona" type="text" class="form-control"
+                           disabled>
                 </div>
             </div>
 
@@ -370,7 +376,8 @@
                     <label>
                         Dirección de Trabajo de la Madrina o Padrino:
                     </label>
-                    <input [value]="userViewData.garante.direccionTipoPersona" type="text" class="form-control" disabled>
+                    <input [value]="userViewData.garante.direccionTipoPersona" type="text" class="form-control"
+                           disabled>
                 </div>
             </div>
 
@@ -388,7 +395,8 @@
                     <label>
                         Nombre del Negocio de la Madrina o Padrino:
                     </label>
-                    <input [value]="userViewData.garante.nombreNegocioGarante" type="text" class="form-control" disabled>
+                    <input [value]="userViewData.garante.nombreNegocioGarante" type="text" class="form-control"
+                           disabled>
                 </div>
             </div>
         </div>
@@ -399,7 +407,7 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label class="form-label" for="vertical-modern-username">Fecha de creación de solicitud</label>
-                <input type="text" id="vertical-modern-username" class="form-control"
+                <input type="text" id="vertical-modern-username_2" class="form-control"
                        value="{{credito.created_at}}" disabled/>
             </div>
             <div class="form-group col-md-4">
@@ -470,6 +478,15 @@
                 <input
                         type="text"
                         value="{{userViewData.tipoPersona}}"
+                        class="form-control"
+                        disabled
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label">Edad</label>
+                <input
+                        type="text"
+                        value="{{userViewData.edad}}"
                         class="form-control"
                         disabled
                 />
@@ -688,11 +705,6 @@
                 <input type="text" class="form-control"
                        value="{{userViewData.otrosIngresos}}" disabled/>
             </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-4">
-
-            </div>
             <div class="form-group col-md-4">
 
                 <label class="form-label" for="vertical-modern-username">Especifique otros ingresos(ejemplo: vendo
@@ -700,6 +712,18 @@
 
                 <input
                         type="text" class="form-control" disabled>
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label class="form-label" for="vertical-modern-username">Total Ingresos</label>
+                <input type="text" class="form-control"
+                       value="{{userViewData.ingresosSolicitante.totalIngresos}}" disabled/>
+            </div>
+            <div class="form-group col-md-4">
 
 
             </div>
@@ -770,6 +794,13 @@
                     colegiaturas dividias,cuidado a terceras personas,etc.)</label>
                 <input type="text" class="form-control"
                        value="{{gastosSolicitante.deccripcion}}" disabled/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-username">Total gastos</label>
+                <input type="text" class="form-control"
+                       value="{{gastosSolicitante.totalGastos}}" disabled/>
             </div>
         </div>
     </div>
@@ -1197,12 +1228,14 @@
                     <label class="form-check-label mr-2" for="checkPapeletaVotacionGarante">Valido</label>
                     <input class="form-check-input" type="checkbox" id="checkPapeletaVotacionGarante"
                            formControlName="checkPapeletaVotacionGarante"/>
-                    <a *ngIf="credito.papeletaVotacionGarante" href="{{credito.papeletaVotacionGarante}}" target="_blank">
+                    <a *ngIf="credito.papeletaVotacionGarante" href="{{credito.papeletaVotacionGarante}}"
+                       target="_blank">
                         Ver
                     </a>
                     <div *ngIf="submitted && controlsFrom.checkPapeletaVotacionGarante.errors" class="invalid-feedback"
                          style="display: block;">
-                        <div *ngIf="controlsFrom.checkPapeletaVotacionGarante.errors.required">Copia de pago de impuesto predial
+                        <div *ngIf="controlsFrom.checkPapeletaVotacionGarante.errors.required">Copia de pago de impuesto
+                            predial
                             es requerido
                         </div>
                     </div>
@@ -1240,45 +1273,52 @@
                     </a>
                     <div *ngIf="submitted && controlsFrom.checkImpuestoPredialGarante.errors" class="invalid-feedback"
                          style="display: block;">
-                        <div *ngIf="controlsFrom.checkImpuestoPredialGarante.errors.required">Copia de pago de impuesto predial
+                        <div *ngIf="controlsFrom.checkImpuestoPredialGarante.errors.required">Copia de pago de impuesto
+                            predial
                             es requerido
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="checkMatriculaVehiculoGarante">Matrícula del vehículo de la madrina o padrino (en caso de aplicar)
+                <label for="checkMatriculaVehiculoGarante">Matrícula del vehículo de la madrina o padrino (en caso de
+                    aplicar)
                 </label>
 
                 <div class="custom-file">
                     <label class="form-check-label mr-2" for="checkMatriculaVehiculoGarante">Valido</label>
                     <input class="form-check-input" type="checkbox" id="checkMatriculaVehiculoGarante"
                            formControlName="checkMatriculaVehiculoGarante"/>
-                    <a *ngIf="credito.matriculaVehiculoGarante" href="{{credito.matriculaVehiculoGarante}}" target="_blank">
+                    <a *ngIf="credito.matriculaVehiculoGarante" href="{{credito.matriculaVehiculoGarante}}"
+                       target="_blank">
                         Ver
                     </a>
                     <div *ngIf="submitted && controlsFrom.checkMatriculaVehiculoGarante.errors" class="invalid-feedback"
                          style="display: block;">
-                        <div *ngIf="controlsFrom.checkMatriculaVehiculoGarante.errors.required">Copia de pago de impuesto predial
+                        <div *ngIf="controlsFrom.checkMatriculaVehiculoGarante.errors.required">Copia de pago de
+                            impuesto predial
                             es requerido
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="checkPlanillaDomicilioGarante">Copia de planilla de luz del domicilio de la madrina o padrino
+                <label for="checkPlanillaDomicilioGarante">Copia de planilla de luz del domicilio de la madrina o
+                    padrino
                 </label>
 
                 <div class="custom-file">
                     <label class="form-check-label mr-2" for="checkPlanillaDomicilioGarante">Valido</label>
                     <input class="form-check-input" type="checkbox" id="checkPlanillaDomicilioGarante"
                            formControlName="checkPlanillaDomicilioGarante"/>
-                    <a *ngIf="credito.planillaDomicilioGarante" href="{{credito.planillaDomicilioGarante}}" target="_blank">
+                    <a *ngIf="credito.planillaDomicilioGarante" href="{{credito.planillaDomicilioGarante}}"
+                       target="_blank">
                         Ver
                     </a>
                     <div *ngIf="submitted && controlsFrom.checkPlanillaDomicilioGarante.errors" class="invalid-feedback"
                          style="display: block;">
-                        <div *ngIf="controlsFrom.checkPlanillaDomicilioGarante.errors.required">Copia de pago de impuesto predial
+                        <div *ngIf="controlsFrom.checkPlanillaDomicilioGarante.errors.required">Copia de pago de
+                            impuesto predial
                             es requerido
                         </div>
                     </div>
