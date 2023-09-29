@@ -99,7 +99,7 @@ export class EmpleadosPreaprovaodsComponent implements OnInit, AfterViewInit {
             page_size: this.page_size,
             page: this.page - 1,
             tipoCredito: 'Empleado-PreAprobado',
-            cargarOrigen: 'BIGPUNTOS',
+            cargarOrigen: ['BIGPUNTOS', 'IFIS'],
             alcance: ['LOCAL', 'OMNIGLOBAL'],
             enviado: 1,
         }).subscribe(info => {
