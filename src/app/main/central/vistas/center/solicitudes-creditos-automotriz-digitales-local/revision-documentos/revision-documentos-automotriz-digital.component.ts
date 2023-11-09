@@ -1,5 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
+/**
+ * COOP
+ * Center
+ * Esta pantalla sirve para mostrar los requisitos de los creditos
+ * Rutas:
+ * No recibe ningun llamado de rutas
+ */
+
 @Component({
   selector: 'app-revision-documentos-center-automotriz-digital',
   templateUrl: './revision-documentos-automotriz-digital.component.html',

@@ -1,11 +1,19 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
-import {PagoProveedoresService} from '../solicitudes-pago-proveedores/pago-proveedores.service';
 import {DatePipe} from '@angular/common';
 import {CoreMenuService} from '../../../../../../@core/components/core-menu/core-menu.service';
 import {SolicitudPagoEmpleadosService} from './solicitud-pago-empleados.service';
 import {SolicitudesCreditosService} from '../solicitudes-creditos/solicitudes-creditos.service';
+
+/**
+ * COOP
+ * Center
+ * Esta pantalla sirve para mostrar las solicitudes de credito de proveedores
+ * Rutas:
+ * `${environment.apiUrl}/corp/pagoProveedores/list/`,
+ * `${environment.apiUrl}/corp/pagoProveedores/update/${datos._id}`,
+ */
 
 @Component({
   selector: 'app-solicitudes-pago-empleados',

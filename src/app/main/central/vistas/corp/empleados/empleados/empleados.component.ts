@@ -6,6 +6,18 @@ import {ParametrizacionesService} from '../../../center/parametrizaciones/parame
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute} from '@angular/router';
 
+/**
+ * COOP
+ * center
+ * pantalla sirve para mostrar el registro del empleado
+ * Rutas:
+ * `${environment.apiUrl}/corp/empresas/list/empleados/`,
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ * `${environment.apiUrl}/corp/empresas/listOne/empleado/${id}`
+ * `${environment.apiUrl}/corp/empresas/actualizar/${id}`,
+ * `${environment.apiUrl}/corp/empresas/empleado/delete/${id}`
+ */
+
 @Component({
   selector: 'app-empleados-empresas',
   templateUrl: './empleados.component.html',
@@ -28,7 +40,7 @@ export class EmpleadosComponent implements OnInit {
   public empresa = '';
   public cargandoEmpresa = false;
   private idEmpleado = 0;
-  private mensaje = '';
+  public mensaje = '';
 
   constructor(
     private _empresasService: EmpresasService,

@@ -1,11 +1,23 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {DatePipe} from '@angular/common';
 import {ValidacionesPropias} from '../../../../../../../utils/customer.validators';
 import {SolicitudesCreditosAutomotrizDigitalService} from '../solicitudes-creditos-automotriz-digital.service';
+
+/**
+ * COOP
+ * Center
+ * ESta pantalla sirve para listar los creditos empleados
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/list/`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('id')}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/pruebaConsumer`
+ * `${environment.apiUrl}/corp/empresas/list/comercial`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ */
 
 @Component({
   selector: 'app-alfa-center-automotriz-digital',
@@ -21,13 +33,12 @@ export class AlfaCenterAutomotrizDigitalComponent implements OnInit, AfterViewIn
   public page_size: any = 4;
   public maxSize;
   public collectionSize;
-  private _unsubscribeAll: Subject<any>;
 
 
   // Variables
   public listaCreditos;
   public userViewData;
-  private ocupacionSolicitante;
+  public ocupacionSolicitante;
   public referenciasSolicitante;
   public ingresosSolicitante;
   public gastosSolicitante;

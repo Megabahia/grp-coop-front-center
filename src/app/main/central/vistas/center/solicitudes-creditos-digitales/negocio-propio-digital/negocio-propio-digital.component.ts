@@ -6,6 +6,19 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {Subject} from 'rxjs';
 
+/**
+ * IFIS
+ * Center
+ * ESta pantalla sirve para listar los creditos negocio propio
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/list/`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('id')}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/pruebaConsumer`
+ * `${environment.apiUrl}/corp/empresas/list/comercial`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ */
+
 @Component({
   selector: 'app-negocio-propio',
   templateUrl: './negocio-propio-digital.component.html',
@@ -238,7 +251,7 @@ export class NegocioPropioDigitalComponent implements OnInit, AfterViewInit {
       this.checks.splice(3, 2);
     }
     this.cargando = true;
-    if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+    if (this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar') {
       this.actualizarCreditoFormData.delete('estado');
       this.actualizarCreditoFormData.append('estado', this.estadoCredito);
     }
@@ -310,6 +323,7 @@ export class NegocioPropioDigitalComponent implements OnInit, AfterViewInit {
       }
     );
   }
+
   cerrarModal() {
     this.modalService.dismissAll();
   }

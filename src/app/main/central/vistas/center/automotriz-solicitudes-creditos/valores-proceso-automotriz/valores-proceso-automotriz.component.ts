@@ -5,6 +5,14 @@ import Decimal from 'decimal.js';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ValidacionesPropias} from '../../../../../../../utils/customer.validators';
 
+/**
+ * COOP
+ * CEnter
+ * Esta pantalla sirve para mostrar los valores que se van a procesar a la solicitud de credito
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('id')}`,
+ */
+
 @Component({
   selector: 'app-valores-proceso-automotriz',
   templateUrl: './valores-proceso-automotriz.component.html',
@@ -20,15 +28,15 @@ export class ValoresProcesoAutomotrizComponent implements OnInit {
   public cargando = false;
   public actualizarCreditoForm: FormGroup;
   public actualizarCreditoFormData;
-  private soltero: boolean;
-  private casaPropia: boolean;
-  private userViewData: any;
-  private ocupacionSolicitante: any;
-  private referenciasSolicitante: any;
-  private ingresosSolicitante: any;
-  private gastosSolicitante: any;
-  private empresa: any;
-  private casado: boolean;
+  public soltero: boolean;
+  public casaPropia: boolean;
+  public userViewData: any;
+  public ocupacionSolicitante: any;
+  public referenciasSolicitante: any;
+  public ingresosSolicitante: any;
+  public gastosSolicitante: any;
+  public empresa: any;
+  public casado: boolean;
   public formSolicitud: FormGroup;
   public formConyuge: FormGroup;
   public microEmpresa = false;
@@ -37,7 +45,8 @@ export class ValoresProcesoAutomotrizComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _solicitudCreditosService: SolicitudesCreditosAutomotrizService,
     private modalService: NgbModal,
-  ) {  }
+  ) {
+  }
 
   ngOnInit(): void {
     this.actualizarCreditoFormData = new FormData();
@@ -55,11 +64,7 @@ export class ValoresProcesoAutomotrizComponent implements OnInit {
       tablaAmortizacion: ['', [Validators.required, ValidacionesPropias.pdfValido]],
     });
     console.log('this.credito', this.credito);
-    if (Object.keys(this.credito.empresaInfo).length === 0) {
-      this.microEmpresa = false;
-    } else {
-      this.microEmpresa = true;
-    }
+    this.microEmpresa = Object.keys(this.credito.empresaInfo).length !== 0;
   }
 
   get controlsFrom() {
@@ -137,7 +142,7 @@ export class ValoresProcesoAutomotrizComponent implements OnInit {
     this.declareFormConyuge();
     this.modalOpenSLC(modal);
     this.casado = (infoEmpresa.esatdo_civil === 'Casad@' || infoEmpresa.esatdo_civil === 'Casado'
-        || infoEmpresa.esatdo_civil === 'Union Libre' || infoEmpresa.esatdo_civil === 'Unión libre');
+      || infoEmpresa.esatdo_civil === 'Union Libre' || infoEmpresa.esatdo_civil === 'Unión libre');
     infoEmpresa?.familiares.forEach(item => this.agregarFamiliar());
     this.formSolicitud.patchValue({...infoEmpresa});
   }

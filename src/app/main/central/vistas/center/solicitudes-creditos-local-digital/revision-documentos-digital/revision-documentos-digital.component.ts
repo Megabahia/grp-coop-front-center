@@ -1,5 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
+/**
+ * COOP
+ * CEnter
+ * ESta pantalla sirve para mostrar el resumen de la solicitud de credito
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/listOne/${id}`
+ */
+
 @Component({
   selector: 'app-revision-documentos-digital',
   templateUrl: './revision-documentos-digital.component.html',
@@ -14,7 +22,7 @@ export class RevisionDocumentosDigitalComponent implements OnInit {
 
   constructor() {
     this.completado = false;
-    console.log('cjesks', this.checks)
+    console.log('cjesks', this.checks);
   }
 
   ngOnInit(): void {

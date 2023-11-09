@@ -6,6 +6,15 @@ import {Subject} from 'rxjs';
 import {PagoProveedoresService} from './pago-proveedores.service';
 import {SolicitudesCreditosService} from '../solicitudes-creditos/solicitudes-creditos.service';
 
+/**
+ * COOP
+ * Center
+ * Esta pantalla sirve para mostrar las solicitudes de credito de proveedores
+ * Rutas:
+ * `${environment.apiUrl}/corp/pagoProveedores/list/`,
+ * `${environment.apiUrl}/corp/pagoProveedores/update/${datos._id}`,
+ */
+
 @Component({
   selector: 'app-solicitudes-pago-proveedores',
   templateUrl: './solicitudes-pago-proveedores.component.html',
@@ -28,12 +37,12 @@ export class SolicitudesPagoProveedoresComponent implements OnInit, AfterViewIni
   public usuario;
   public observacion = '';
   public idPagoProveedor = '';
-  private solicitudPago;
+  public solicitudPago;
   public numeroComprobante = '';
   public date = new Date();
 
   constructor(
-      private _solicitudCreditosService: SolicitudesCreditosService,
+    private _solicitudCreditosService: SolicitudesCreditosService,
     private _pagoProveedoresService: PagoProveedoresService,
     private datePipe: DatePipe,
     private _coreMenuService: CoreMenuService,
@@ -123,6 +132,7 @@ export class SolicitudesPagoProveedoresComponent implements OnInit, AfterViewIni
   abrirModal(modal) {
     this._modalService.open(modal);
   }
+
   consumirAWS() {
     this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
       console.log(info);
