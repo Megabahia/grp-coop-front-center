@@ -407,4 +407,6 @@ export class AlfaComponent implements OnInit, AfterViewInit {
       this.obtenerSolicitudesCreditos();
     });
   }
+
+  protected readonly JSON = JSON;
 }
