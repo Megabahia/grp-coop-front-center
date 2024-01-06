@@ -6,6 +6,19 @@ import {SolicitudesCreditosDigitalService} from '../solicitudes-creditos-digital
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {DatePipe} from '@angular/common';
 
+/**
+ * COOP
+ * Center
+ * ESta pantalla sirve para listar los creditos empleados
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/list/`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('id')}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/pruebaConsumer`
+ * `${environment.apiUrl}/corp/empresas/list/comercial`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ */
+
 @Component({
   selector: 'app-alfa',
   templateUrl: './alfa-digital.component.html',
@@ -56,11 +69,11 @@ export class AlfaDigitalComponent implements OnInit {
   private estadoCredito: any;
 
   constructor(
-      private _solicitudCreditosService: SolicitudesCreditosDigitalService,
-      private modalService: NgbModal,
-      private _coreSidebarService: CoreSidebarService,
-      private _formBuilder: FormBuilder,
-      private datePipe: DatePipe,
+    private _solicitudCreditosService: SolicitudesCreditosDigitalService,
+    private modalService: NgbModal,
+    private _coreSidebarService: CoreSidebarService,
+    private _formBuilder: FormBuilder,
+    private datePipe: DatePipe,
   ) {
   }
 
@@ -88,9 +101,9 @@ export class AlfaDigitalComponent implements OnInit {
 
   modalOpenSLC(modalSLC) {
     this.modalService.open(modalSLC, {
-          centered: true,
-          size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
-        }
+        centered: true,
+        size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+      }
     );
   }
 
@@ -112,7 +125,7 @@ export class AlfaDigitalComponent implements OnInit {
     this.credito = credito;
     const user = credito.user;
     this.soltero = (user.estadoCivil === 'Solter@' || user.estadoCivil === 'Soltero' ||
-        user.estadoCivil === 'Divorciad@' || user.estadoCivil === 'Divorciado');
+      user.estadoCivil === 'Divorciad@' || user.estadoCivil === 'Divorciado');
     this.casaPropia = (user.tipoVivienda === 'Propia');
     this.modalOpenSLC(modal);
     this.userViewData = user;
@@ -129,8 +142,8 @@ export class AlfaDigitalComponent implements OnInit {
     this.actualizarCreditoFormData = new FormData();
     this.pantalla = 1;
     this.soltero = (credito.estadoCivil === 'Solter@' || credito.estadoCivil === 'Soltero' ||
-        credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
-        credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
+      credito.user.estadoCivil === 'Solter@' || credito.user.estadoCivil === 'Divorciado' ||
+      credito.estadoCivil === 'Divorciad@' || credito.estadoCivil === 'Divorciado');
     console.log(this.soltero, 'this.soltero');
     this.actualizarCreditoForm = this._formBuilder.group({
       id: [credito._id, [Validators.required]],
@@ -150,7 +163,7 @@ export class AlfaDigitalComponent implements OnInit {
       checkCalificacionBuroIfis: ['', [Validators.requiredTrue]],
       checkBuroRevisado: ['', [Validators.requiredTrue]],
       checkIdenficicacion: ['', [Validators.requiredTrue]],
-      checkRuc: ['', ],
+      checkRuc: [''],
       checkFotoCarnet: ['', [Validators.requiredTrue]],
       checkPapeletaVotacion: ['', [Validators.requiredTrue]],
       checkIdentificacionConyuge: ['', this.soltero ? [] : [Validators.requiredTrue]],
@@ -252,19 +265,19 @@ export class AlfaDigitalComponent implements OnInit {
     }
     console.log('this.actualizarCreditoFormData', this.actualizarCreditoFormData);
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
-          this.cerrarModal();
-          this.cargando = false;
-          if (estado === 'Negado' || estado === 'Por Completar') {
-            this.pantalla = 0;
-          } else {
-            this.pantalla = 3;
-          }
-          this.obtenerSolicitudesCreditos();
-          this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
-        },
-        (error) => {
-          this.cargando = false;
-        });
+        this.cerrarModal();
+        this.cargando = false;
+        if (estado === 'Negado' || estado === 'Por Completar') {
+          this.pantalla = 0;
+        } else {
+          this.pantalla = 3;
+        }
+        this.obtenerSolicitudesCreditos();
+        this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
+      },
+      (error) => {
+        this.cargando = false;
+      });
   }
 
   actualizarSolicitudCreditoNegado(estado) {
@@ -283,21 +296,21 @@ export class AlfaDigitalComponent implements OnInit {
     this.actualizarCreditoFormData.delete('estado');
     this.actualizarCreditoFormData.append('estado', estado);
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
-          this.cargando = false;
-          this.obtenerSolicitudesCreditos();
-          this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
-          if (estado === 'Negado') {
-            this.pantalla = 0;
-          } else {
-            this.pantalla = 3;
-          }
-        },
-        (error) => {
-          this.cargando = false;
-          if (estado === 'Negado') {
-            this.pantalla = 0;
-          }
-        });
+        this.cargando = false;
+        this.obtenerSolicitudesCreditos();
+        this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
+        if (estado === 'Negado') {
+          this.pantalla = 0;
+        } else {
+          this.pantalla = 3;
+        }
+      },
+      (error) => {
+        this.cargando = false;
+        if (estado === 'Negado') {
+          this.pantalla = 0;
+        }
+      });
   }
 
   abrirModalMotivo(modalMotivo, estadoCredito) {
@@ -312,9 +325,9 @@ export class AlfaDigitalComponent implements OnInit {
     this.motivo = '';
     this.estadoCredito = estadoCredito;
     this.modalService.open(modalMotivo, {
-          centered: true,
-          size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
-        }
+        centered: true,
+        size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+      }
     );
   }
 

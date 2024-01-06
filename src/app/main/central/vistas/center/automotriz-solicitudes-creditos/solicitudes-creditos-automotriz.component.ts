@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 
 import { NgbModal, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
@@ -18,7 +18,7 @@ import {SolicitudesCreditosService} from '../solicitudes-creditos/solicitudes-cr
     styleUrls: ['./solicitudes-creditos-automotriz.component.scss'],
     providers: [DatePipe]
 })
-export class SolicitudesCreditosAutomotrizComponent implements OnInit {
+export class SolicitudesCreditosAutomotrizComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild('confirmarPreautorizacionMdl') confirmarPreautorizacionMdl;
     @ViewChild('mensajeModal') mensajeModal;
     @ViewChild('detalleCreditoMdl') detalleCreditoMdl;

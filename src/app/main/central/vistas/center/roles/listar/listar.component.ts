@@ -1,12 +1,12 @@
 import {Component, Injectable, OnInit, ViewChild} from '@angular/core';
-import { NgbPagination, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbPagination, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BehaviorSubject, Subject} from 'rxjs';
-import { Rol } from '../models/rol';
+import {Rol} from '../models/rol';
 import {FormGroup, FormBuilder, Validators, FormArray, FormControl} from '@angular/forms';
-import { RolesService } from '../roles.service';
-import { DatePipe } from '@angular/common';
-import { CoreSidebarService } from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import {RolesService} from '../roles.service';
+import {DatePipe} from '@angular/common';
+import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
+import {HttpErrorResponse} from '@angular/common/http';
 import {menu} from '../../../../../../menu/menu';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
@@ -62,7 +62,7 @@ export class ChecklistDatabase {
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
    * The return value is the list of `TodoItemNode`.
    */
-  buildFileTree(obj: {[key: string]: any}, level: number): TodoItemNode[] {
+  buildFileTree(obj: { [key: string]: any }, level: number): TodoItemNode[] {
     return Object.keys(obj).reduce<TodoItemNode[]>((accumulator, key) => {
       const value = obj[key];
       const node = new TodoItemNode();
@@ -93,6 +93,18 @@ export class ChecklistDatabase {
     this.dataChange.next(this.data);
   }
 }
+
+/**
+ * COOP
+ * Center
+ * Esta pantalla sirve para listar los roles
+ * Rutas:
+ * `${environment.apiUrl}/central/roles/list/`,
+ * `${environment.apiUrl}/central/roles/listOne/${id}`
+ * `${environment.apiUrl}/central/roles/create/`,
+ * `${environment.apiUrl}/central/roles/update/${datos._id}`,
+ * `${environment.apiUrl}/central/roles/delete/${id}`
+ */
 
 @Component({
   selector: 'app-listar',
@@ -129,15 +141,15 @@ export class ListarComponent implements OnInit {
   };
 
   treeControl = new FlatTreeControl<any>(
-      node => node.level,
-      node => node.expandable,
+    node => node.level,
+    node => node.expandable,
   );
 
   treeFlattener = new MatTreeFlattener(
-      this._transformer,
-      node => node.level,
-      node => node.expandable,
-      node => node.children,
+    this._transformer,
+    node => node.level,
+    node => node.expandable,
+    node => node.children,
   );
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   hasChild = (_: number, node: any) => node.expandable;
@@ -161,11 +173,11 @@ export class ListarComponent implements OnInit {
     const nodeSelected = this.checklistSelection.isSelected(node);
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected =
-        descendants.length > 0 &&
-        descendants.every(child => {
-          // this.onCheckboxChange(child);
-          return this.checklistSelection.isSelected(child);
-        });
+      descendants.length > 0 &&
+      descendants.every(child => {
+        // this.onCheckboxChange(child);
+        return this.checklistSelection.isSelected(child);
+      });
     if (nodeSelected && !descAllSelected) {
       this.checklistSelection.deselect(node);
     } else if (!nodeSelected && descAllSelected) {
@@ -211,32 +223,35 @@ export class ListarComponent implements OnInit {
     }
     this.dataSource.data = menu;
   }
+
   onCheckboxChange(event: any) {
     const selectedCountries = (this.rolesForm.controls['config'] as FormArray);
     if (event.target.checked) {
       selectedCountries.push(new FormControl(event.target.value));
     } else {
       const index = selectedCountries.controls
-          .findIndex(x => x.value === event.target.value);
+        .findIndex(x => x.value === event.target.value);
       selectedCountries.removeAt(index);
     }
   }
+
   descendantsAllSelected(node: any): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected =
-        descendants.length > 0 &&
-        descendants.every(child => {
-          return this.checklistSelection.isSelected(child);
-        });
+      descendants.length > 0 &&
+      descendants.every(child => {
+        return this.checklistSelection.isSelected(child);
+      });
     return descAllSelected;
   }
+
   /** Toggle the to-do item selection. Select/deselect all the descendants node */
   todoItemSelectionToggle(node: any, event?): void {
     this.checklistSelection.toggle(node);
     const descendants = this.treeControl.getDescendants(node);
     this.checklistSelection.isSelected(node)
-        ? this.checklistSelection.select(...descendants)
-        : this.checklistSelection.deselect(...descendants);
+      ? this.checklistSelection.select(...descendants)
+      : this.checklistSelection.deselect(...descendants);
 
     // Force update for the parent
     descendants.forEach(child => this.checklistSelection.isSelected(child));
@@ -248,19 +263,22 @@ export class ListarComponent implements OnInit {
     const result = descendants.some(child => this.checklistSelection.isSelected(child));
     return result && !this.descendantsAllSelected(node);
   }
+
   ngOnInit(): void {
     this.rolesForm = this._formBuilder.group({
       codigo: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
-      config:  new FormArray([])
+      config: new FormArray([])
     });
   }
+
   ngAfterViewInit() {
     this.iniciarPaginador();
 
     this.obtenerListaRoles();
   }
+
   obtenerListaRoles() {
     this._rolService.obtenerListaRoles({
       page: this.page - 1, page_size: this.page_size, tipoUsuario: "center"
@@ -269,12 +287,13 @@ export class ListarComponent implements OnInit {
       this.collectionSize = info.cont;
     });
   }
+
   toggleSidebar(name, id): void {
     this.idRol = id;
     if (this.idRol) {
       this._rolService.obtenerRol(this.idRol).subscribe((info) => {
-        this.rol = info.rol;
-      },
+          this.rol = info.rol;
+        },
         (error) => {
           this.mensaje = "No se ha podido obtener el rol";
 
@@ -291,6 +310,7 @@ export class ListarComponent implements OnInit {
     }
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
+
   guardarRol() {
     const values = this.checklistSelection.selected;
     this.rol.config = JSON.stringify(values.reduce((acumulador, item) => {
@@ -306,14 +326,14 @@ export class ListarComponent implements OnInit {
     this.cargandoRol = true;
 
     if (this.idRol == "") {
-      this._rolService.crearRol({ ...this.rol, tipoUsuario: 'center' }).subscribe((info) => {
-        this.obtenerListaRoles();
-        this.mensaje = "Rol guardado con éxito";
-        this.abrirModal(this.mensajeModal);
-        this.toggleSidebar('guardarRol', '');
-        this.cargandoRol = false;
+      this._rolService.crearRol({...this.rol, tipoUsuario: 'center'}).subscribe((info) => {
+          this.obtenerListaRoles();
+          this.mensaje = "Rol guardado con éxito";
+          this.abrirModal(this.mensajeModal);
+          this.toggleSidebar('guardarRol', '');
+          this.cargandoRol = false;
 
-      },
+        },
         (error) => {
           // console.log(error);
           // let errores = Object.values(error);
@@ -328,13 +348,13 @@ export class ListarComponent implements OnInit {
         });
     } else {
       this._rolService.actualizarRol(this.rol).subscribe((info) => {
-        this.obtenerListaRoles();
-        this.mensaje = "Rol actualizado con éxito";
-        this.abrirModal(this.mensajeModal);
-        this.toggleSidebar('guardarRol', '');
-        this.cargandoRol = false;
+          this.obtenerListaRoles();
+          this.mensaje = "Rol actualizado con éxito";
+          this.abrirModal(this.mensajeModal);
+          this.toggleSidebar('guardarRol', '');
+          this.cargandoRol = false;
 
-      },
+        },
         (error) => {
           this.mensaje = "Error actualizando el rol";
           this.abrirModal(this.mensajeModal);
@@ -344,35 +364,42 @@ export class ListarComponent implements OnInit {
     }
 
   }
+
   eliminarRol() {
     this._rolService.eliminarRol(this.idRol).subscribe(() => {
-      this.obtenerListaRoles();
-      this.mensaje = "Rol eliminado correctamente";
-      this.abrirModal(this.mensajeModal);
-    },
+        this.obtenerListaRoles();
+        this.mensaje = "Rol eliminado correctamente";
+        this.abrirModal(this.mensajeModal);
+      },
       (error) => {
         this.mensaje = "Ha ocurrido un error al eliminar el rol";
         this.abrirModal(this.mensajeModal);
       });
   }
+
   get rolForm() {
     return this.rolesForm.controls;
   }
+
   iniciarPaginador() {
     this.paginator.pageChange.subscribe(() => {
       this.obtenerListaRoles();
     });
   }
+
   eliminarRolModal(id) {
     this.idRol = id;
     this.abrirModal(this.eliminarRolMdl);
   }
+
   abrirModal(modal) {
     this._modalService.open(modal)
   }
+
   cerrarModal() {
     this._modalService.dismissAll();
   }
+
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();

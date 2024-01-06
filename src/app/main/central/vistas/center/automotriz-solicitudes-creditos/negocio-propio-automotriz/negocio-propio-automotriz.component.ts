@@ -1,10 +1,22 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {SolicitudesCreditosAutomotrizService} from '../solicitudes-creditos-automotriz.service';
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {Subject} from 'rxjs';
+
+/**
+ * COOP
+ * Center
+ * ESta pantalla sirve para listar los creditos negocio propio
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/list/`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('id')}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/pruebaConsumer`
+ * `${environment.apiUrl}/corp/empresas/list/comercial`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ */
 
 @Component({
   selector: 'app-negocio-propio',
@@ -20,12 +32,11 @@ export class NegocioPropioAutomotrizComponent implements OnInit, AfterViewInit {
   public page_size: any = 4;
   public maxSize;
   public collectionSize;
-  private _unsubscribeAll: Subject<any>;
 
   // Variables
   public listaCreditos;
   public userViewData;
-  private ocupacionSolicitante;
+  public ocupacionSolicitante;
   public referenciasSolicitante;
   public ingresosSolicitante;
   public gastosSolicitante;
@@ -238,7 +249,7 @@ export class NegocioPropioAutomotrizComponent implements OnInit, AfterViewInit {
       this.checks.splice(3, 2);
     }
     this.cargando = true;
-    if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+    if (this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar') {
       this.actualizarCreditoFormData.delete('estado');
       this.actualizarCreditoFormData.append('estado', this.estadoCredito);
     }
@@ -310,6 +321,7 @@ export class NegocioPropioAutomotrizComponent implements OnInit, AfterViewInit {
       }
     );
   }
+
   cerrarModal() {
     this.modalService.dismissAll();
   }

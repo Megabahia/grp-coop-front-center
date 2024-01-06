@@ -6,6 +6,19 @@ import {SolicitudesCreditosAutomotrizService} from '../solicitudes-creditos-auto
 import {CoreSidebarService} from '../../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {DatePipe} from '@angular/common';
 
+/**
+ * COOP
+ * Center
+ * ESta pantalla sirve para listar los creditos empleados preaprobados
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/list/`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('id')}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/pruebaConsumer`
+ * `${environment.apiUrl}/corp/empresas/list/comercial`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ */
+
 @Component({
   selector: 'app-empleados-preaprovaods',
   templateUrl: './empleados-preaprovaods-automotriz.component.html',
@@ -56,11 +69,11 @@ export class EmpleadosPreaprovaodsAutomotrizComponent implements OnInit, AfterVi
   private estadoCredito: any;
 
   constructor(
-      private _solicitudCreditosService: SolicitudesCreditosAutomotrizService,
-      private modalService: NgbModal,
-      private _coreSidebarService: CoreSidebarService,
-      private _formBuilder: FormBuilder,
-      private datePipe: DatePipe,
+    private _solicitudCreditosService: SolicitudesCreditosAutomotrizService,
+    private modalService: NgbModal,
+    private _coreSidebarService: CoreSidebarService,
+    private _formBuilder: FormBuilder,
+    private datePipe: DatePipe,
   ) {
   }
 
@@ -88,9 +101,9 @@ export class EmpleadosPreaprovaodsAutomotrizComponent implements OnInit, AfterVi
 
   modalOpenSLC(modalSLC) {
     this.modalService.open(modalSLC, {
-          centered: true,
-          size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
-        }
+        centered: true,
+        size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+      }
     );
   }
 
@@ -230,7 +243,7 @@ export class EmpleadosPreaprovaodsAutomotrizComponent implements OnInit, AfterVi
       this.checks.splice(3, 2);
     }
     this.cargando = true;
-    if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+    if (this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar') {
       this.actualizarCreditoFormData.delete('estado');
       this.actualizarCreditoFormData.append('estado', this.estadoCredito);
     }
@@ -238,18 +251,18 @@ export class EmpleadosPreaprovaodsAutomotrizComponent implements OnInit, AfterVi
     this.actualizarCreditoFormData.append('motivo', this.motivo);
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
         this.cerrarModal();
-          this.cargando = false;
+        this.cargando = false;
         if (estado === 'Negado' || estado === 'Por Completar') {
           this.pantalla = 0;
         } else {
           this.pantalla = 3;
         }
-          this.obtenerSolicitudesCreditos();
-          this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
-        },
-        (error) => {
-          this.cargando = false;
-        });
+        this.obtenerSolicitudesCreditos();
+        this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
+      },
+      (error) => {
+        this.cargando = false;
+      });
   }
 
   actualizarSolicitudCreditoNegado(estado) {
@@ -268,21 +281,21 @@ export class EmpleadosPreaprovaodsAutomotrizComponent implements OnInit, AfterVi
     this.actualizarCreditoFormData.delete('estado');
     this.actualizarCreditoFormData.append('estado', estado);
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
-          this.cargando = false;
-          this.obtenerSolicitudesCreditos();
-          this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
-          if (estado === 'Negado') {
-            this.pantalla = 0;
-          } else {
-            this.pantalla = 3;
-          }
-        },
-        (error) => {
-          this.cargando = false;
-          if (estado === 'Negado') {
-            this.pantalla = 0;
-          }
-        });
+        this.cargando = false;
+        this.obtenerSolicitudesCreditos();
+        this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
+        if (estado === 'Negado') {
+          this.pantalla = 0;
+        } else {
+          this.pantalla = 3;
+        }
+      },
+      (error) => {
+        this.cargando = false;
+        if (estado === 'Negado') {
+          this.pantalla = 0;
+        }
+      });
   }
 
   abrirModalMotivo(modalMotivo, estadoCredito) {

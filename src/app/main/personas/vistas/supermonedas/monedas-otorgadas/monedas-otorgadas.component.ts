@@ -1,10 +1,20 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
-import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'app/auth/models';
-import { Subject } from 'rxjs';
-import { MonedasOtorgadasService } from './monedas-otorgadas.service';
+import {DatePipe} from '@angular/common';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {CoreMenuService} from '@core/components/core-menu/core-menu.service';
+import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
+import {User} from 'app/auth/models';
+import {Subject} from 'rxjs';
+import {MonedasOtorgadasService} from './monedas-otorgadas.service';
+
+/**
+ * COOP
+ * Personas
+ * ESta pantalla sirve para mostrar las monedas otorgadas
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/core/monedas/list/otorgadas/`,
+ * `${environment.apiUrl}/corp/empresas/list/logos`,
+ */
 
 @Component({
   selector: 'app-monedas-otorgadas',
@@ -13,7 +23,7 @@ import { MonedasOtorgadasService } from './monedas-otorgadas.service';
   providers: [DatePipe]
 
 })
-export class MonedasOtorgadasComponent implements OnInit {
+export class MonedasOtorgadasComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(NgbPagination) paginator: NgbPagination;
   public page = 1;
   public page_size: any = 10;
@@ -23,11 +33,11 @@ export class MonedasOtorgadasComponent implements OnInit {
   public usuario: User;
   public cantidadMonedas;
   private _unsubscribeAll: Subject<any>;
+
   constructor(
     private _monedasOtorgadasService: MonedasOtorgadasService,
     private _coreMenuService: CoreMenuService,
     private datePipe: DatePipe
-
   ) {
     this._unsubscribeAll = new Subject();
     this.usuario = this._coreMenuService.grpCoopCenterUser;
@@ -35,8 +45,9 @@ export class MonedasOtorgadasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
+
   ngAfterViewInit() {
     this.iniciarPaginador();
     this.obtenerListaMonedas();
@@ -50,15 +61,17 @@ export class MonedasOtorgadasComponent implements OnInit {
       this.collectionSize = info.cont;
     });
   }
+
   iniciarPaginador() {
     this.paginator.pageChange.subscribe(() => {
       this.obtenerListaMonedas();
     });
   }
+
   transformarFecha(fecha) {
-    let nuevaFecha = this.datePipe.transform(fecha, 'yyyy-MM-dd');
-    return nuevaFecha;
+    return this.datePipe.transform(fecha, 'yyyy-MM-dd');
   }
+
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();

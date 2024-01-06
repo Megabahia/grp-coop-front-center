@@ -5,6 +5,14 @@ import Decimal from 'decimal.js';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ValidacionesPropias} from '../../../../../../../utils/customer.validators';
 
+/**
+ * COOP
+ * CEnter
+ * Esta pantalla sirve para mostrar los valores que se van a procesar a la solicitud de credito
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('id')}`,
+ */
+
 @Component({
   selector: 'app-valores-proceso',
   templateUrl: './valores-proceso-digital.component.html',
@@ -37,7 +45,8 @@ export class ValoresProcesoDigitalComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _solicitudCreditosService: SolicitudesCreditosDigitalService,
     private modalService: NgbModal,
-  ) {  }
+  ) {
+  }
 
   ngOnInit(): void {
     this.actualizarCreditoFormData = new FormData();
@@ -137,7 +146,7 @@ export class ValoresProcesoDigitalComponent implements OnInit {
     this.declareFormConyuge();
     this.modalOpenSLC(modal);
     this.casado = (infoEmpresa.esatdo_civil === 'Casad@' || infoEmpresa.esatdo_civil === 'Casado'
-        || infoEmpresa.esatdo_civil === 'Union Libre' || infoEmpresa.esatdo_civil === 'Unión libre');
+      || infoEmpresa.esatdo_civil === 'Union Libre' || infoEmpresa.esatdo_civil === 'Unión libre');
     infoEmpresa?.familiares.forEach(item => this.agregarFamiliar());
     this.formSolicitud.patchValue({...infoEmpresa});
   }

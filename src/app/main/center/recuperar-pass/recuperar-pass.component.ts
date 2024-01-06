@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CoreConfigService } from '@core/services/config.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { RecuperarPassService } from './recuperar-pass.service';
-import { Router } from '@angular/router';
-import {environment} from "../../../../environments/environment";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CoreConfigService} from '@core/services/config.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {RecuperarPassService} from './recuperar-pass.service';
+import {Router} from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-recuperar-pass',
   templateUrl: './recuperar-pass.component.html',
   styleUrls: ['./recuperar-pass.component.scss']
 })
-export class RecuperarPassComponent implements OnInit {
+export class RecuperarPassComponent implements OnInit, OnDestroy {
   // Public
-  public emailVar;
   public coreConfig: any;
   public forgotPasswordForm: FormGroup;
   public submitted = false;
@@ -25,13 +24,6 @@ export class RecuperarPassComponent implements OnInit {
   public captcha: boolean;
   public siteKey: string;
 
-  /**
-   * Constructor
-   *
-   * @param {CoreConfigService} _coreConfigService
-   * @param {FormBuilder} _formBuilder
-   *
-   */
   constructor(
     private _coreConfigService: CoreConfigService,
     private _formBuilder: FormBuilder,
@@ -62,6 +54,7 @@ export class RecuperarPassComponent implements OnInit {
   get f() {
     return this.forgotPasswordForm.controls;
   }
+
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
@@ -91,14 +84,14 @@ export class RecuperarPassComponent implements OnInit {
       return;
     }
     this._recuperarPassService.recuperarPassword(this.f.email.value).subscribe((info) => {
-      this.error = null;
-      if(info.status){
-        this._router.navigate(['/grp/login']);
-      }
-    },
-    (error)=>{
-      this.error = "Ocurrió un error al enviar su correo";
-    });
+        this.error = null;
+        if (info.status) {
+          this._router.navigate(['/grp/login']);
+        }
+      },
+      (error) => {
+        this.error = 'Ocurrió un error al enviar su correo';
+      });
   }
 
   ngOnDestroy(): void {

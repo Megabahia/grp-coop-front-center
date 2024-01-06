@@ -11,6 +11,19 @@ import {CoreMenuService} from '../../../../../../../@core/components/core-menu/c
 import {ParametrizacionesService} from '../../../center/parametrizaciones/parametrizaciones.service';
 import {BienvenidoService} from '../../../../../personas/vistas/bienvenido/bienvenido.service';
 
+/**
+ * COOP
+ * center
+ * Esta pantalla sirve para cargar bigpuntos
+ * Rutas:
+ * `${environment.apiUrl}/corp/empresas/list/all`,
+ * `${environment.apiUrl}/corp/empresas/list/ifis`,
+ * `${environment.apiUrl}/corp/creditoArchivos/list/`,
+ * `${environment.apiUrl}/corp/creditoArchivos/create/`,
+ * `${environment.apiUrl}/corp/creditoArchivos/delete/${id}`
+ * `${environment.apiUrl}/corp/creditoArchivos/upload/creditos/preaprobados/automotriz/empleados/${id}`,
+ */
+
 @Component({
   selector: 'app-listar',
   templateUrl: './listar.component.html',

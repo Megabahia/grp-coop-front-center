@@ -1,10 +1,22 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {SolicitudesCreditosAutomotrizService} from '../../solicitudes-creditos-automotriz.service';
 import {CoreSidebarService} from '../../../../../../../../@core/components/core-sidebar/core-sidebar.service';
+
+/**
+ * COOP
+ * Center
+ * ESta pantalla sirve para listar los creditos ifis negocio propio
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/list/`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('id')}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/pruebaConsumer`
+ * `${environment.apiUrl}/corp/empresas/list/comercial`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ */
 
 @Component({
   selector: 'app-negocio-propio-preaprovaods',
@@ -15,24 +27,23 @@ import {CoreSidebarService} from '../../../../../../../../@core/components/core-
 })
 export class IfisNegocioPropioPreaprovaodsAutomotrizComponent implements OnInit, AfterViewInit {
 
-@ViewChild(NgbPagination) paginator: NgbPagination;
+  @ViewChild(NgbPagination) paginator: NgbPagination;
 
-public page = 1;
-public page_size: any = 4;
-public maxSize;
-public collectionSize;
-private _unsubscribeAll: Subject<any>;
+  public page = 1;
+  public page_size: any = 4;
+  public maxSize;
+  public collectionSize;
 
   // Variables
-public listaCreditos;
-public userViewData;
-private ocupacionSolicitante;
-public referenciasSolicitante;
-public ingresosSolicitante;
-public gastosSolicitante;
-public pantalla = 0;
-public credito;
-public checks = [
+  public listaCreditos;
+  public userViewData;
+  public ocupacionSolicitante;
+  public referenciasSolicitante;
+  public ingresosSolicitante;
+  public gastosSolicitante;
+  public pantalla = 0;
+  public credito;
+  public checks = [
     {'label': 'Identificacion', 'valor': false},
     {'label': 'Foto Carnet', 'valor': false},
     {'label': 'Papeleta votacion', 'valor': false},
@@ -47,22 +58,22 @@ public checks = [
     {'label': 'Observación', 'valor': false},
   ];
   // Formulario
-public soltero = false;
-public actualizarCreditoForm: FormGroup;
-public submitted = false;
-public cargando = false;
-public actualizarCreditoFormData;
+  public soltero = false;
+  public actualizarCreditoForm: FormGroup;
+  public submitted = false;
+  public cargando = false;
+  public actualizarCreditoFormData;
   public casaPropia = false;
-  private motivo: string;
-  private estadoCredito: any;
+  public motivo: string;
+  public estadoCredito: any;
 
   constructor(
-      private _solicitudCreditosService: SolicitudesCreditosAutomotrizService,
-      private modalService: NgbModal,
-      private _coreSidebarService: CoreSidebarService,
-      private _formBuilder: FormBuilder,
-      private datePipe: DatePipe,
-) {
+    private _solicitudCreditosService: SolicitudesCreditosAutomotrizService,
+    private modalService: NgbModal,
+    private _coreSidebarService: CoreSidebarService,
+    private _formBuilder: FormBuilder,
+    private datePipe: DatePipe,
+  ) {
   }
 
   ngOnInit(): void {
@@ -89,9 +100,9 @@ public actualizarCreditoFormData;
 
   modalOpenSLC(modalSLC) {
     this.modalService.open(modalSLC, {
-          centered: true,
-          size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
-        }
+        centered: true,
+        size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+      }
     );
   }
 
@@ -227,7 +238,10 @@ public actualizarCreditoFormData;
       {'label': 'Planilla luz Domicilio', 'valor': resto.checkPlanillaLuzDomicilio},
       {'label': 'Planilla luz Negocio', 'valor': resto.checkPlanillaLuzNegocio},
       {'label': 'Copia de factura de venta del ultimo mes', 'valor': resto.checkfacturasVentas2meses},
-      {'label': 'Copia de factura de venta del penúltimo mes (hace dos meses)', 'valor': resto.checkfacturasVentas2meses2},
+      {
+        'label': 'Copia de factura de venta del penúltimo mes (hace dos meses)',
+        'valor': resto.checkfacturasVentas2meses2
+      },
       {'label': 'Copia de factura del antepenúltimo mes (hace tres meses)', 'valor': resto.checkfacturasVentas2meses3},
       {
         'label': 'Certificado de la Asociación (este campo aplica si usted es transportista: Bus o Taxi)',
@@ -244,7 +258,7 @@ public actualizarCreditoFormData;
       this.checks.splice(3, 2);
     }
     this.cargando = true;
-    if ( this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar' ) {
+    if (this.estadoCredito === 'Negado' || this.estadoCredito === 'Por Completar') {
       this.actualizarCreditoFormData.delete('estado');
       this.actualizarCreditoFormData.append('estado', this.estadoCredito);
     }
@@ -260,10 +274,10 @@ public actualizarCreditoFormData;
         }
         this.obtenerSolicitudesCreditos();
         this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
-        },
-        (error) => {
-          this.cargando = false;
-        });
+      },
+      (error) => {
+        this.cargando = false;
+      });
   }
 
   actualizarSolicitudCreditoNegado(estado) {
@@ -282,21 +296,21 @@ public actualizarCreditoFormData;
     this.actualizarCreditoFormData.delete('estado');
     this.actualizarCreditoFormData.append('estado', estado);
     this._solicitudCreditosService.actualizarSolictudesCreditos(this.actualizarCreditoFormData).subscribe((info) => {
-          this.cargando = false;
-          this.obtenerSolicitudesCreditos();
-          this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
-          if (estado === 'Negado') {
-            this.pantalla = 0;
-          } else {
-            this.pantalla = 3;
-          }
-        },
-        (error) => {
-          this.cargando = false;
-          if (estado === 'Negado') {
-            this.pantalla = 0;
-          }
-        });
+        this.cargando = false;
+        this.obtenerSolicitudesCreditos();
+        this._solicitudCreditosService.deleteDocumentFirebase(this.actualizarCreditoFormData.get('id'));
+        if (estado === 'Negado') {
+          this.pantalla = 0;
+        } else {
+          this.pantalla = 3;
+        }
+      },
+      (error) => {
+        this.cargando = false;
+        if (estado === 'Negado') {
+          this.pantalla = 0;
+        }
+      });
   }
 
   abrirModalMotivo(modalMotivo, estadoCredito) {
@@ -314,11 +328,13 @@ public actualizarCreditoFormData;
       }
     );
   }
+
   consumirAWS() {
     this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
       this.obtenerSolicitudesCreditos();
     });
   }
+
   cerrarModal() {
     this.modalService.dismissAll();
   }
