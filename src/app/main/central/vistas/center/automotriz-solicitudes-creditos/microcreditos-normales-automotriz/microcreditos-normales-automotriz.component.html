@@ -1010,7 +1010,7 @@
                     <input type="file" class="custom-file-input" id="solicitudCredito"
                            formControlName="solicitudCredito"
                            (change)="subirDoc( $event, 'solicitudCredito')"
-                           accept="image/jpeg,image/png,application/pdf"/>
+                           accept="application/pdf"/>
                     <label class="custom-file-label"
                            for="solicitudCredito">{{actualizarCreditoForm.get('solicitudCredito').value}}</label>
                     <div *ngIf="submitted && controlsFrom.solicitudCredito.errors" class="invalid-feedback"
@@ -1042,7 +1042,7 @@
                     <input type="file" class="custom-file-input" id="evaluacionCrediticia"
                            formControlName="evaluacionCrediticia"
                            (change)="subirDoc( $event, 'evaluacionCrediticia')"
-                           accept="image/jpeg,image/png,application/pdf"/>
+                           accept="application/pdf"/>
                     <label class="custom-file-label"
                            for="evaluacionCrediticia">{{actualizarCreditoForm.get('evaluacionCrediticia').value}}</label>
                     <div *ngIf="submitted && controlsFrom.evaluacionCrediticia.errors" class="invalid-feedback"
@@ -1128,7 +1128,7 @@
                     <input type="file" class="custom-file-input" id="buroCreditoIfis"
                            formControlName="buroCreditoIfis"
                            (change)="subirDoc( $event, 'buroCreditoIfis')"
-                           accept="image/jpeg,image/png,application/pdf"/>
+                           accept="application/pdf"/>
                     <label class="custom-file-label"
                            for="buroCreditoIfis">{{actualizarCreditoForm.get('buroCreditoIfis').value}}</label>
                     <div *ngIf="submitted && controlsFrom.buroCreditoIfis.errors" class="invalid-feedback"
