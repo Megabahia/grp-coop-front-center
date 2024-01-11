@@ -63,6 +63,7 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
   public estadoCredito: string;
   public motivo: string;
   public ingresoNegocioSuperior = false;
+  public motivoNegarLinea = '';
 
   constructor(
     private _solicitudCreditosService: SolicitudesCreditosService,
@@ -474,6 +475,27 @@ export class MicrocreditosNormalesComponent implements OnInit, AfterViewInit {
   consumirAWS() {
     this._solicitudCreditosService.actualizarAWS().subscribe((info) => {
       this.obtenerSolicitudesCreditos();
+    });
+  }
+
+
+  activacion(modal, credito) {
+    this.credito = credito;
+    this.modalOpenSLC(modal);
+  }
+
+  negar(modal, credito) {
+    this.credito = credito;
+    this.modalOpenSLC(modal);
+  }
+
+  actualizarLineaCredito(activarMenu?: number) {
+    this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+      _id: this.credito._id,
+      motivoNegarLinea: this.motivoNegarLinea,
+      activarMenu
+    }).subscribe((n) => {
+      this.cerrarModal();
     });
   }
 }
