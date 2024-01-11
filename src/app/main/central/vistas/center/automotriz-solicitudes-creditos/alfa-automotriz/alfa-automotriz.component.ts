@@ -65,6 +65,9 @@ export class AlfaAutomotrizComponent implements OnInit, AfterViewInit {
   public casaPropia = false;
   public motivo: string;
   public estadoCredito: any;
+  // Select Custom header footer template
+  public selectEmpresasCorp = [{name: 'Holaaa'}];
+  public selectEmpresasCorpSelected = [];
 
   constructor(
     private _solicitudCreditosService: SolicitudesCreditosService,
@@ -134,6 +137,12 @@ export class AlfaAutomotrizComponent implements OnInit, AfterViewInit {
   }
 
   verDocumentos(credito) {
+    const tieneAlMenosUnaReferenciaNoValidada = credito.user?.referenciasSolicitante.some(objeto => !objeto.valido);
+
+    if (tieneAlMenosUnaReferenciaNoValidada) {
+      alert('No has validado las referencias familiares');
+      return;
+    }
     console.log('log---', credito);
     this.credito = credito;
     this.submitted = false;
@@ -339,4 +348,70 @@ export class AlfaAutomotrizComponent implements OnInit, AfterViewInit {
       this.obtenerSolicitudesCreditos();
     });
   }
+
+  obtenerEmpresasCorp() {
+    this._solicitudCreditosService.obtenerEmpresasCorp({}).subscribe((info) => {
+      this.selectEmpresasCorp = info.info;
+    });
+  }
+
+  actualizarEmpresasAplican(credito_id) {
+    this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+      _id: credito_id, empresasAplican: JSON.stringify(this.selectEmpresasCorpSelected)
+    }).subscribe(next => {
+      this.obtenerSolicitudesCreditos();
+      this.cerrarModal();
+    });
+  }
+
+  customHeaderFooterSelectAll() {
+    this.selectEmpresasCorpSelected = this.selectEmpresasCorp.map((x: any) => x.ruc);
+  }
+
+  customHeaderFooterUnselectAll() {
+    this.selectEmpresasCorpSelected = [];
+  }
+
+  modalSelectOpen(modalSelect, empresasAplican) {
+    this.selectEmpresasCorpSelected = JSON.parse(empresasAplican);
+    this.modalService.open(modalSelect, {
+      windowClass: 'modal'
+    });
+  }
+
+  viewReferences(modal, referenciasSolicitante) {
+    this.obtenerSolicitudesCreditos();
+    this.referenciasSolicitante = referenciasSolicitante;
+    console.log('ahora tiene', this.referenciasSolicitante);
+
+    this.modalOpenSLC(modal);
+  }
+
+  familiarIsValid(event, index) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      console.log('El checkbox está seleccionado', index);
+      this.referenciasSolicitante[index].valido = true;
+    } else {
+      console.log('El checkbox no está seleccionado', index);
+      this.referenciasSolicitante[index].valido = false;
+
+      // Realiza aquí las acciones que desees cuando el checkbox se desmarca.
+    }
+  }
+
+  guardarReferencias(credito) {
+
+    this._solicitudCreditosService.actualizarSolictudesCreditosObservacion({
+      _id: credito._id,
+      user: {...credito.user, referenciasSolicitante: this.referenciasSolicitante}
+    }).subscribe((info) => {
+      console.log('actualizo');
+      this.obtenerSolicitudesCreditos();
+      this.cerrarModal();
+    });
+
+  }
+
+  protected readonly JSON = JSON;
 }
