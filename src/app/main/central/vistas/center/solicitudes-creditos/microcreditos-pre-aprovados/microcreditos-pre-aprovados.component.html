@@ -64,6 +64,7 @@
                         <th>Estado</th>
                         <th>Solicitud de crédito</th>
                         <th>Observaciones</th>
+                        <th>Documentos habilitantes</th>
                         <th>Acciones</th>
                     </tr>
                     </thead>
@@ -91,8 +92,12 @@
                             </button>
                         </td>
                         <td>{{credito.observacion}}</td>
-
-
+                        <td *ngIf="credito.estado === 'Aprobado'">
+                            <a href="{{credito.solicitudCredito}}" target="_blank">Solicitud credito</a>
+                            <a href="{{credito.pagare}}" target="_blank">Pagaré</a>
+                            <a href="{{credito.contratosCuenta}}" target="_blank">Contratos cuenta</a>
+                            <a href="{{credito.tablaAmortizacion}}" target="_blank">Tabla amortización</a>
+                        </td>
                         <td class="d-flex">
                             <a *ngIf="credito.estado == 'Nuevo'" href="javascript:void(0)" class="avatar bg-info mr-1" data-target="#gestionar"
                                data-toggle="modal" (click)="verDocumentos(credito)">
